@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>
     <style>
-        /* ===== GLOBAL RESET & ADVANCED ENGINEERING THEME ===== */
+        /* ===== GLOBAL RESET & THEME ===== */
         * {
             margin: 0;
             padding: 0;
@@ -41,7 +41,7 @@
             border-radius: 10px;
         }
 
-        /* ===== INTRO FULLSCREEN ANIMATION ===== */
+        /* ===== INTRO FULLSCREEN ===== */
         #intro {
             position: fixed;
             top: 0;
@@ -107,9 +107,7 @@
             transition: opacity 1.2s ease-out;
         }
 
-        /* ============================================================
-               TREE NAVIGATION (sticky top)
-               ============================================================ */
+        /* ===== STICKY TREE NAV ===== */
         #tree-nav {
             position: sticky;
             top: 0;
@@ -120,7 +118,6 @@
             padding: 14px 5% 10px;
             display: flex;
             justify-content: center;
-            transition: all 0.3s;
         }
 
         .tree-container {
@@ -131,7 +128,6 @@
             gap: 4px 16px;
             max-width: 1200px;
             width: 100%;
-            position: relative;
             padding: 6px 0 10px;
         }
 
@@ -139,13 +135,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
             cursor: pointer;
-            transition: all 0.25s;
             padding: 4px 10px;
             border-radius: 40px;
             border: 1px solid transparent;
             min-width: 70px;
+            transition: all 0.25s;
         }
 
         .tree-node:hover {
@@ -166,7 +161,6 @@
             letter-spacing: 0.6px;
             text-transform: uppercase;
             color: #8ab8e0;
-            transition: color 0.25s;
             text-align: center;
             line-height: 1.3;
             padding: 4px 2px;
@@ -177,14 +171,12 @@
             margin-bottom: 2px;
             display: block;
             filter: grayscale(0.3);
-            transition: filter 0.3s;
         }
 
         .tree-node:hover .node-label,
         .tree-node.active .node-label {
             color: #ffffff;
         }
-
         .tree-node:hover .node-icon,
         .tree-node.active .node-icon {
             filter: grayscale(0);
@@ -249,21 +241,9 @@
                 color: #c4edff;
                 font-weight: 600;
             }
-            .tree-node.has-children .node-label::after {
-                content: ' ▾';
-                font-size: 0.6rem;
-                opacity: 0.5;
-                color: #5aa0c0;
-            }
-            .tree-node.has-children.active .node-label::after {
-                opacity: 1;
-                color: #0ff;
-            }
         }
 
-        /* ============================================================
-               SECTION DIVIDER NAVIGATION BUTTONS (between sections)
-               ============================================================ */
+        /* ===== SECTION DIVIDER NAV BUTTONS ===== */
         .section-divider-nav {
             display: flex;
             justify-content: center;
@@ -313,18 +293,42 @@
             box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
         }
 
-        .divider-spacer {
-            height: 8px;
+        /* ===== NEXT SECTION BUTTON (at end of each section) ===== */
+        .next-section-btn {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #8ab8e0;
+            background: rgba(0, 20, 30, 0.6);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            padding: 10px 32px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
         }
 
-        /* ===== HERO SECTION ===== */
+        .next-section-btn:hover {
+            background: rgba(0, 200, 255, 0.15);
+            border-color: #0ff;
+            color: #fff;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ===== HERO ===== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 100px 6% 60px;
-            position: relative;
         }
 
         .hero-center {
@@ -332,7 +336,6 @@
             gap: 70px;
             max-width: 1300px;
             width: 100%;
-            backdrop-filter: blur(2px);
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -344,7 +347,6 @@
             justify-content: center;
         }
 
-        /* --- BIGGER PHOTO --- */
         .profile-pic {
             width: 340px;
             height: 340px;
@@ -371,11 +373,6 @@
             padding: 40px 42px;
             border: 1px solid rgba(0, 255, 255, 0.2);
             box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6);
-            transition: border 0.2s;
-        }
-
-        .hero-right:hover {
-            border-color: rgba(0, 180, 255, 0.5);
         }
 
         #typing-name {
@@ -393,7 +390,6 @@
             font-size: 1.05rem;
             line-height: 1.65;
             color: #cdd9ff;
-            font-weight: 400;
             margin-bottom: 24px;
         }
 
@@ -467,9 +463,11 @@
             }
         }
 
-        /* ===== PROJECTS SECTION ===== */
+        /* ============================================================
+               PROJECTS – 3D CAROUSEL (WHEEL)
+               ============================================================ */
         #projects {
-            padding: 40px 7% 80px;
+            padding: 40px 5% 60px;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -477,7 +475,7 @@
         .section-title {
             font-size: 2.5rem;
             font-weight: 600;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             letter-spacing: -0.02em;
             border-left: 5px solid #0ff;
             padding-left: 25px;
@@ -487,117 +485,186 @@
             color: transparent;
         }
 
-        .project-card {
-            background: rgba(8, 14, 20, 0.7);
-            backdrop-filter: blur(6px);
-            border-radius: 32px;
-            padding: 32px;
-            margin-bottom: 55px;
-            border: 1px solid rgba(0, 180, 250, 0.2);
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+        /* carousel wrapper */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            perspective: 1200px;
+            padding: 30px 0 20px;
+            overflow: hidden;
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 210, 255, 0.6);
-            box-shadow: 0 25px 40px -12px rgba(0, 150, 255, 0.2);
-            background: rgba(10, 18, 28, 0.85);
+        .carousel-track {
+            width: 100%;
+            height: 440px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .project-row {
+        .carousel-item {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -200px;
+            border-radius: 24px;
+            background: rgba(8, 14, 20, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 180, 250, 0.25);
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
+            padding: 20px 22px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            backface-visibility: hidden;
             display: flex;
-            gap: 50px;
-            flex-wrap: wrap;
+            flex-direction: column;
         }
 
-        .project-text {
-            flex: 1.6;
+        .carousel-item::-webkit-scrollbar {
+            width: 4px;
+        }
+        .carousel-item::-webkit-scrollbar-thumb {
+            background: #2a6f8f;
+            border-radius: 10px;
         }
 
-        .project-title {
-            font-size: 1.9rem;
+        .carousel-item .project-title-sm {
+            font-size: 1.3rem;
             font-weight: 600;
-            letter-spacing: -0.3px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
+            color: #fff;
         }
 
-        .project-meta {
+        .carousel-item .project-meta-sm {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: #8bb9fe;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border-left: 2px solid #0ff;
-            padding-left: 12px;
+            padding-left: 8px;
         }
 
-        .project-tags {
+        .carousel-item .project-tags-sm {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 22px;
+            gap: 5px;
+            margin-bottom: 12px;
         }
 
-        .project-tags span {
+        .carousel-item .project-tags-sm span {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 500;
+            font-size: 0.55rem;
             background: #0a1018;
-            padding: 5px 12px;
+            padding: 2px 10px;
             border-radius: 20px;
             border: 1px solid #2c5a7a;
             color: #b3e4ff;
-            letter-spacing: 0.3px;
         }
 
-        .project-desc {
-            font-size: 1rem;
-            line-height: 1.6;
+        .carousel-item .project-desc-sm {
+            font-size: 0.85rem;
+            line-height: 1.5;
             color: #d3e5fc;
-            margin-bottom: 24px;
+            flex: 1;
+            overflow-y: auto;
         }
 
-        .project-links a {
+        .carousel-item .project-desc-sm::-webkit-scrollbar {
+            width: 3px;
+        }
+        .carousel-item .project-desc-sm::-webkit-scrollbar-thumb {
+            background: #2a6f8f;
+            border-radius: 10px;
+        }
+
+        .carousel-item .project-link-sm {
+            margin-top: 12px;
             font-family: 'JetBrains Mono', monospace;
-            text-decoration: none;
-            background: transparent;
-            border: 1.5px solid #2f8fbf;
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            font-size: 0.7rem;
             color: #b6e6ff;
+            border: 1px solid #2f8fbf;
+            padding: 4px 14px;
+            border-radius: 40px;
+            display: inline-block;
+            text-decoration: none;
             transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            width: fit-content;
         }
 
-        .project-links a:hover {
+        .carousel-item .project-link-sm:hover {
             background: #0ff22d1;
-            color: #010101;
+            color: #000;
             border-color: #0ff;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
 
-        .project-image-container {
-            flex: 1;
+        /* carousel controls */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 20, 30, 0.7);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            color: #c4edff;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(0, 200, 255, 0.2);
+            border-color: #0ff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        /* circular dots (wheel indicator) */
+        .carousel-dots {
             display: flex;
             justify-content: center;
-            align-items: center;
+            gap: 14px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+            position: relative;
         }
 
-        .project-image-container img {
-            width: 100%;
-            max-width: 380px;
-            border-radius: 24px;
-            border: 1px solid rgba(0, 162, 255, 0.4);
-            box-shadow: 0 15px 25px -12px black;
-            transition: transform 0.3s;
+        .carousel-dots .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 200, 255, 0.2);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
         }
 
-        .project-image-container img:hover {
-            transform: scale(1.02);
+        .carousel-dots .dot.active {
+            background: #0ff;
+            border-color: #0ff;
+            box-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
+            transform: scale(1.2);
+        }
+
+        .carousel-dots .dot:hover {
+            background: rgba(0, 255, 255, 0.4);
         }
 
         /* ===== TECHNICAL NOTES ===== */
@@ -689,71 +756,6 @@
             border: 1px solid rgba(100, 200, 255, 0.2);
         }
 
-        .note-problem {
-            margin-bottom: 28px;
-            padding-bottom: 16px;
-            border-bottom: 1px dashed rgba(0, 180, 255, 0.3);
-        }
-
-        .note-problem h3 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
-            color: #55ddff;
-            margin-bottom: 14px;
-        }
-
-        .note-problem p {
-            color: #cde3ff;
-            margin: 12px 0;
-            line-height: 1.6;
-        }
-
-        .note-problem-header {
-            width: 100%;
-            background: rgba(0, 15, 25, 0.6);
-            border: 1px solid rgba(0, 150, 200, 0.3);
-            margin: 8px 0;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
-            color: #aae0ff;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 12px;
-            transition: 0.2s;
-        }
-
-        .note-problem-header:hover {
-            background: rgba(0, 60, 90, 0.7);
-            border-color: #0ff;
-        }
-
-        .note-problem-header span {
-            font-size: 1.2rem;
-            font-weight: 300;
-        }
-
-        .latex-block {
-            background: #051016;
-            padding: 16px 20px;
-            border-radius: 20px;
-            margin: 16px 0;
-            overflow-x: auto;
-            border-left: 3px solid #0ff;
-        }
-
-        .latex-block mjx-container {
-            font-size: 1.05rem;
-        }
-
-        .collapsed-content {
-            display: none;
-        }
-
         /* ===== CONTACT ===== */
         #contact {
             display: flex;
@@ -829,12 +831,6 @@
             #typing-name {
                 font-size: 2rem;
             }
-            .project-row {
-                flex-direction: column;
-            }
-            .project-image-container img {
-                max-width: 100%;
-            }
             .section-title {
                 font-size: 1.9rem;
             }
@@ -868,15 +864,27 @@
                 font-size: 0.65rem;
                 padding: 4px 12px;
             }
+            .carousel-item {
+                width: 240px;
+                height: 340px;
+                margin-left: -120px;
+                margin-top: -170px;
+                padding: 16px 18px;
+            }
+            .carousel-track {
+                height: 380px;
+            }
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
         }
 
         @media (max-width: 560px) {
             .hero-left .profile-pic {
                 width: 200px;
                 height: 200px;
-            }
-            .project-title {
-                font-size: 1.5rem;
             }
             .tree-container {
                 gap: 2px 6px;
@@ -900,22 +908,26 @@
                 font-size: 0.55rem;
                 padding: 3px 10px;
             }
-        }
-
-        .glow-text {
-            text-shadow: 0 0 5px rgba(0, 210, 255, 0.3);
-        }
-
-        .cursor-blink {
-            animation: blinkCarets 0.9s infinite;
-        }
-        @keyframes blinkCarets {
-            0%,
-            100% {
-                opacity: 1;
+            .carousel-item {
+                width: 190px;
+                height: 280px;
+                margin-left: -95px;
+                margin-top: -140px;
+                padding: 12px 14px;
             }
-            50% {
-                opacity: 0;
+            .carousel-item .project-title-sm {
+                font-size: 1rem;
+            }
+            .carousel-item .project-desc-sm {
+                font-size: 0.7rem;
+            }
+            .carousel-track {
+                height: 320px;
+            }
+            .carousel-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
             }
         }
 
@@ -938,7 +950,7 @@
 </head>
 <body>
 
-    <!-- ===== INTRO OVERLAY ===== -->
+    <!-- ===== INTRO ===== -->
     <div id="intro">
         <div class="intro-container">
             <h1 id="intro-text"></h1>
@@ -949,29 +961,29 @@
     <!-- ===== MAIN CONTENT ===== -->
     <div id="main-content" style="display: none;">
 
-        <!-- ===== TREE NAVIGATION (sticky) ===== -->
+        <!-- ===== TREE NAV ===== -->
         <nav id="tree-nav">
-            <div class="tree-container" id="treeContainer">
-                <div class="tree-node root-node active" data-target="hero" data-label="⏣ Home">
+            <div class="tree-container">
+                <div class="tree-node root-node active" data-target="hero">
                     <span class="node-icon">⏣</span>
                     <span class="node-label">Home</span>
                 </div>
-                <div class="tree-node has-children" data-target="projects" data-label="⚙ Projects">
+                <div class="tree-node has-children" data-target="projects">
                     <span class="node-icon">⚙</span>
                     <span class="node-label">Projects</span>
                 </div>
-                <div class="tree-node" data-target="tech-notes" data-label="📘 Notes">
+                <div class="tree-node" data-target="tech-notes">
                     <span class="node-icon">📘</span>
                     <span class="node-label">Tech Notes</span>
                 </div>
-                <div class="tree-node" data-target="contact" data-label="✉ Connect">
+                <div class="tree-node" data-target="contact">
                     <span class="node-icon">✉</span>
                     <span class="node-label">Contact</span>
                 </div>
             </div>
         </nav>
 
-        <!-- ===== HERO SECTION ===== -->
+        <!-- ===== HERO ===== -->
         <section class="hero" id="hero">
             <div class="hero-center">
                 <div class="hero-left">
@@ -996,431 +1008,90 @@
                     </a>
                 </div>
             </div>
+            <!-- Next Section button at end of Hero -->
+            <div style="display:flex; justify-content:center; margin-top:20px;">
+                <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
+            </div>
         </section>
 
-        <!-- ===== DIVIDER NAV 1 (after Hero) ===== -->
-        <div class="section-divider-nav" id="divider-hero">
+        <!-- ===== DIVIDER 1 ===== -->
+        <div class="section-divider-nav">
             <button class="nav-btn active-btn" data-target="hero">⏣ Home</button>
             <button class="nav-btn" data-target="projects">⚙ Projects</button>
             <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
             <button class="nav-btn" data-target="contact">✉ Contact</button>
         </div>
 
-        <!-- ===== PROJECTS SECTION ===== -->
+        <!-- ===== PROJECTS (3D CAROUSEL WHEEL) ===== -->
         <section id="projects">
             <h2 class="section-title">// technical infrastructure</h2>
 
-            <!-- Robo-Maestro -->
-            <div class="project-card" id="project-robo">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Robo-Maestro</h3>
-                        <p class="project-meta">UBC | Jan 2026 – Apr 2026 | PID Controller</p>
-                        <div class="project-tags">
-                            <span>ESP32</span><span>C++</span><span>Arduino IDE</span>
-                            <span>PID Control</span><span>H-Bridge</span><span>AS5600 Encoder</span>
-                        </div>
-                        <p class="project-desc">
-                            Designed and developed an electromechanical piano-playing robot using a DC motor and two solenoids.
-                            Programmed embedded firmware in C++ on an ESP32 using the Arduino IDE and implemented a PID controller
-                            for precise linear positioning with a timing belt system and AS5600 magnetic encoder.
-                            Designed a custom H-bridge motor driver and switching circuits to actuate solenoids for accurate piano key strikes.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ Demo Repository →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="robomaestro.jpg" alt="Robo-Maestro Project" />
-                    </div>
+            <div class="carousel-wrapper" id="carouselWrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- items injected by JS -->
                 </div>
+                <button class="carousel-btn prev" id="carouselPrev">‹</button>
+                <button class="carousel-btn next" id="carouselNext">›</button>
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
 
-            <!-- 2-Bit ALU -->
-            <div class="project-card" id="project-alu">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">2-Bit Arithmetic Logic Unit (ALU)</h3>
-                        <p class="project-meta">Personal Project | 2026</p>
-                        <div class="project-tags">
-                            <span>Digital Logic</span><span>Breadboard</span>
-                            <span>Logic Gates</span><span>Combinational Logic</span>
-                        </div>
-                        <p class="project-desc">
-                            Designed and constructed a 2-bit Arithmetic Logic Unit (ALU) on a breadboard using discrete AND, OR, and NOT logic gates. Derived and minimized Boolean expressions to implement arithmetic and logical operations, including addition, subtraction, AND, and OR. Verified correct functionality through exhaustive testing of all input combinations using LEDs as output indicators.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ Project Repository →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="alu.jpg" alt="2-Bit ALU" />
-                    </div>
-                </div>
+            <!-- Next Section button at end of Projects -->
+            <div style="display:flex; justify-content:center; margin-top:10px;">
+                <button class="next-section-btn" data-next="tech-notes">⬇ Next: Tech Notes</button>
             </div>
-
-            <!-- Boost Converter -->
-            <div class="project-card" id="project-boost">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Closed-Loop DC-DC Boost Converter</h3>
-                        <p class="project-meta">Personal Project | Jan 2026</p>
-                        <div class="project-tags">
-                            <span>Power Electronics</span><span>Arduino</span><span>C++</span>
-                            <span>PWM</span><span>Feedback Control</span><span>Voltage Regulation</span>
-                        </div>
-                        <p class="project-desc">
-                            Designed and built a closed-loop DC-DC boost converter using an Arduino microcontroller to regulate the output voltage through PWM duty-cycle control. Implemented voltage feedback using an analog sensing circuit and developed firmware to dynamically adjust the switching duty cycle in response to load and input voltage variations. Characterized converter performance with an oscilloscope and optimized the feedback loop for stable output regulation.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ Project Repository →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="boost_converter.jpg" alt="Closed-Loop Boost Converter" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Colpitts Oscillator -->
-            <div class="project-card" id="project-colpitts">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Colpitts Oscillator</h3>
-                        <p class="project-meta">Personal Project | 2026</p>
-                        <div class="project-tags">
-                            <span>Analog Electronics</span><span>BJT</span>
-                            <span>Oscillator</span><span>LTspice</span><span>Oscilloscope</span>
-                        </div>
-                        <p class="project-desc">
-                            Designed and constructed a BJT-based Colpitts oscillator using an LC resonant tank to generate stable sinusoidal oscillations. Simulated circuit performance in LTspice, selected passive component values to achieve the desired oscillation frequency, and validated startup behavior and output waveform using an oscilloscope.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ Project Repository →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="colpitts.jpg" alt="Colpitts Oscillator" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Common-Emitter Amplifier -->
-            <div class="project-card" id="project-common-emitter">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Common-Emitter BJT Amplifier</h3>
-                        <p class="project-meta">Personal Project | 2026</p>
-                        <div class="project-tags">
-                            <span>Analog Electronics</span><span>BJT</span>
-                            <span>Signal Amplification</span><span>LTspice</span>
-                        </div>
-                        <p class="project-desc">
-                            Designed and analyzed a single-stage common-emitter amplifier using discrete BJTs. Calculated the DC operating point, established proper transistor biasing, and optimized component values to achieve the desired voltage gain while maintaining linear operation. Verified amplifier performance through simulation and laboratory measurements.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ Project Repository →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="common_emitter.jpg" alt="Common-Emitter Amplifier" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Discrete H-Bridge -->
-            <div class="project-card" id="project-hbridge">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Discrete MOSFET H-Bridge Motor Driver</h3>
-                        <p class="project-meta">Personal Project | Jan 2026</p>
-                        <div class="project-tags">
-                            <span>Power Electronics</span><span>ESP32</span><span>C++</span>
-                            <span>MOSFETs</span><span>BJT Driver</span><span>PWM</span>
-                        </div>
-                        <p class="project-desc">
-                            Designed a discrete MOSFET H-bridge capable of bidirectional DC motor control using IRF3205 and IRF9540N power MOSFETs with 2N2222 transistor-based gate drivers. Implemented PWM-based speed and direction control on an ESP32, characterized switching performance with an oscilloscope, and optimized the gate-drive circuit to achieve reliable operation under load.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ Project Repository →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="hbridge.jpg" alt="Discrete MOSFET H-Bridge" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- E-Ball -->
-            <div class="project-card" id="project-eball">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">E-Ball Model</h3>
-                        <p class="project-meta">UBC | Dec 2025 – Jan 2026 | Robotics & BLDC</p>
-                        <div class="project-tags">
-                            <span>ESP32</span><span>C++</span><span>BLDC</span><span>PWM</span><span>Bluetooth (DS4)</span><span>ESC</span>
-                        </div>
-                        <p class="project-desc">
-                            Engineered a high-torque Bluetooth-controlled robotic vehicle driven by three-phase sensorless BLDC motors.
-                            Wrote custom C++ firmware on ESP32 using Arduino IDE, implementing smooth speed regulation via 50kHz PWM signals and dynamic current limiting.
-                            Integrated DualShock 4 wireless controller for real-time teleoperation with responsive acceleration curves.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ Demo Repository →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="eball.jpg" alt="E-Ball Model" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Coin Robot -->
-            <div class="project-card" id="project-coin">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Coin Picking Robot</h3>
-                        <p class="project-meta">UBC | Apr 2025 – May 2025 | Embedded Collaboration</p>
-                        <div class="project-tags">
-                            <span>C</span><span>PIC18</span><span>EFM8</span><span>RF Modules</span><span>H-Bridge</span><span>Metal Detection</span>
-                        </div>
-                        <p class="project-desc">
-                            Architected a remote-controlled robotic system that autonomously picks Canadian coins using inductive sensing.
-                            Wrote low-level C for PIC18 and EFM8 microcontrollers using CrossIDE, designed custom H-bridge motor driver, and implemented robust 433MHz RF communication.
-                            Collaborated in a team of five, achieving 95% coin detection accuracy during demonstration.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/JeremyF003/Picking-coin-robot" target="_blank">📁 View Code →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="coin.jpg" alt="Coin Robot" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Reflow Oven -->
-            <div class="project-card" id="project-reflow">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Reflow Oven Controller</h3>
-                        <p class="project-meta">UBC | Mar 2025 – May 2025 | Industrial Control</p>
-                        <div class="project-tags">
-                            <span>A51 Assembly</span><span>N76E003</span><span>Thermocouple</span><span>PID</span><span>Zero-Cross</span>
-                        </div>
-                        <p class="project-desc">
-                            Developed a reflow soldering oven controller with real-time temperature profiling, programmed entirely in A51 assembly on N76E003.
-                            Implemented a PI control algorithm with triac switching for stable heat ramp-up, reducing overshoot below 5°C.
-                            Collaborated with six teammates to validate J-STD-020 profiles and deliver robust performance.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/JeremyF003/Reflow-oven" target="_blank">🔥 View Code →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="reflow.jpg" alt="Reflow Oven" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Line Following Robot -->
-            <div class="project-card" id="project-line">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Line Following Robot</h3>
-                        <p class="project-meta">KPU | Apr 2024 – May 2024 | Optical Sensing</p>
-                        <div class="project-tags">
-                            <span>C</span><span>PIC18F46K42</span><span>Phototransistors</span><span>PID Line</span><span>MPLAB</span>
-                        </div>
-                        <p class="project-desc">
-                            Programmed an autonomous line-following robot using PID-based steering correction.
-                            Implemented sensor fusion from 5-channel IR array, wrote efficient C interrupt routines on PIC18.
-                            Optimized motor speed differential for sharp curves, achieving smooth path tracking at 0.4m/s.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://github.com/JeremyF003/WheelsonRobot" target="_blank">🤖 View Code →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="line.jpg" alt="Line Following Robot" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- Differential Drive -->
-            <div class="project-card" id="project-diff">
-                <div class="project-row">
-                    <div class="project-text">
-                        <h3 class="project-title">Mechanical Differential Gear Assembly</h3>
-                        <p class="project-meta">Personal Project | 2026</p>
-                        <div class="project-tags">
-                            <span>SOLIDWORKS</span><span>Mechanical Design</span><span>CAD</span><span>Gear Design</span>
-                        </div>
-                        <p class="project-desc">
-                            Designed a functional automotive-style differential assembly in SOLIDWORKS, modeling gears, shafts, bearings, and housing components. Created fully constrained assemblies and verified the kinematic motion to demonstrate torque distribution during differential wheel speeds.
-                        </p>
-                        <div class="project-links">
-                            <a href="#" target="_blank">⚙️ CAD Files →</a>
-                        </div>
-                    </div>
-                    <div class="project-image-container">
-                        <img src="differential.jpg" alt="Differential Drive" />
-                    </div>
-                </div>
-            </div>
-
         </section>
 
-        <!-- ===== DIVIDER NAV 2 (after Projects) ===== -->
-        <div class="section-divider-nav" id="divider-projects">
+        <!-- ===== DIVIDER 2 ===== -->
+        <div class="section-divider-nav">
             <button class="nav-btn" data-target="hero">⏣ Home</button>
             <button class="nav-btn active-btn" data-target="projects">⚙ Projects</button>
             <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
             <button class="nav-btn" data-target="contact">✉ Contact</button>
         </div>
 
-        <!-- ===== TECHNICAL NOTES SECTION ===== -->
+        <!-- ===== TECHNICAL NOTES ===== -->
         <section id="technical-notes">
             <h2 class="section-title">// technical notes</h2>
             <div class="notes-book">
-
-                <!-- Calculus -->
                 <button class="notes-header" onclick="toggleNotesSection('calc-notes-main')">
-                    📘 Stewart Calculus: Early Transcendentals
-                    <span id="calc-notes-main-symbol">+</span>
+                    📘 Stewart Calculus <span id="calc-notes-main-symbol">+</span>
                 </button>
-                <div id="calc-notes-main" class="notes-content" style="display: none;">
+                <div id="calc-notes-main" class="notes-content" style="display:none;">
                     <button class="chapter-header" onclick="toggleChapter('calc-chap-2')">
-                        Chapter 2: Limits and Derivatives <span id="calc-chap-2-symbol">+</span>
+                        Chapter 2: Limits <span id="calc-chap-2-symbol">+</span>
                     </button>
-                    <div id="calc-chap-2" class="chapter-content" style="display: none;"></div>
-
+                    <div id="calc-chap-2" class="chapter-content" style="display:none;"></div>
                     <button class="chapter-header" onclick="toggleChapter('calc-chap-3')">
-                        Chapter 3: Differentiation Rules <span id="calc-chap-3-symbol">+</span>
+                        Chapter 3: Differentiation <span id="calc-chap-3-symbol">+</span>
                     </button>
-                    <div id="calc-chap-3" class="chapter-content" style="display: none;"></div>
-
-                    <button class="chapter-header" onclick="toggleChapter('calc-chap-4')">
-                        Chapter 4: Applications of Differentiation <span id="calc-chap-4-symbol">+</span>
-                    </button>
-                    <div id="calc-chap-4" class="chapter-content" style="display: none;"></div>
-
-                    <button class="chapter-header" onclick="toggleChapter('calc-chap-5')">
-                        Chapter 5: Integrals <span id="calc-chap-5-symbol">+</span>
-                    </button>
-                    <div id="calc-chap-5" class="chapter-content" style="display: none;"></div>
-
-                    <button class="chapter-header" onclick="toggleChapter('calc-chap-6')">
-                        Chapter 6: Applications of Integration <span id="calc-chap-6-symbol">+</span>
-                    </button>
-                    <div id="calc-chap-6" class="chapter-content" style="display: none;"></div>
-
-                    <button class="chapter-header" onclick="toggleChapter('calc-chap-7')">
-                        Chapter 7: Techniques of Integration <span id="calc-chap-7-symbol">+</span>
-                    </button>
-                    <div id="calc-chap-7" class="chapter-content" style="display: none;"></div>
+                    <div id="calc-chap-3" class="chapter-content" style="display:none;"></div>
                 </div>
-
-                <!-- Engineering Economics -->
                 <button class="notes-header" onclick="toggleNotesSection('econ-notes-main')">
-                    📘 Engineering Economics: Financial Decision Making
-                    <span id="econ-notes-main-symbol">+</span>
+                    📘 Engineering Economics <span id="econ-notes-main-symbol">+</span>
                 </button>
-                <div id="econ-notes-main" class="notes-content" style="display: none;">
+                <div id="econ-notes-main" class="notes-content" style="display:none;">
                     <button class="chapter-header" onclick="toggleChapter('econ-chap-1')">
                         Chapter 1: Introduction <span id="econ-chap-1-symbol">+</span>
                     </button>
-                    <div id="econ-chap-1" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('econ-chap-2')">
-                        Chapter 2: Interest and Equivalence <span id="econ-chap-2-symbol">+</span>
-                    </button>
-                    <div id="econ-chap-2" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('econ-chap-3')">
-                        Chapter 3: Present Worth Analysis <span id="econ-chap-3-symbol">+</span>
-                    </button>
-                    <div id="econ-chap-3" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('econ-chap-4')">
-                        Chapter 4: Annual Worth Analysis <span id="econ-chap-4-symbol">+</span>
-                    </button>
-                    <div id="econ-chap-4" class="chapter-content" style="display: none;"></div>
+                    <div id="econ-chap-1" class="chapter-content" style="display:none;"></div>
                 </div>
+            </div>
 
-                <!-- Circuit Analysis -->
-                <button class="notes-header" onclick="toggleNotesSection('circuits-notes-main')">
-                    📘 Electric Circuit Analysis
-                    <span id="circuits-notes-main-symbol">+</span>
-                </button>
-                <div id="circuits-notes-main" class="notes-content" style="display: none;">
-                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-1')">
-                        Chapter 1: Basic Electrical Quantities <span id="circuits-chap-1-symbol">+</span>
-                    </button>
-                    <div id="circuits-chap-1" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-2')">
-                        Chapter 2: Ohm's Law and Kirchhoff's Laws <span id="circuits-chap-2-symbol">+</span>
-                    </button>
-                    <div id="circuits-chap-2" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-3')">
-                        Chapter 3: Nodal and Mesh Analysis <span id="circuits-chap-3-symbol">+</span>
-                    </button>
-                    <div id="circuits-chap-3" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-4')">
-                        Chapter 4: Operational Amplifiers <span id="circuits-chap-4-symbol">+</span>
-                    </button>
-                    <div id="circuits-chap-4" class="chapter-content" style="display: none;"></div>
-                </div>
-
-                <!-- Signals & Systems -->
-                <button class="notes-header" onclick="toggleNotesSection('signals-notes-main')">
-                    📘 Signals and Systems
-                    <span id="signals-notes-main-symbol">+</span>
-                </button>
-                <div id="signals-notes-main" class="notes-content" style="display: none;">
-                    <button class="chapter-header" onclick="toggleChapter('signals-chap-1')">
-                        Chapter 1: Continuous-Time Signals <span id="signals-chap-1-symbol">+</span>
-                    </button>
-                    <div id="signals-chap-1" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('signals-chap-2')">
-                        Chapter 2: Fourier Series <span id="signals-chap-2-symbol">+</span>
-                    </button>
-                    <div id="signals-chap-2" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('signals-chap-3')">
-                        Chapter 3: Laplace Transform <span id="signals-chap-3-symbol">+</span>
-                    </button>
-                    <div id="signals-chap-3" class="chapter-content" style="display: none;"></div>
-                </div>
-
-                <!-- Electromagnetics -->
-                <button class="notes-header" onclick="toggleNotesSection('em-notes-main')">
-                    📘 Engineering Electromagnetics
-                    <span id="em-notes-main-symbol">+</span>
-                </button>
-                <div id="em-notes-main" class="notes-content" style="display: none;">
-                    <button class="chapter-header" onclick="toggleChapter('em-chap-1')">
-                        Chapter 1: Vector Analysis <span id="em-chap-1-symbol">+</span>
-                    </button>
-                    <div id="em-chap-1" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('em-chap-2')">
-                        Chapter 2: Electrostatics <span id="em-chap-2-symbol">+</span>
-                    </button>
-                    <div id="em-chap-2" class="chapter-content" style="display: none;"></div>
-                    <button class="chapter-header" onclick="toggleChapter('em-chap-3')">
-                        Chapter 3: Magnetostatics <span id="em-chap-3-symbol">+</span>
-                    </button>
-                    <div id="em-chap-3" class="chapter-content" style="display: none;"></div>
-                </div>
-
+            <!-- Next Section button at end of Tech Notes -->
+            <div style="display:flex; justify-content:center; margin-top:30px;">
+                <button class="next-section-btn" data-next="contact">⬇ Next: Contact</button>
             </div>
         </section>
 
-        <!-- ===== DIVIDER NAV 3 (after Tech Notes) ===== -->
-        <div class="section-divider-nav" id="divider-tech">
+        <!-- ===== DIVIDER 3 ===== -->
+        <div class="section-divider-nav">
             <button class="nav-btn" data-target="hero">⏣ Home</button>
             <button class="nav-btn" data-target="projects">⚙ Projects</button>
             <button class="nav-btn active-btn" data-target="tech-notes">📘 Tech Notes</button>
             <button class="nav-btn" data-target="contact">✉ Contact</button>
         </div>
 
-        <!-- ===== CONTACT SECTION ===== -->
+        <!-- ===== CONTACT ===== -->
         <section id="contact">
             <div class="contact-card">
                 <h2>⟨ connect ⟩</h2>
@@ -1434,10 +1105,14 @@
                     <a href="mailto:jeremyfa2013@gmail.com">✉️ jeremyfa2013@gmail.com</a>
                 </div>
             </div>
+            <!-- Back to top button at end of Contact -->
+            <div style="display:flex; justify-content:center; margin-top:20px;">
+                <button class="next-section-btn" data-next="hero">⬆ Back to Home</button>
+            </div>
         </section>
 
-        <!-- ===== DIVIDER NAV 4 (after Contact) ===== -->
-        <div class="section-divider-nav" id="divider-contact">
+        <!-- ===== DIVIDER 4 ===== -->
+        <div class="section-divider-nav">
             <button class="nav-btn" data-target="hero">⏣ Home</button>
             <button class="nav-btn" data-target="projects">⚙ Projects</button>
             <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
@@ -1450,6 +1125,300 @@
     </div>
 
     <script>
+        // ================================================================
+        // PROJECT DATA (copied from original cards)
+        // ================================================================
+        const projectData = [{
+            title: "Robo-Maestro",
+            meta: "UBC | Jan 2026 – Apr 2026 | PID Controller",
+            tags: ["ESP32", "C++", "Arduino IDE", "PID Control", "H-Bridge", "AS5600 Encoder"],
+            desc: "Designed and developed an electromechanical piano-playing robot using a DC motor and two solenoids. Programmed embedded firmware in C++ on an ESP32 using the Arduino IDE and implemented a PID controller for precise linear positioning with a timing belt system and AS5600 magnetic encoder.",
+            link: "#"
+        }, {
+            title: "2-Bit ALU",
+            meta: "Personal Project | 2026",
+            tags: ["Digital Logic", "Breadboard", "Logic Gates", "Combinational Logic"],
+            desc: "Designed and constructed a 2-bit Arithmetic Logic Unit (ALU) on a breadboard using discrete AND, OR, and NOT logic gates. Derived and minimized Boolean expressions to implement arithmetic and logical operations.",
+            link: "#"
+        }, {
+            title: "Closed-Loop Boost Converter",
+            meta: "Personal Project | Jan 2026",
+            tags: ["Power Electronics", "Arduino", "C++", "PWM", "Feedback Control"],
+            desc: "Designed and built a closed-loop DC-DC boost converter using an Arduino to regulate output voltage through PWM duty-cycle control. Implemented voltage feedback and optimized the feedback loop for stable output regulation.",
+            link: "#"
+        }, {
+            title: "Colpitts Oscillator",
+            meta: "Personal Project | 2026",
+            tags: ["Analog Electronics", "BJT", "Oscillator", "LTspice", "Oscilloscope"],
+            desc: "Designed and constructed a BJT-based Colpitts oscillator using an LC resonant tank. Simulated in LTspice and validated startup behavior and output waveform using an oscilloscope.",
+            link: "#"
+        }, {
+            title: "Common-Emitter BJT Amp",
+            meta: "Personal Project | 2026",
+            tags: ["Analog Electronics", "BJT", "Signal Amplification", "LTspice"],
+            desc: "Designed and analyzed a single-stage common-emitter amplifier. Calculated DC operating point, established proper biasing, and optimized component values for desired voltage gain.",
+            link: "#"
+        }, {
+            title: "Discrete H-Bridge Driver",
+            meta: "Personal Project | Jan 2026",
+            tags: ["Power Electronics", "ESP32", "C++", "MOSFETs", "BJT Driver", "PWM"],
+            desc: "Designed a discrete MOSFET H-bridge for bidirectional DC motor control using IRF3205 and IRF9540N with 2N2222 gate drivers. Implemented PWM-based speed control and optimized gate-drive.",
+            link: "#"
+        }, {
+            title: "E-Ball Model",
+            meta: "UBC | Dec 2025 – Jan 2026 | Robotics & BLDC",
+            tags: ["ESP32", "C++", "BLDC", "PWM", "Bluetooth (DS4)", "ESC"],
+            desc: "Engineered a high-torque Bluetooth-controlled robotic vehicle driven by three-phase sensorless BLDC motors. Wrote custom C++ firmware with smooth speed regulation via 50kHz PWM.",
+            link: "#"
+        }, {
+            title: "Coin Picking Robot",
+            meta: "UBC | Apr 2025 – May 2025 | Embedded Collaboration",
+            tags: ["C", "PIC18", "EFM8", "RF Modules", "H-Bridge", "Metal Detection"],
+            desc: "Architected a remote-controlled robot that autonomously picks Canadian coins using inductive sensing. Wrote low-level C for PIC18 and EFM8, designed custom H-bridge, and 433MHz RF.",
+            link: "https://github.com/JeremyF003/Picking-coin-robot"
+        }, {
+            title: "Reflow Oven Controller",
+            meta: "UBC | Mar 2025 – May 2025 | Industrial Control",
+            tags: ["A51 Assembly", "N76E003", "Thermocouple", "PID", "Zero-Cross"],
+            desc: "Developed a reflow soldering oven controller with real-time temperature profiling, programmed entirely in A51 assembly. Implemented PI control with triac switching.",
+            link: "https://github.com/JeremyF003/Reflow-oven"
+        }, {
+            title: "Line Following Robot",
+            meta: "KPU | Apr 2024 – May 2024 | Optical Sensing",
+            tags: ["C", "PIC18F46K42", "Phototransistors", "PID Line", "MPLAB"],
+            desc: "Programmed an autonomous line-following robot using PID-based steering correction. Implemented sensor fusion from 5-channel IR array with efficient C interrupt routines.",
+            link: "https://github.com/JeremyF003/WheelsonRobot"
+        }, {
+            title: "Differential Gear Assembly",
+            meta: "Personal Project | 2026",
+            tags: ["SOLIDWORKS", "Mechanical Design", "CAD", "Gear Design"],
+            desc: "Designed a functional automotive-style differential assembly in SOLIDWORKS, modeling gears, shafts, bearings, and housing. Verified kinematic motion for torque distribution.",
+            link: "#"
+        }];
+
+        // ================================================================
+        // CAROUSEL (3D WHEEL)
+        // ================================================================
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        const dotsContainer = document.getElementById('carouselDots');
+
+        let currentIndex = 0;
+        const visibleCount = 3;
+        const totalItems = projectData.length;
+
+        function buildCarousel() {
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            projectData.forEach((p, idx) => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.dataset.index = idx;
+
+                const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
+
+                item.innerHTML = `
+                    <div class="project-title-sm">${p.title}</div>
+                    <div class="project-meta-sm">${p.meta}</div>
+                    <div class="project-tags-sm">${tagsHtml}</div>
+                    <div class="project-desc-sm">${p.desc}</div>
+                    <a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>
+                `;
+                track.appendChild(item);
+
+                // dots
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.dataset.index = idx;
+                dot.addEventListener('click', () => goTo(idx));
+                dotsContainer.appendChild(dot);
+            });
+
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const items = track.querySelectorAll('.carousel-item');
+            const dots = dotsContainer.querySelectorAll('.dot');
+            const angleStep = 360 / totalItems;
+            const radius = 520; // distance from center
+
+            // rotate track so that currentIndex is at center (angle 0)
+            const trackRotation = -currentIndex * angleStep;
+            track.style.transform = `rotateY(${trackRotation}deg)`;
+
+            items.forEach((item, i) => {
+                const angle = i * angleStep;
+                // position in 3D
+                const x = radius * Math.sin(angle * Math.PI / 180);
+                const z = radius * Math.cos(angle * Math.PI / 180);
+                // we want the item to face outward from the center
+                const rotY = angle;
+                item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg)`;
+                // hide items far behind (z < -radius/2)
+                const opacity = (z > -radius * 0.4) ? 1 : 0;
+                const scale = (z > -radius * 0.4) ? 1 : 0.8;
+                item.style.opacity = opacity;
+                item.style.transform += ` scale(${scale})`;
+                // make items at the back not clickable
+                item.style.pointerEvents = (z > -radius * 0.4) ? 'auto' : 'none';
+            });
+
+            // update dots
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function goTo(index) {
+            currentIndex = (index + totalItems) % totalItems;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            goTo(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            goTo(currentIndex - 1);
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // ================================================================
+        // NAVIGATION HELPERS
+        // ================================================================
+        function navigateToSection(targetId) {
+            const sectionMap = {
+                'hero': 'hero',
+                'projects': 'projects',
+                'tech-notes': 'technical-notes',
+                'contact': 'contact'
+            };
+            const el = document.getElementById(sectionMap[targetId]);
+            if (!el) return;
+            el.classList.remove('section-highlight');
+            void el.offsetWidth;
+            el.classList.add('section-highlight');
+            const offset = 80;
+            const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+
+            // update tree nodes
+            document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.tree-node').forEach(n => {
+                if (n.dataset.target === targetId) n.classList.add('active');
+            });
+            // update divider buttons
+            document.querySelectorAll('.section-divider-nav .nav-btn').forEach(b => {
+                b.classList.remove('active-btn');
+                if (b.dataset.target === targetId) b.classList.add('active-btn');
+            });
+        }
+
+        // Tree node clicks
+        document.querySelectorAll('.tree-node').forEach(node => {
+            node.addEventListener('click', function() {
+                const target = this.dataset.target;
+                if (target) navigateToSection(target);
+            });
+        });
+
+        // Divider button clicks
+        document.querySelectorAll('.section-divider-nav .nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const target = this.dataset.target;
+                if (target) navigateToSection(target);
+            });
+        });
+
+        // "Explore Projects" button
+        document.getElementById('exploreBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateToSection('projects');
+        });
+
+        // "Next Section" buttons
+        document.querySelectorAll('.next-section-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const target = this.dataset.next;
+                if (target) navigateToSection(target);
+            });
+        });
+
+        // ================================================================
+        // TOGGLE FUNCTIONS for Tech Notes
+        // ================================================================
+        window.toggleNotesSection = function(sectionId) {
+            const content = document.getElementById(sectionId);
+            const symbol = document.getElementById(sectionId + "-symbol");
+            if (content) {
+                if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+                    if (symbol) symbol.innerHTML = "−";
+                    if (window.MathJax) MathJax.typesetPromise();
+                } else {
+                    content.style.display = "none";
+                    if (symbol) symbol.innerHTML = "+";
+                }
+            }
+        };
+
+        window.toggleChapter = function(chapterId) {
+            const div = document.getElementById(chapterId);
+            const sym = document.getElementById(chapterId + "-symbol");
+            if (div) {
+                if (div.style.display === "none" || div.style.display === "") {
+                    div.style.display = "block";
+                    if (sym) sym.innerHTML = "−";
+                    if (window.MathJax) MathJax.typesetPromise();
+                } else {
+                    div.style.display = "none";
+                    if (sym) sym.innerHTML = "+";
+                }
+            }
+        };
+
+        // ================================================================
+        // SCROLL SPY
+        // ================================================================
+        const sectionIds = ['hero', 'projects', 'technical-notes', 'contact'];
+        const targetMap = { 'hero': 'hero', 'projects': 'projects', 'technical-notes': 'tech-notes', 'contact': 'contact' };
+
+        function updateActiveOnScroll() {
+            const scrollY = window.pageYOffset + 120;
+            let currentId = 'hero';
+            for (const id of sectionIds) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const top = el.offsetTop;
+                    const bottom = top + el.offsetHeight;
+                    if (scrollY >= top && scrollY < bottom) {
+                        currentId = id;
+                        break;
+                    }
+                }
+            }
+            const target = targetMap[currentId] || 'hero';
+            document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.tree-node').forEach(n => {
+                if (n.dataset.target === target) n.classList.add('active');
+            });
+            document.querySelectorAll('.section-divider-nav .nav-btn').forEach(b => {
+                b.classList.remove('active-btn');
+                if (b.dataset.target === target) b.classList.add('active-btn');
+            });
+        }
+
+        let scrollTimer;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(updateActiveOnScroll, 80);
+        });
+
         // ================================================================
         // INTRO TYPING
         // ================================================================
@@ -1474,26 +1443,22 @@
                             mainDiv.style.opacity = "1";
                         }, 20);
                         startNameTyping();
-                        setActiveNode('hero');
-                        updateDividerButtons('hero');
+                        buildCarousel();
+                        updateActiveOnScroll();
                     }, 1000);
                 }, 800);
             }
         }
 
         // ================================================================
-        // NAME TYPING IN HERO
+        // NAME TYPING
         // ================================================================
         const nameTarget = "Jeremy Fernandez";
         let nameIdx = 0;
         const typingSpan = document.getElementById("typing-name");
-        let nameActive = false;
 
         function startNameTyping() {
-            if (nameActive) return;
-            nameActive = true;
             typingSpan.innerHTML = "";
-
             function typeNameChar() {
                 if (nameIdx < nameTarget.length) {
                     typingSpan.innerHTML += nameTarget.charAt(nameIdx);
@@ -1508,179 +1473,10 @@
         }
 
         // ================================================================
-        // TREE NAVIGATION (sticky)
+        // IMAGE PLACEHOLDERS
         // ================================================================
-        const treeNodes = document.querySelectorAll('.tree-node');
-        const exploreBtn = document.getElementById('exploreBtn');
-
-        const sectionMap = {
-            'hero': 'hero',
-            'projects': 'projects',
-            'tech-notes': 'technical-notes',
-            'contact': 'contact'
-        };
-
-        function setActiveNode(targetId) {
-            treeNodes.forEach(n => n.classList.remove('active'));
-            treeNodes.forEach(n => {
-                if (n.dataset.target === targetId) {
-                    n.classList.add('active');
-                }
-            });
-        }
-
-        function updateDividerButtons(targetId) {
-            document.querySelectorAll('.section-divider-nav .nav-btn').forEach(btn => {
-                btn.classList.remove('active-btn');
-                if (btn.dataset.target === targetId) {
-                    btn.classList.add('active-btn');
-                }
-            });
-        }
-
-        function navigateToSection(targetId) {
-            const sectionId = sectionMap[targetId];
-            if (!sectionId) return;
-            const el = document.getElementById(sectionId);
-            if (el) {
-                el.classList.remove('section-highlight');
-                void el.offsetWidth;
-                el.classList.add('section-highlight');
-                const offset = 80;
-                const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
-                window.scrollTo({ top, behavior: 'smooth' });
-                setActiveNode(targetId);
-                updateDividerButtons(targetId);
-            }
-        }
-
-        // Tree node clicks
-        treeNodes.forEach(node => {
-            node.addEventListener('click', function(e) {
-                const target = this.dataset.target;
-                if (target) navigateToSection(target);
-            });
-        });
-
-        // Divider button clicks
-        document.querySelectorAll('.section-divider-nav .nav-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const target = this.dataset.target;
-                if (target) navigateToSection(target);
-            });
-        });
-
-        // "Explore Projects" button
-        if (exploreBtn) {
-            exploreBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                navigateToSection('projects');
-            });
-        }
-
-        // ================================================================
-        // TOGGLE FUNCTIONS for Technical Notes
-        // ================================================================
-        window.toggleNotesSection = function(sectionId) {
-            const content = document.getElementById(sectionId);
-            const symbolSpan = document.getElementById(sectionId + "-symbol");
-            if (content) {
-                if (content.style.display === "none" || content.style.display === "") {
-                    content.style.display = "block";
-                    if (symbolSpan) symbolSpan.innerHTML = "−";
-                    if (window.MathJax) MathJax.typesetPromise();
-                } else {
-                    content.style.display = "none";
-                    if (symbolSpan) symbolSpan.innerHTML = "+";
-                }
-            }
-        };
-
-        window.toggleChapter = function(chapterId) {
-            const chapterDiv = document.getElementById(chapterId);
-            const symbolSpan = document.getElementById(chapterId + "-symbol");
-            if (chapterDiv) {
-                if (chapterDiv.style.display === "none" || chapterDiv.style.display === "") {
-                    chapterDiv.style.display = "block";
-                    if (symbolSpan) symbolSpan.innerHTML = "−";
-                    if (window.MathJax) MathJax.typesetPromise();
-                } else {
-                    chapterDiv.style.display = "none";
-                    if (symbolSpan) symbolSpan.innerHTML = "+";
-                }
-            }
-        };
-
-        window.toggleProblem = function(problemId) {
-            const problemDiv = document.getElementById(problemId);
-            const symbolSpan = document.getElementById(problemId + "-symbol");
-            if (problemDiv) {
-                if (problemDiv.style.display === "none" || problemDiv.style.display === "") {
-                    problemDiv.style.display = "block";
-                    if (symbolSpan) symbolSpan.innerHTML = "−";
-                    if (window.MathJax) MathJax.typesetPromise();
-                } else {
-                    problemDiv.style.display = "none";
-                    if (symbolSpan) symbolSpan.innerHTML = "+";
-                }
-            }
-        };
-
-        // ================================================================
-        // SCROLL SPY – update active tree + divider buttons
-        // ================================================================
-        const sectionIds = ['hero', 'projects', 'technical-notes', 'contact'];
-
-        function updateActiveOnScroll() {
-            const scrollY = window.pageYOffset + 120;
-            let currentId = 'hero';
-            for (const id of sectionIds) {
-                const el = document.getElementById(id);
-                if (el) {
-                    const top = el.offsetTop;
-                    const bottom = top + el.offsetHeight;
-                    if (scrollY >= top && scrollY < bottom) {
-                        currentId = id;
-                        break;
-                    }
-                }
-            }
-            const targetMap = {
-                'hero': 'hero',
-                'projects': 'projects',
-                'technical-notes': 'tech-notes',
-                'contact': 'contact'
-            };
-            const target = targetMap[currentId] || 'hero';
-            setActiveNode(target);
-            updateDividerButtons(target);
-        }
-
-        let scrollTimer;
-        window.addEventListener('scroll', function() {
-            clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(updateActiveOnScroll, 80);
-        });
-
-        // ================================================================
-        // IMAGE PLACEHOLDER
-        // ================================================================
-        const profileImage = document.getElementById("profileImage");
-        if (profileImage) {
-            profileImage.src = "profile.jpg";
-            profileImage.alt = "Jeremy Fernandez - Electrical Engineer";
-        }
-
-        const projectImgs = document.querySelectorAll(".project-image-container img");
-        const imgSources = [
-            "robomaestro.jpg", "alu.jpg", "boost_converter.jpg",
-            "colpitts.jpg", "common_emitter.jpg", "hbridge.jpg",
-            "eball.jpg", "coin.jpg", "reflow.jpg", "line.jpg",
-            "differential.jpg"
-        ];
-        for (let i = 0; i < projectImgs.length && i < imgSources.length; i++) {
-            if (projectImgs[i]) projectImgs[i].src = imgSources[i];
-        }
+        document.getElementById('profileImage').src = "profile.jpg";
+        // We don't need to set project images because we are using text-only cards in the carousel.
 
         // ================================================================
         // START
