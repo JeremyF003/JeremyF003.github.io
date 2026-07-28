@@ -107,7 +107,7 @@
             transition: opacity 1.2s ease-out;
         }
 
-        /* ===== STICKY TREE NAV ===== */
+        /* ===== STICKY TREE NAV (primary navigation) ===== */
         #tree-nav {
             position: sticky;
             top: 0;
@@ -241,56 +241,6 @@
                 color: #c4edff;
                 font-weight: 600;
             }
-        }
-
-        /* ===== SECTION DIVIDER NAV BUTTONS ===== */
-        .section-divider-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px 30px;
-            flex-wrap: wrap;
-            padding: 18px 20px 22px;
-            margin: 10px auto 0;
-            max-width: 900px;
-            border-top: 1px solid rgba(0, 200, 255, 0.12);
-            border-bottom: 1px solid rgba(0, 200, 255, 0.12);
-            background: rgba(6, 12, 20, 0.5);
-            backdrop-filter: blur(4px);
-            border-radius: 60px;
-        }
-
-        .section-divider-nav .nav-btn {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            color: #8ab8e0;
-            background: transparent;
-            border: 1px solid rgba(0, 200, 255, 0.2);
-            padding: 6px 18px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.25s;
-            background: rgba(0, 20, 30, 0.4);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .section-divider-nav .nav-btn:hover {
-            color: #fff;
-            border-color: #0ff;
-            background: rgba(0, 200, 255, 0.12);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .section-divider-nav .nav-btn.active-btn {
-            color: #ffffff;
-            border-color: #0ff;
-            background: rgba(0, 200, 255, 0.18);
-            box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
         }
 
         /* ===== NEXT SECTION BUTTON ===== */
@@ -465,8 +415,8 @@
         }
 
         /* ============================================================
-               PROJECTS – SLIDING CAROUSEL (shows 3 at a time)
-               ============================================================ */
+           PROJECTS – SLIDING CAROUSEL (shows 3 at a time)
+           ============================================================ */
         #projects {
             padding: 40px 5% 60px;
             max-width: 1400px;
@@ -490,7 +440,7 @@
             position: relative;
             width: 100%;
             overflow: hidden;
-            padding: 10px 0 20px;
+            padding: 10px 50px 20px; /* space for arrows */
         }
 
         .carousel-track {
@@ -512,7 +462,7 @@
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s;
-            height: 400px;
+            height: 420px;
             overflow-y: auto;
         }
 
@@ -530,18 +480,27 @@
             box-shadow: 0 25px 40px -12px rgba(0, 150, 255, 0.2);
         }
 
+        .carousel-item .project-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+        }
+
         .carousel-item .project-title-sm {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             color: #fff;
         }
 
         .carousel-item .project-meta-sm {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #8bb9fe;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             border-left: 2px solid #0ff;
             padding-left: 8px;
         }
@@ -550,21 +509,21 @@
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .carousel-item .project-tags-sm span {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             background: #0a1018;
-            padding: 2px 10px;
+            padding: 2px 8px;
             border-radius: 20px;
             border: 1px solid #2c5a7a;
             color: #b3e4ff;
         }
 
         .carousel-item .project-desc-sm {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             line-height: 1.5;
             color: #d3e5fc;
             flex: 1;
@@ -582,7 +541,7 @@
         .carousel-item .project-link-sm {
             margin-top: 12px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #b6e6ff;
             border: 1px solid #2f8fbf;
             padding: 4px 14px;
@@ -600,17 +559,17 @@
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
 
-        /* carousel controls */
+        /* carousel controls – positioned outside the track area */
         .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 20, 30, 0.7);
-            border: 1px solid rgba(0, 200, 255, 0.3);
+            background: rgba(0, 20, 30, 0.8);
+            border: 1px solid rgba(0, 200, 255, 0.4);
             color: #c4edff;
             font-size: 2rem;
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 10;
@@ -622,16 +581,16 @@
         }
 
         .carousel-btn:hover {
-            background: rgba(0, 200, 255, 0.2);
+            background: rgba(0, 200, 255, 0.25);
             border-color: #0ff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
         }
 
         .carousel-btn.prev {
-            left: 10px;
+            left: 6px;
         }
         .carousel-btn.next {
-            right: 10px;
+            right: 6px;
         }
 
         /* circular dots (wheel indicator) */
@@ -859,23 +818,16 @@
                 width: 260px;
                 height: 260px;
             }
-            .section-divider-nav {
-                gap: 12px 16px;
-                padding: 14px 16px;
-                border-radius: 40px;
-                margin: 6px 10px 0;
-            }
-            .section-divider-nav .nav-btn {
-                font-size: 0.65rem;
-                padding: 4px 12px;
+            .carousel-wrapper {
+                padding: 10px 40px 20px;
             }
             .carousel-item {
                 flex: 0 0 calc(100% - 20px);
-                height: 360px;
+                height: 380px;
             }
             .carousel-btn {
-                width: 40px;
-                height: 40px;
+                width: 36px;
+                height: 36px;
                 font-size: 1.5rem;
             }
         }
@@ -898,17 +850,11 @@
             .tree-node {
                 padding: 3px 6px;
             }
-            .section-divider-nav {
-                gap: 8px 10px;
-                padding: 10px 12px;
-                border-radius: 30px;
-            }
-            .section-divider-nav .nav-btn {
-                font-size: 0.55rem;
-                padding: 3px 10px;
+            .carousel-wrapper {
+                padding: 10px 30px 20px;
             }
             .carousel-item {
-                height: 300px;
+                height: 320px;
                 padding: 16px;
             }
             .carousel-item .project-title-sm {
@@ -918,9 +864,9 @@
                 font-size: 0.7rem;
             }
             .carousel-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 1rem;
+                width: 30px;
+                height: 30px;
+                font-size: 1.2rem;
             }
         }
 
@@ -954,7 +900,7 @@
     <!-- ===== MAIN CONTENT ===== -->
     <div id="main-content" style="display: none;">
 
-        <!-- ===== TREE NAV ===== -->
+        <!-- ===== STICKY TREE NAV (primary navigation) ===== -->
         <nav id="tree-nav">
             <div class="tree-container">
                 <div class="tree-node root-node active" data-target="hero">
@@ -1004,14 +950,6 @@
             <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
         </section>
 
-        <!-- ===== DIVIDER 1 ===== -->
-        <div class="section-divider-nav">
-            <button class="nav-btn active-btn" data-target="hero">⏣ Home</button>
-            <button class="nav-btn" data-target="projects">⚙ Projects</button>
-            <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
-            <button class="nav-btn" data-target="contact">✉ Contact</button>
-        </div>
-
         <!-- ===== PROJECTS (SLIDING CAROUSEL) ===== -->
         <section id="projects">
             <h2 class="section-title">// technical infrastructure</h2>
@@ -1027,14 +965,6 @@
 
             <button class="next-section-btn" data-next="tech-notes">⬇ Next: Tech Notes</button>
         </section>
-
-        <!-- ===== DIVIDER 2 ===== -->
-        <div class="section-divider-nav">
-            <button class="nav-btn" data-target="hero">⏣ Home</button>
-            <button class="nav-btn active-btn" data-target="projects">⚙ Projects</button>
-            <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
-            <button class="nav-btn" data-target="contact">✉ Contact</button>
-        </div>
 
         <!-- ===== TECHNICAL NOTES ===== -->
         <section id="technical-notes">
@@ -1066,14 +996,6 @@
             <button class="next-section-btn" data-next="contact">⬇ Next: Contact</button>
         </section>
 
-        <!-- ===== DIVIDER 3 ===== -->
-        <div class="section-divider-nav">
-            <button class="nav-btn" data-target="hero">⏣ Home</button>
-            <button class="nav-btn" data-target="projects">⚙ Projects</button>
-            <button class="nav-btn active-btn" data-target="tech-notes">📘 Tech Notes</button>
-            <button class="nav-btn" data-target="contact">✉ Contact</button>
-        </div>
-
         <!-- ===== CONTACT ===== -->
         <section id="contact">
             <div class="contact-card">
@@ -1091,14 +1013,6 @@
             <button class="next-section-btn" data-next="hero">⬆ Back to Home</button>
         </section>
 
-        <!-- ===== DIVIDER 4 ===== -->
-        <div class="section-divider-nav">
-            <button class="nav-btn" data-target="hero">⏣ Home</button>
-            <button class="nav-btn" data-target="projects">⚙ Projects</button>
-            <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
-            <button class="nav-btn active-btn" data-target="contact">✉ Contact</button>
-        </div>
-
         <div class="footer-note">
             ⚡ Electrical Engineering · UBC | Firmware · Control · PCB
         </div>
@@ -1106,74 +1020,85 @@
 
     <script>
         // ================================================================
-        // PROJECT DATA
+        // PROJECT DATA (with image filenames)
         // ================================================================
         const projectData = [{
             title: "Robo-Maestro",
             meta: "UBC | Jan 2026 – Apr 2026 | PID Controller",
             tags: ["ESP32", "C++", "Arduino IDE", "PID Control", "H-Bridge", "AS5600 Encoder"],
             desc: "Designed and developed an electromechanical piano-playing robot using a DC motor and two solenoids. Programmed embedded firmware in C++ on an ESP32 using the Arduino IDE and implemented a PID controller for precise linear positioning with a timing belt system and AS5600 magnetic encoder.",
-            link: "#"
+            link: "#",
+            img: "robomaestro.jpg"
         }, {
             title: "2-Bit ALU",
             meta: "Personal Project | 2026",
             tags: ["Digital Logic", "Breadboard", "Logic Gates", "Combinational Logic"],
             desc: "Designed and constructed a 2-bit Arithmetic Logic Unit (ALU) on a breadboard using discrete AND, OR, and NOT logic gates. Derived and minimized Boolean expressions to implement arithmetic and logical operations.",
-            link: "#"
+            link: "#",
+            img: "alu.jpg"
         }, {
             title: "Closed-Loop Boost Converter",
             meta: "Personal Project | Jan 2026",
             tags: ["Power Electronics", "Arduino", "C++", "PWM", "Feedback Control"],
             desc: "Designed and built a closed-loop DC-DC boost converter using an Arduino to regulate output voltage through PWM duty-cycle control. Implemented voltage feedback and optimized the feedback loop for stable output regulation.",
-            link: "#"
+            link: "#",
+            img: "boost_converter.jpg"
         }, {
             title: "Colpitts Oscillator",
             meta: "Personal Project | 2026",
             tags: ["Analog Electronics", "BJT", "Oscillator", "LTspice", "Oscilloscope"],
             desc: "Designed and constructed a BJT-based Colpitts oscillator using an LC resonant tank. Simulated in LTspice and validated startup behavior and output waveform using an oscilloscope.",
-            link: "#"
+            link: "#",
+            img: "colpitts.jpg"
         }, {
             title: "Common-Emitter BJT Amp",
             meta: "Personal Project | 2026",
             tags: ["Analog Electronics", "BJT", "Signal Amplification", "LTspice"],
             desc: "Designed and analyzed a single-stage common-emitter amplifier. Calculated DC operating point, established proper biasing, and optimized component values for desired voltage gain.",
-            link: "#"
+            link: "#",
+            img: "common_emitter.jpg"
         }, {
             title: "Discrete H-Bridge Driver",
             meta: "Personal Project | Jan 2026",
             tags: ["Power Electronics", "ESP32", "C++", "MOSFETs", "BJT Driver", "PWM"],
             desc: "Designed a discrete MOSFET H-bridge for bidirectional DC motor control using IRF3205 and IRF9540N with 2N2222 gate drivers. Implemented PWM-based speed control and optimized gate-drive.",
-            link: "#"
+            link: "#",
+            img: "hbridge.jpg"
         }, {
             title: "E-Ball Model",
             meta: "UBC | Dec 2025 – Jan 2026 | Robotics & BLDC",
             tags: ["ESP32", "C++", "BLDC", "PWM", "Bluetooth (DS4)", "ESC"],
             desc: "Engineered a high-torque Bluetooth-controlled robotic vehicle driven by three-phase sensorless BLDC motors. Wrote custom C++ firmware with smooth speed regulation via 50kHz PWM.",
-            link: "#"
+            link: "#",
+            img: "eball.jpg"
         }, {
             title: "Coin Picking Robot",
             meta: "UBC | Apr 2025 – May 2025 | Embedded Collaboration",
             tags: ["C", "PIC18", "EFM8", "RF Modules", "H-Bridge", "Metal Detection"],
             desc: "Architected a remote-controlled robot that autonomously picks Canadian coins using inductive sensing. Wrote low-level C for PIC18 and EFM8, designed custom H-bridge, and 433MHz RF.",
-            link: "https://github.com/JeremyF003/Picking-coin-robot"
+            link: "https://github.com/JeremyF003/Picking-coin-robot",
+            img: "coin.jpg"
         }, {
             title: "Reflow Oven Controller",
             meta: "UBC | Mar 2025 – May 2025 | Industrial Control",
             tags: ["A51 Assembly", "N76E003", "Thermocouple", "PID", "Zero-Cross"],
             desc: "Developed a reflow soldering oven controller with real-time temperature profiling, programmed entirely in A51 assembly. Implemented PI control with triac switching.",
-            link: "https://github.com/JeremyF003/Reflow-oven"
+            link: "https://github.com/JeremyF003/Reflow-oven",
+            img: "reflow.jpg"
         }, {
             title: "Line Following Robot",
             meta: "KPU | Apr 2024 – May 2024 | Optical Sensing",
             tags: ["C", "PIC18F46K42", "Phototransistors", "PID Line", "MPLAB"],
             desc: "Programmed an autonomous line-following robot using PID-based steering correction. Implemented sensor fusion from 5-channel IR array with efficient C interrupt routines.",
-            link: "https://github.com/JeremyF003/WheelsonRobot"
+            link: "https://github.com/JeremyF003/WheelsonRobot",
+            img: "line.jpg"
         }, {
             title: "Differential Gear Assembly",
             meta: "Personal Project | 2026",
             tags: ["SOLIDWORKS", "Mechanical Design", "CAD", "Gear Design"],
             desc: "Designed a functional automotive-style differential assembly in SOLIDWORKS, modeling gears, shafts, bearings, and housing. Verified kinematic motion for torque distribution.",
-            link: "#"
+            link: "#",
+            img: "differential.jpg"
         }];
 
         // ================================================================
@@ -1198,6 +1123,7 @@
                 item.className = 'carousel-item';
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
                 item.innerHTML = `
+                    <img src="${p.img}" alt="${p.title}" class="project-img" onerror="this.style.display='none'">
                     <div class="project-title-sm">${p.title}</div>
                     <div class="project-meta-sm">${p.meta}</div>
                     <div class="project-tags-sm">${tagsHtml}</div>
@@ -1219,18 +1145,16 @@
 
         function updateCarousel() {
             const itemWidth = track.querySelector('.carousel-item')?.offsetWidth || 0;
-            const gap = 20; // from CSS gap
+            const gap = 20;
             const offset = currentIndex * (itemWidth + gap);
             track.style.transform = `translateX(-${offset}px)`;
 
-            // update dots
             const dots = dotsContainer.querySelectorAll('.dot');
             dots.forEach((dot, i) => {
                 const isActive = (i >= currentIndex && i < currentIndex + itemsPerView);
                 dot.classList.toggle('active', isActive);
             });
 
-            // enable/disable buttons
             prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
             prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
             nextBtn.style.opacity = currentIndex >= maxIndex ? '0.3' : '1';
@@ -1277,24 +1201,11 @@
             document.querySelectorAll('.tree-node').forEach(n => {
                 if (n.dataset.target === targetId) n.classList.add('active');
             });
-            // update divider buttons
-            document.querySelectorAll('.section-divider-nav .nav-btn').forEach(b => {
-                b.classList.remove('active-btn');
-                if (b.dataset.target === targetId) b.classList.add('active-btn');
-            });
         }
 
         // Tree node clicks
         document.querySelectorAll('.tree-node').forEach(node => {
             node.addEventListener('click', function() {
-                const target = this.dataset.target;
-                if (target) navigateToSection(target);
-            });
-        });
-
-        // Divider button clicks
-        document.querySelectorAll('.section-divider-nav .nav-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
                 const target = this.dataset.target;
                 if (target) navigateToSection(target);
             });
@@ -1372,10 +1283,6 @@
             document.querySelectorAll('.tree-node').forEach(n => {
                 if (n.dataset.target === target) n.classList.add('active');
             });
-            document.querySelectorAll('.section-divider-nav .nav-btn').forEach(b => {
-                b.classList.remove('active-btn');
-                if (b.dataset.target === target) b.classList.add('active-btn');
-            });
         }
 
         let scrollTimer;
@@ -1449,5 +1356,6 @@
             typeIntroSequence();
         };
     </script>
+
 </body>
 </html>
