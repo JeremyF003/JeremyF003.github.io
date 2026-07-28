@@ -108,7 +108,7 @@
         }
 
         /* ============================================================
-               TREE NAVIGATION – the visual "branch" system
+               TREE NAVIGATION (sticky top)
                ============================================================ */
         #tree-nav {
             position: sticky;
@@ -135,21 +135,6 @@
             padding: 6px 0 10px;
         }
 
-        /* ---- tree "trunk" line ---- */
-        .tree-container::before {
-            content: '';
-            position: absolute;
-            top: 38px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 16px;
-            background: linear-gradient(to bottom, #0ff, transparent);
-            opacity: 0.5;
-            display: none;
-        }
-
-        /* each node group */
         .tree-node {
             display: flex;
             flex-direction: column;
@@ -205,19 +190,11 @@
             filter: grayscale(0);
         }
 
-        /* ---- branch connector lines (horizontal) ---- */
-        .tree-connector {
-            display: none;
-            /* we draw them with pseudo on larger screens */;
-        }
-
-        /* desktop: show connector dots and lines */
         @media (min-width: 780px) {
             .tree-container {
                 flex-wrap: nowrap;
                 gap: 0 4px;
             }
-
             .tree-node {
                 flex-direction: row;
                 gap: 6px;
@@ -225,17 +202,13 @@
                 border-radius: 40px;
                 min-width: auto;
             }
-
             .tree-node .node-icon {
                 font-size: 1rem;
                 margin-bottom: 0;
             }
-
             .tree-node .node-label {
                 font-size: 0.7rem;
             }
-
-            /* connector line between nodes */
             .tree-node::after {
                 content: '';
                 position: absolute;
@@ -247,12 +220,9 @@
                 background: linear-gradient(to right, rgba(0, 200, 255, 0.3), rgba(0, 200, 255, 0.05));
                 border-radius: 2px;
             }
-
             .tree-node:last-child::after {
                 display: none;
             }
-
-            /* dot at start of each node */
             .tree-node::before {
                 content: '';
                 width: 6px;
@@ -264,38 +234,87 @@
                 transition: background 0.3s, box-shadow 0.3s;
                 margin-right: 2px;
             }
-
             .tree-node.active::before,
             .tree-node:hover::before {
                 background: #0ff;
                 box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
             }
-
-            /* root node special treatment */
             .tree-node.root-node::before {
                 background: #0ff;
                 box-shadow: 0 0 16px rgba(0, 255, 255, 0.3);
                 width: 8px;
                 height: 8px;
             }
-
             .tree-node.root-node .node-label {
                 color: #c4edff;
                 font-weight: 600;
             }
-
-            /* sub-branch indicator (child projects) */
             .tree-node.has-children .node-label::after {
                 content: ' ▾';
                 font-size: 0.6rem;
                 opacity: 0.5;
                 color: #5aa0c0;
             }
-
             .tree-node.has-children.active .node-label::after {
                 opacity: 1;
                 color: #0ff;
             }
+        }
+
+        /* ============================================================
+               SECTION DIVIDER NAVIGATION BUTTONS (between sections)
+               ============================================================ */
+        .section-divider-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px 30px;
+            flex-wrap: wrap;
+            padding: 18px 20px 22px;
+            margin: 10px auto 0;
+            max-width: 900px;
+            border-top: 1px solid rgba(0, 200, 255, 0.12);
+            border-bottom: 1px solid rgba(0, 200, 255, 0.12);
+            background: rgba(6, 12, 20, 0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+        }
+
+        .section-divider-nav .nav-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: #8ab8e0;
+            background: transparent;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            padding: 6px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.25s;
+            background: rgba(0, 20, 30, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .section-divider-nav .nav-btn:hover {
+            color: #fff;
+            border-color: #0ff;
+            background: rgba(0, 200, 255, 0.12);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .section-divider-nav .nav-btn.active-btn {
+            color: #ffffff;
+            border-color: #0ff;
+            background: rgba(0, 200, 255, 0.18);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+        }
+
+        .divider-spacer {
+            height: 8px;
         }
 
         /* ===== HERO SECTION ===== */
@@ -325,9 +344,10 @@
             justify-content: center;
         }
 
+        /* --- BIGGER PHOTO --- */
         .profile-pic {
-            width: 260px;
-            height: 260px;
+            width: 340px;
+            height: 340px;
             object-fit: cover;
             border-radius: 32px;
             border: 2px solid rgba(0, 255, 255, 0.4);
@@ -834,6 +854,20 @@
             .tree-node .node-icon {
                 font-size: 0.9rem;
             }
+            .profile-pic {
+                width: 260px;
+                height: 260px;
+            }
+            .section-divider-nav {
+                gap: 12px 16px;
+                padding: 14px 16px;
+                border-radius: 40px;
+                margin: 6px 10px 0;
+            }
+            .section-divider-nav .nav-btn {
+                font-size: 0.65rem;
+                padding: 4px 12px;
+            }
         }
 
         @media (max-width: 560px) {
@@ -857,9 +891,17 @@
             .tree-node {
                 padding: 3px 6px;
             }
+            .section-divider-nav {
+                gap: 8px 10px;
+                padding: 10px 12px;
+                border-radius: 30px;
+            }
+            .section-divider-nav .nav-btn {
+                font-size: 0.55rem;
+                padding: 3px 10px;
+            }
         }
 
-        /* extra glow */
         .glow-text {
             text-shadow: 0 0 5px rgba(0, 210, 255, 0.3);
         }
@@ -877,7 +919,6 @@
             }
         }
 
-        /* ===== section highlight on nav click ===== */
         .section-highlight {
             animation: glowPulse 0.8s ease 2;
         }
@@ -891,20 +932,6 @@
             }
             100% {
                 box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
-            }
-        }
-
-        /* small tree branch indicator for mobile */
-        .tree-branch-indicator {
-            display: none;
-            font-size: 0.6rem;
-            color: #4a8aaa;
-            letter-spacing: 1px;
-        }
-
-        @media (max-width: 780px) {
-            .tree-branch-indicator {
-                display: inline;
             }
         }
     </style>
@@ -922,28 +949,21 @@
     <!-- ===== MAIN CONTENT ===== -->
     <div id="main-content" style="display: none;">
 
-        <!-- ===== TREE NAVIGATION ===== -->
+        <!-- ===== TREE NAVIGATION (sticky) ===== -->
         <nav id="tree-nav">
             <div class="tree-container" id="treeContainer">
-                <!-- ROOT NODE: Hero -->
                 <div class="tree-node root-node active" data-target="hero" data-label="⏣ Home">
                     <span class="node-icon">⏣</span>
                     <span class="node-label">Home</span>
                 </div>
-
-                <!-- BRANCH: Projects -->
                 <div class="tree-node has-children" data-target="projects" data-label="⚙ Projects">
                     <span class="node-icon">⚙</span>
                     <span class="node-label">Projects</span>
                 </div>
-
-                <!-- BRANCH: Technical Notes -->
                 <div class="tree-node" data-target="tech-notes" data-label="📘 Notes">
                     <span class="node-icon">📘</span>
                     <span class="node-label">Tech Notes</span>
                 </div>
-
-                <!-- BRANCH: Contact -->
                 <div class="tree-node" data-target="contact" data-label="✉ Connect">
                     <span class="node-icon">✉</span>
                     <span class="node-label">Contact</span>
@@ -951,7 +971,7 @@
             </div>
         </nav>
 
-        <!-- ===== HERO SECTION (root) ===== -->
+        <!-- ===== HERO SECTION ===== -->
         <section class="hero" id="hero">
             <div class="hero-center">
                 <div class="hero-left">
@@ -977,6 +997,14 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== DIVIDER NAV 1 (after Hero) ===== -->
+        <div class="section-divider-nav" id="divider-hero">
+            <button class="nav-btn active-btn" data-target="hero">⏣ Home</button>
+            <button class="nav-btn" data-target="projects">⚙ Projects</button>
+            <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
+            <button class="nav-btn" data-target="contact">✉ Contact</button>
+        </div>
 
         <!-- ===== PROJECTS SECTION ===== -->
         <section id="projects">
@@ -1243,6 +1271,14 @@
 
         </section>
 
+        <!-- ===== DIVIDER NAV 2 (after Projects) ===== -->
+        <div class="section-divider-nav" id="divider-projects">
+            <button class="nav-btn" data-target="hero">⏣ Home</button>
+            <button class="nav-btn active-btn" data-target="projects">⚙ Projects</button>
+            <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
+            <button class="nav-btn" data-target="contact">✉ Contact</button>
+        </div>
+
         <!-- ===== TECHNICAL NOTES SECTION ===== -->
         <section id="technical-notes">
             <h2 class="section-title">// technical notes</h2>
@@ -1376,6 +1412,14 @@
             </div>
         </section>
 
+        <!-- ===== DIVIDER NAV 3 (after Tech Notes) ===== -->
+        <div class="section-divider-nav" id="divider-tech">
+            <button class="nav-btn" data-target="hero">⏣ Home</button>
+            <button class="nav-btn" data-target="projects">⚙ Projects</button>
+            <button class="nav-btn active-btn" data-target="tech-notes">📘 Tech Notes</button>
+            <button class="nav-btn" data-target="contact">✉ Contact</button>
+        </div>
+
         <!-- ===== CONTACT SECTION ===== -->
         <section id="contact">
             <div class="contact-card">
@@ -1391,6 +1435,14 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== DIVIDER NAV 4 (after Contact) ===== -->
+        <div class="section-divider-nav" id="divider-contact">
+            <button class="nav-btn" data-target="hero">⏣ Home</button>
+            <button class="nav-btn" data-target="projects">⚙ Projects</button>
+            <button class="nav-btn" data-target="tech-notes">📘 Tech Notes</button>
+            <button class="nav-btn active-btn" data-target="contact">✉ Contact</button>
+        </div>
 
         <div class="footer-note">
             ⚡ Electrical Engineering · UBC | Firmware · Control · PCB
@@ -1422,8 +1474,8 @@
                             mainDiv.style.opacity = "1";
                         }, 20);
                         startNameTyping();
-                        // after intro, set active tree node to Home
                         setActiveNode('hero');
+                        updateDividerButtons('hero');
                     }, 1000);
                 }, 800);
             }
@@ -1456,12 +1508,11 @@
         }
 
         // ================================================================
-        // TREE NAVIGATION
+        // TREE NAVIGATION (sticky)
         // ================================================================
         const treeNodes = document.querySelectorAll('.tree-node');
         const exploreBtn = document.getElementById('exploreBtn');
 
-        // Map target → section ID
         const sectionMap = {
             'hero': 'hero',
             'projects': 'projects',
@@ -1478,26 +1529,42 @@
             });
         }
 
+        function updateDividerButtons(targetId) {
+            document.querySelectorAll('.section-divider-nav .nav-btn').forEach(btn => {
+                btn.classList.remove('active-btn');
+                if (btn.dataset.target === targetId) {
+                    btn.classList.add('active-btn');
+                }
+            });
+        }
+
         function navigateToSection(targetId) {
             const sectionId = sectionMap[targetId];
             if (!sectionId) return;
             const el = document.getElementById(sectionId);
             if (el) {
-                // highlight
                 el.classList.remove('section-highlight');
                 void el.offsetWidth;
                 el.classList.add('section-highlight');
-                // scroll
                 const offset = 80;
                 const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
                 window.scrollTo({ top, behavior: 'smooth' });
                 setActiveNode(targetId);
+                updateDividerButtons(targetId);
             }
         }
 
-        // Click tree nodes
+        // Tree node clicks
         treeNodes.forEach(node => {
             node.addEventListener('click', function(e) {
+                const target = this.dataset.target;
+                if (target) navigateToSection(target);
+            });
+        });
+
+        // Divider button clicks
+        document.querySelectorAll('.section-divider-nav .nav-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 const target = this.dataset.target;
                 if (target) navigateToSection(target);
             });
@@ -1560,11 +1627,11 @@
         };
 
         // ================================================================
-        // SCROLL SPY – update active tree node on scroll
+        // SCROLL SPY – update active tree + divider buttons
         // ================================================================
         const sectionIds = ['hero', 'projects', 'technical-notes', 'contact'];
 
-        function updateActiveNodeOnScroll() {
+        function updateActiveOnScroll() {
             const scrollY = window.pageYOffset + 120;
             let currentId = 'hero';
             for (const id of sectionIds) {
@@ -1578,7 +1645,6 @@
                     }
                 }
             }
-            // map section id → tree target
             const targetMap = {
                 'hero': 'hero',
                 'projects': 'projects',
@@ -1587,16 +1653,17 @@
             };
             const target = targetMap[currentId] || 'hero';
             setActiveNode(target);
+            updateDividerButtons(target);
         }
 
         let scrollTimer;
         window.addEventListener('scroll', function() {
             clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(updateActiveNodeOnScroll, 80);
+            scrollTimer = setTimeout(updateActiveOnScroll, 80);
         });
 
         // ================================================================
-        // IMAGE PLACEHOLDER HANDLING
+        // IMAGE PLACEHOLDER
         // ================================================================
         const profileImage = document.getElementById("profileImage");
         if (profileImage) {
