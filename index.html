@@ -293,7 +293,7 @@
             box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
         }
 
-        /* ===== NEXT SECTION BUTTON (at end of each section) ===== */
+        /* ===== NEXT SECTION BUTTON ===== */
         .next-section-btn {
             display: block;
             width: fit-content;
@@ -326,6 +326,7 @@
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 100px 6% 60px;
@@ -464,7 +465,7 @@
         }
 
         /* ============================================================
-               PROJECTS – 3D CAROUSEL (WHEEL)
+               PROJECTS – SLIDING CAROUSEL (shows 3 at a time)
                ============================================================ */
         #projects {
             padding: 40px 5% 60px;
@@ -485,42 +486,34 @@
             color: transparent;
         }
 
-        /* carousel wrapper */
         .carousel-wrapper {
             position: relative;
             width: 100%;
-            perspective: 1200px;
-            padding: 30px 0 20px;
             overflow: hidden;
+            padding: 10px 0 20px;
         }
 
         .carousel-track {
-            width: 100%;
-            height: 440px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            gap: 20px;
+            padding: 0 10px;
         }
 
         .carousel-item {
-            position: absolute;
-            width: 300px;
-            height: 400px;
-            left: 50%;
-            top: 50%;
-            margin-left: -150px;
-            margin-top: -200px;
-            border-radius: 24px;
+            flex: 0 0 calc(33.333% - 14px);
+            min-width: 220px;
             background: rgba(8, 14, 20, 0.85);
             backdrop-filter: blur(8px);
+            border-radius: 24px;
             border: 1px solid rgba(0, 180, 250, 0.25);
-            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
             padding: 20px 22px;
-            overflow-y: auto;
-            transition: all 0.3s ease;
-            backface-visibility: hidden;
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            height: 400px;
+            overflow-y: auto;
         }
 
         .carousel-item::-webkit-scrollbar {
@@ -529,6 +522,12 @@
         .carousel-item::-webkit-scrollbar-thumb {
             background: #2a6f8f;
             border-radius: 10px;
+        }
+
+        .carousel-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 210, 255, 0.6);
+            box-shadow: 0 25px 40px -12px rgba(0, 150, 255, 0.2);
         }
 
         .carousel-item .project-title-sm {
@@ -642,7 +641,6 @@
             gap: 14px;
             margin-top: 25px;
             flex-wrap: wrap;
-            position: relative;
         }
 
         .carousel-dots .dot {
@@ -653,7 +651,6 @@
             border: 1px solid rgba(0, 200, 255, 0.3);
             transition: all 0.3s;
             cursor: pointer;
-            position: relative;
         }
 
         .carousel-dots .dot.active {
@@ -759,6 +756,8 @@
         /* ===== CONTACT ===== */
         #contact {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
             padding: 30px 20px 90px;
         }
@@ -824,7 +823,13 @@
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 860px) {
+        @media (max-width: 1024px) {
+            .carousel-item {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 768px) {
             .hero-right {
                 padding: 30px 24px;
             }
@@ -865,14 +870,8 @@
                 padding: 4px 12px;
             }
             .carousel-item {
-                width: 240px;
-                height: 340px;
-                margin-left: -120px;
-                margin-top: -170px;
-                padding: 16px 18px;
-            }
-            .carousel-track {
-                height: 380px;
+                flex: 0 0 calc(100% - 20px);
+                height: 360px;
             }
             .carousel-btn {
                 width: 40px;
@@ -909,20 +908,14 @@
                 padding: 3px 10px;
             }
             .carousel-item {
-                width: 190px;
-                height: 280px;
-                margin-left: -95px;
-                margin-top: -140px;
-                padding: 12px 14px;
+                height: 300px;
+                padding: 16px;
             }
             .carousel-item .project-title-sm {
                 font-size: 1rem;
             }
             .carousel-item .project-desc-sm {
                 font-size: 0.7rem;
-            }
-            .carousel-track {
-                height: 320px;
             }
             .carousel-btn {
                 width: 32px;
@@ -1008,10 +1001,7 @@
                     </a>
                 </div>
             </div>
-            <!-- Next Section button at end of Hero -->
-            <div style="display:flex; justify-content:center; margin-top:20px;">
-                <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
-            </div>
+            <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
         </section>
 
         <!-- ===== DIVIDER 1 ===== -->
@@ -1022,7 +1012,7 @@
             <button class="nav-btn" data-target="contact">✉ Contact</button>
         </div>
 
-        <!-- ===== PROJECTS (3D CAROUSEL WHEEL) ===== -->
+        <!-- ===== PROJECTS (SLIDING CAROUSEL) ===== -->
         <section id="projects">
             <h2 class="section-title">// technical infrastructure</h2>
 
@@ -1035,10 +1025,7 @@
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
 
-            <!-- Next Section button at end of Projects -->
-            <div style="display:flex; justify-content:center; margin-top:10px;">
-                <button class="next-section-btn" data-next="tech-notes">⬇ Next: Tech Notes</button>
-            </div>
+            <button class="next-section-btn" data-next="tech-notes">⬇ Next: Tech Notes</button>
         </section>
 
         <!-- ===== DIVIDER 2 ===== -->
@@ -1076,11 +1063,7 @@
                     <div id="econ-chap-1" class="chapter-content" style="display:none;"></div>
                 </div>
             </div>
-
-            <!-- Next Section button at end of Tech Notes -->
-            <div style="display:flex; justify-content:center; margin-top:30px;">
-                <button class="next-section-btn" data-next="contact">⬇ Next: Contact</button>
-            </div>
+            <button class="next-section-btn" data-next="contact">⬇ Next: Contact</button>
         </section>
 
         <!-- ===== DIVIDER 3 ===== -->
@@ -1105,10 +1088,7 @@
                     <a href="mailto:jeremyfa2013@gmail.com">✉️ jeremyfa2013@gmail.com</a>
                 </div>
             </div>
-            <!-- Back to top button at end of Contact -->
-            <div style="display:flex; justify-content:center; margin-top:20px;">
-                <button class="next-section-btn" data-next="hero">⬆ Back to Home</button>
-            </div>
+            <button class="next-section-btn" data-next="hero">⬆ Back to Home</button>
         </section>
 
         <!-- ===== DIVIDER 4 ===== -->
@@ -1126,7 +1106,7 @@
 
     <script>
         // ================================================================
-        // PROJECT DATA (copied from original cards)
+        // PROJECT DATA
         // ================================================================
         const projectData = [{
             title: "Robo-Maestro",
@@ -1197,7 +1177,7 @@
         }];
 
         // ================================================================
-        // CAROUSEL (3D WHEEL)
+        // CAROUSEL (SLIDING, 3 ITEMS VISIBLE)
         // ================================================================
         const track = document.getElementById('carouselTrack');
         const prevBtn = document.getElementById('carouselPrev');
@@ -1205,8 +1185,9 @@
         const dotsContainer = document.getElementById('carouselDots');
 
         let currentIndex = 0;
-        const visibleCount = 3;
+        const itemsPerView = 3;
         const totalItems = projectData.length;
+        const maxIndex = Math.max(0, totalItems - itemsPerView);
 
         function buildCarousel() {
             track.innerHTML = '';
@@ -1215,10 +1196,7 @@
             projectData.forEach((p, idx) => {
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
-                item.dataset.index = idx;
-
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
-
                 item.innerHTML = `
                     <div class="project-title-sm">${p.title}</div>
                     <div class="project-meta-sm">${p.meta}</div>
@@ -1240,49 +1218,36 @@
         }
 
         function updateCarousel() {
-            const items = track.querySelectorAll('.carousel-item');
-            const dots = dotsContainer.querySelectorAll('.dot');
-            const angleStep = 360 / totalItems;
-            const radius = 520; // distance from center
-
-            // rotate track so that currentIndex is at center (angle 0)
-            const trackRotation = -currentIndex * angleStep;
-            track.style.transform = `rotateY(${trackRotation}deg)`;
-
-            items.forEach((item, i) => {
-                const angle = i * angleStep;
-                // position in 3D
-                const x = radius * Math.sin(angle * Math.PI / 180);
-                const z = radius * Math.cos(angle * Math.PI / 180);
-                // we want the item to face outward from the center
-                const rotY = angle;
-                item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg)`;
-                // hide items far behind (z < -radius/2)
-                const opacity = (z > -radius * 0.4) ? 1 : 0;
-                const scale = (z > -radius * 0.4) ? 1 : 0.8;
-                item.style.opacity = opacity;
-                item.style.transform += ` scale(${scale})`;
-                // make items at the back not clickable
-                item.style.pointerEvents = (z > -radius * 0.4) ? 'auto' : 'none';
-            });
+            const itemWidth = track.querySelector('.carousel-item')?.offsetWidth || 0;
+            const gap = 20; // from CSS gap
+            const offset = currentIndex * (itemWidth + gap);
+            track.style.transform = `translateX(-${offset}px)`;
 
             // update dots
+            const dots = dotsContainer.querySelectorAll('.dot');
             dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
+                const isActive = (i >= currentIndex && i < currentIndex + itemsPerView);
+                dot.classList.toggle('active', isActive);
             });
+
+            // enable/disable buttons
+            prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+            prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+            nextBtn.style.opacity = currentIndex >= maxIndex ? '0.3' : '1';
+            nextBtn.style.pointerEvents = currentIndex >= maxIndex ? 'none' : 'auto';
         }
 
         function goTo(index) {
-            currentIndex = (index + totalItems) % totalItems;
+            currentIndex = Math.min(Math.max(index, 0), maxIndex);
             updateCarousel();
         }
 
         function nextSlide() {
-            goTo(currentIndex + 1);
+            if (currentIndex < maxIndex) goTo(currentIndex + 1);
         }
 
         function prevSlide() {
-            goTo(currentIndex - 1);
+            if (currentIndex > 0) goTo(currentIndex - 1);
         }
 
         prevBtn.addEventListener('click', prevSlide);
@@ -1473,10 +1438,9 @@
         }
 
         // ================================================================
-        // IMAGE PLACEHOLDERS
+        // IMAGE PLACEHOLDER
         // ================================================================
         document.getElementById('profileImage').src = "profile.jpg";
-        // We don't need to set project images because we are using text-only cards in the carousel.
 
         // ================================================================
         // START
@@ -1485,6 +1449,5 @@
             typeIntroSequence();
         };
     </script>
-
 </body>
 </html>
