@@ -663,6 +663,156 @@
             background: rgba(0, 255, 255, 0.4);
         }
 
+        /* ============================================================
+           PROJECT DETAIL MODAL (in-page overlay)
+           ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content {
+            background: rgba(10, 18, 28, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px 42px;
+            position: relative;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #2a6f8f;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: rgba(0, 20, 30, 0.8);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            color: #c4edff;
+            font-size: 1.8rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            margin-bottom: 10px;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 200, 255, 0.2);
+            border-color: #0ff;
+            transform: rotate(90deg);
+        }
+
+        .modal-content .modal-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .modal-content .modal-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #8bb9fe;
+            border-left: 2px solid #0ff;
+            padding-left: 14px;
+            margin-bottom: 18px;
+        }
+
+        .modal-content .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content .modal-tags span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            background: rgba(0, 200, 255, 0.1);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 200, 255, 0.25);
+            color: #b3e4ff;
+        }
+
+        .modal-content .modal-desc {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #cdd9ff;
+            margin-bottom: 24px;
+        }
+
+        .modal-content .modal-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .modal-content .modal-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #b6e6ff;
+            border: 1px solid #2f8fbf;
+            padding: 6px 22px;
+            border-radius: 40px;
+            display: inline-block;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .modal-content .modal-link:hover {
+            background: #0ff;
+            color: #000;
+            border-color: #0ff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
         /* ===== TECHNICAL NOTES ===== */
         #technical-notes {
             padding: 30px 7% 70px;
@@ -874,6 +1024,12 @@
                 height: 40px;
                 font-size: 1.5rem;
             }
+            .modal-content {
+                padding: 30px 24px;
+            }
+            .modal-content .modal-title {
+                font-size: 1.8rem;
+            }
         }
 
         @media (max-width: 560px) {
@@ -916,6 +1072,12 @@
                 width: 34px;
                 height: 34px;
                 font-size: 1.2rem;
+            }
+            .modal-content {
+                padding: 20px 16px;
+            }
+            .modal-content .modal-title {
+                font-size: 1.5rem;
             }
         }
 
@@ -1191,6 +1353,16 @@
             <button class="next-section-btn" data-next="hero">⬆ Back to Home</button>
         </section>
 
+        <!-- ===== PROJECT DETAIL MODAL ===== -->
+        <div class="modal-overlay" id="projectModal">
+            <div class="modal-content" id="modalContent">
+                <button class="modal-close" id="modalClose">✕</button>
+                <div id="modalBody">
+                    <!-- filled by JS -->
+                </div>
+            </div>
+        </div>
+
         <div class="footer-note">
             ⚡ Electrical Engineering · UBC | Firmware · Control · PCB
         </div>
@@ -1231,7 +1403,7 @@
             desc: "Designed and developed an electromechanical piano-playing robot using a DC motor and two solenoids. Programmed embedded firmware in C++ on an ESP32 using the Arduino IDE and implemented a PID controller for precise linear positioning with a timing belt system and AS5600 magnetic encoder.",
             link: "#",
             img: "robomaestro.jpg",
-            blog: "https://example.com/blog/robomaestro"  // <-- Learn More link for this project
+            blog: true // indicates this project has a detailed blog/modal content
         }, {
             title: "2-Bit ALU",
             meta: "Personal Project | 2026",
@@ -1327,10 +1499,10 @@
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
                 const placeholderSrc = getPlaceholderSVG(p.title);
 
-                // Build button row
                 let buttonRow = `<a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>`;
+                // Add Learn More if blog property exists
                 if (p.blog) {
-                    buttonRow += `<a href="${p.blog}" target="_blank" class="learn-more-btn">📖 Learn More</a>`;
+                    buttonRow += `<button class="learn-more-btn" data-index="${idx}">📖 Learn More</button>`;
                 }
 
                 item.innerHTML = `
@@ -1354,6 +1526,15 @@
                 dot.dataset.index = idx;
                 dot.addEventListener('click', () => goTo(idx));
                 dotsContainer.appendChild(dot);
+            });
+
+            // Attach click events to Learn More buttons
+            document.querySelectorAll('.learn-more-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const idx = parseInt(this.dataset.index);
+                    openModal(idx);
+                });
             });
 
             updateCarousel();
@@ -1392,6 +1573,54 @@
 
         prevBtn.addEventListener('click', prevSlide);
         nextBtn.addEventListener('click', nextSlide);
+
+        // ================================================================
+        // MODAL LOGIC (in-page)
+        // ================================================================
+        const modalOverlay = document.getElementById('projectModal');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+
+        function openModal(index) {
+            const project = projectData[index];
+            if (!project) return;
+
+            const tagsHtml = project.tags.map(t => `<span>${t}</span>`).join('');
+            const imageHtml = `<img src="${project.img}" alt="${project.title}" class="modal-image" onerror="this.style.display='none'">`;
+
+            modalBody.innerHTML = `
+                ${imageHtml}
+                <div class="modal-title">${project.title}</div>
+                <div class="modal-meta">${project.meta}</div>
+                <div class="modal-tags">${tagsHtml}</div>
+                <div class="modal-desc">${project.desc}</div>
+                ${project.link ? `<a href="${project.link}" target="_blank" class="modal-link">⚙ View Project →</a>` : ''}
+                <p style="margin-top:20px; color:#6a9ecf; font-size:0.85rem; border-top:1px solid rgba(0,200,255,0.1); padding-top:20px;">
+                    📖 This is the detailed blog / documentation section for ${project.title}. 
+                    You can write a full case study, share schematics, code snippets, or any additional insights here.
+                </p>
+            `;
+
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
+                closeModal();
+            }
+        });
 
         // ================================================================
         // NAVIGATION HELPERS
