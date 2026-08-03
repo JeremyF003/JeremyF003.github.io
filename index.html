@@ -415,7 +415,7 @@
         }
 
         /* ============================================================
-           PROJECTS – CLEAN CARD LAYOUT (Image top, text bottom)
+           PROJECTS – CLEAN CARD LAYOUT
            ============================================================ */
         #projects {
             padding: 40px 5% 60px;
@@ -450,7 +450,6 @@
             padding: 0 10px;
         }
 
-        /* --- Clean card: image top, text bottom, no overlap --- */
         .carousel-item {
             flex: 0 0 calc(33.333% - 16px);
             min-width: 240px;
@@ -472,7 +471,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 150, 255, 0.3);
         }
 
-        /* Image container – fixed height, image fills it */
         .carousel-item .img-wrapper {
             height: 200px;
             flex-shrink: 0;
@@ -489,7 +487,6 @@
             display: block;
         }
 
-        /* Text content – separate, with its own background */
         .carousel-item .card-content {
             padding: 18px 22px 22px;
             display: flex;
@@ -556,12 +553,19 @@
             border-radius: 10px;
         }
 
-        .carousel-item .project-link-sm {
+        /* ----- buttons row ----- */
+        .carousel-item .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-top: 12px;
+            align-items: center;
+        }
+
+        .carousel-item .project-link-sm,
+        .carousel-item .learn-more-btn {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
-            color: #b6e6ff;
-            border: 1px solid #2f8fbf;
             padding: 4px 16px;
             border-radius: 40px;
             display: inline-block;
@@ -569,6 +573,10 @@
             transition: 0.2s;
             width: fit-content;
             align-self: flex-start;
+            border: 1px solid #2f8fbf;
+            color: #b6e6ff;
+            background: transparent;
+            cursor: pointer;
         }
 
         .carousel-item .project-link-sm:hover {
@@ -576,6 +584,19 @@
             color: #000;
             border-color: #0ff;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .carousel-item .learn-more-btn {
+            border-color: rgba(0, 200, 255, 0.4);
+            color: #8ab8e0;
+            background: rgba(0, 200, 255, 0.05);
+        }
+
+        .carousel-item .learn-more-btn:hover {
+            background: rgba(0, 200, 255, 0.15);
+            border-color: #0ff;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
         }
 
         /* --- Carousel Controls --- */
@@ -613,7 +634,6 @@
             right: 6px;
         }
 
-        /* --- Dots --- */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -643,7 +663,7 @@
             background: rgba(0, 255, 255, 0.4);
         }
 
-        /* ===== TECHNICAL NOTES (all textbooks restored) ===== */
+        /* ===== TECHNICAL NOTES ===== */
         #technical-notes {
             padding: 30px 7% 70px;
             max-width: 1400px;
@@ -1181,7 +1201,6 @@
         // HELPER: Generate a placeholder image as data URI
         // ================================================================
         function getPlaceholderSVG(title) {
-            // Escape title for SVG
             const safeTitle = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
@@ -1203,7 +1222,7 @@
         }
 
         // ================================================================
-        // PROJECT DATA (with image filenames)
+        // PROJECT DATA
         // ================================================================
         const projectData = [{
             title: "Robo-Maestro",
@@ -1211,7 +1230,8 @@
             tags: ["ESP32", "C++", "Arduino IDE", "PID Control", "H-Bridge", "AS5600 Encoder"],
             desc: "Designed and developed an electromechanical piano-playing robot using a DC motor and two solenoids. Programmed embedded firmware in C++ on an ESP32 using the Arduino IDE and implemented a PID controller for precise linear positioning with a timing belt system and AS5600 magnetic encoder.",
             link: "#",
-            img: "robomaestro.jpg"
+            img: "robomaestro.jpg",
+            blog: "https://example.com/blog/robomaestro"  // <-- Learn More link for this project
         }, {
             title: "2-Bit ALU",
             meta: "Personal Project | 2026",
@@ -1306,6 +1326,13 @@
                 item.className = 'carousel-item';
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
                 const placeholderSrc = getPlaceholderSVG(p.title);
+
+                // Build button row
+                let buttonRow = `<a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>`;
+                if (p.blog) {
+                    buttonRow += `<a href="${p.blog}" target="_blank" class="learn-more-btn">📖 Learn More</a>`;
+                }
+
                 item.innerHTML = `
                     <div class="img-wrapper">
                         <img src="${p.img}" alt="${p.title}" class="project-img" 
@@ -1316,7 +1343,7 @@
                         <div class="project-meta-sm">${p.meta}</div>
                         <div class="project-tags-sm">${tagsHtml}</div>
                         <div class="project-desc-sm">${p.desc}</div>
-                        <a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>
+                        <div class="button-row">${buttonRow}</div>
                     </div>
                 `;
                 track.appendChild(item);
