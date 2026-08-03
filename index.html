@@ -484,7 +484,7 @@
         .carousel-item .project-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;   /* cover to fill the area nicely, but no text overlap */
+            object-fit: cover;
             object-position: center;
             display: block;
         }
@@ -540,7 +540,7 @@
             color: #cdd9ff;
             flex: 1;
             overflow-y: auto;
-            max-height: 4.5em; /* show about 3 lines */
+            max-height: 4.5em;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -914,6 +914,43 @@
                 box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
             }
         }
+
+        /* ===== PLACEHOLDER IMAGE FALLBACK STYLES ===== */
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a1628, #1a2a4a);
+            color: #0ff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .placeholder-img .gear-icon {
+            font-size: 4rem;
+            opacity: 0.6;
+            animation: spin 8s linear infinite;
+        }
+
+        .placeholder-img .label-text {
+            font-size: 0.75rem;
+            color: #6a9ecf;
+            opacity: 0.7;
+            letter-spacing: 2px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1141,6 +1178,31 @@
 
     <script>
         // ================================================================
+        // HELPER: Generate a placeholder image as data URI
+        // ================================================================
+        function getPlaceholderSVG(title) {
+            // Escape title for SVG
+            const safeTitle = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+              <defs>
+                <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#1a2a4a;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <rect width="400" height="200" fill="url(#bg)" rx="8" ry="8"/>
+              <circle cx="200" cy="70" r="30" fill="none" stroke="#0ff" stroke-width="3" opacity="0.4"/>
+              <circle cx="200" cy="70" r="18" fill="none" stroke="#0ff" stroke-width="2" opacity="0.3"/>
+              <circle cx="200" cy="70" r="6" fill="#0ff" opacity="0.2"/>
+              <text x="200" y="130" font-family="monospace" font-size="14" fill="#6a9ecf" text-anchor="middle" opacity="0.8">${safeTitle}</text>
+              <text x="200" y="155" font-family="monospace" font-size="10" fill="#4a7a9a" text-anchor="middle" opacity="0.6" letter-spacing="3">PROJECT</text>
+              <text x="200" y="65" font-family="monospace" font-size="32" fill="#0ff" text-anchor="middle" opacity="0.15">⚙</text>
+            </svg>
+          `)}`;
+        }
+
+        // ================================================================
         // PROJECT DATA (with image filenames)
         // ================================================================
         const projectData = [{
@@ -1243,9 +1305,11 @@
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
+                const placeholderSrc = getPlaceholderSVG(p.title);
                 item.innerHTML = `
                     <div class="img-wrapper">
-                        <img src="${p.img}" alt="${p.title}" class="project-img" onerror="this.style.display='none'">
+                        <img src="${p.img}" alt="${p.title}" class="project-img" 
+                             onerror="this.style.display='none'; this.parentElement.innerHTML = '<div class=\\'placeholder-img\\'><span class=\\'gear-icon\\'>⚙</span><span class=\\'label-text\\'>${p.title}</span></div>';">
                     </div>
                     <div class="card-content">
                         <div class="project-title-sm">${p.title}</div>
