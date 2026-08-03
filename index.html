@@ -107,7 +107,7 @@
             transition: opacity 1.2s ease-out;
         }
 
-        /* ===== STICKY TREE NAV (primary navigation) ===== */
+        /* ===== STICKY TREE NAV ===== */
         #tree-nav {
             position: sticky;
             top: 0;
@@ -553,7 +553,6 @@
             border-radius: 10px;
         }
 
-        /* ----- buttons row ----- */
         .carousel-item .button-row {
             display: flex;
             flex-wrap: wrap;
@@ -599,7 +598,6 @@
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
         }
 
-        /* --- Carousel Controls --- */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -672,7 +670,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             z-index: 1000;
             display: none;
@@ -689,26 +687,26 @@
         @keyframes modalFadeIn {
             0% {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: scale(0.95) translateY(20px);
             }
             100% {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1) translateY(0);
             }
         }
 
         .modal-content {
-            background: rgba(10, 18, 28, 0.95);
+            background: rgba(10, 18, 28, 0.98);
             backdrop-filter: blur(12px);
             border-radius: 32px;
             border: 1px solid rgba(0, 210, 255, 0.3);
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             padding: 40px 42px;
             position: relative;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9);
         }
 
         .modal-content::-webkit-scrollbar {
@@ -745,6 +743,7 @@
             transform: rotate(90deg);
         }
 
+        /* ---- Modal blog content styles ---- */
         .modal-content .modal-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -778,20 +777,93 @@
             color: #b3e4ff;
         }
 
-        .modal-content .modal-desc {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: #cdd9ff;
-            margin-bottom: 24px;
-        }
-
         .modal-content .modal-image {
             width: 100%;
             max-height: 300px;
             object-fit: cover;
             border-radius: 16px;
             border: 1px solid rgba(0, 200, 255, 0.2);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            background: #0a1018;
+        }
+
+        /* Blog content */
+        .modal-content .blog-section {
+            margin-top: 8px;
+        }
+
+        .modal-content .blog-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 28px 0 12px 0;
+            border-left: 3px solid #0ff;
+            padding-left: 14px;
+        }
+
+        .modal-content .blog-section h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .modal-content .blog-section p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #cdd9ff;
+            margin-bottom: 16px;
+        }
+
+        .modal-content .blog-section .blog-image-placeholder {
+            width: 100%;
+            border-radius: 16px;
+            border: 2px dashed rgba(0, 200, 255, 0.25);
+            background: rgba(0, 20, 30, 0.4);
+            padding: 30px 20px;
+            text-align: center;
+            margin: 16px 0 20px;
+            color: #5a8aaa;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            transition: border-color 0.3s;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .modal-content .blog-section .blog-image-placeholder:hover {
+            border-color: rgba(0, 200, 255, 0.5);
+        }
+
+        .modal-content .blog-section .blog-image-placeholder .icon {
+            font-size: 2.5rem;
+            opacity: 0.4;
+        }
+
+        .modal-content .blog-section .blog-image-placeholder .caption {
+            font-size: 0.7rem;
+            color: #4a7a9a;
+            letter-spacing: 1px;
+        }
+
+        .modal-content .blog-section .note-box {
+            background: rgba(0, 200, 255, 0.06);
+            border-left: 3px solid #ffaa44;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .modal-content .blog-section .note-box p {
+            color: #f0e6d0;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .modal-content .blog-section .note-box .highlight {
+            color: #ffaa44;
+            font-weight: 600;
         }
 
         .modal-content .modal-link {
@@ -804,6 +876,7 @@
             display: inline-block;
             text-decoration: none;
             transition: 0.2s;
+            margin-top: 8px;
         }
 
         .modal-content .modal-link:hover {
@@ -962,7 +1035,6 @@
             box-shadow: 0 0 14px #0ff;
         }
 
-        /* ===== FOOTER ===== */
         .footer-note {
             text-align: center;
             padding: 24px;
@@ -1025,7 +1097,7 @@
                 font-size: 1.5rem;
             }
             .modal-content {
-                padding: 30px 24px;
+                padding: 28px 20px;
             }
             .modal-content .modal-title {
                 font-size: 1.8rem;
@@ -1079,6 +1151,12 @@
             .modal-content .modal-title {
                 font-size: 1.5rem;
             }
+            .modal-content .blog-section p {
+                font-size: 0.9rem;
+            }
+            .modal-content .blog-section h3 {
+                font-size: 1.1rem;
+            }
         }
 
         .section-highlight {
@@ -1097,7 +1175,7 @@
             }
         }
 
-        /* ===== PLACEHOLDER IMAGE FALLBACK STYLES ===== */
+        /* ===== PLACEHOLDER IMAGE FALLBACK ===== */
         .placeholder-img {
             width: 100%;
             height: 100%;
@@ -1148,7 +1226,7 @@
     <!-- ===== MAIN CONTENT ===== -->
     <div id="main-content" style="display: none;">
 
-        <!-- ===== STICKY TREE NAV (primary navigation) ===== -->
+        <!-- ===== STICKY TREE NAV ===== -->
         <nav id="tree-nav">
             <div class="tree-container">
                 <div class="tree-node root-node active" data-target="hero">
@@ -1198,13 +1276,13 @@
             <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
         </section>
 
-        <!-- ===== PROJECTS (CLEAN CARD LAYOUT) ===== -->
+        <!-- ===== PROJECTS ===== -->
         <section id="projects">
             <h2 class="section-title">// technical infrastructure</h2>
 
             <div class="carousel-wrapper" id="carouselWrapper">
                 <div class="carousel-track" id="carouselTrack">
-                    <!-- items injected by JS -->
+                    <!-- injected by JS -->
                 </div>
                 <button class="carousel-btn prev" id="carouselPrev">‹</button>
                 <button class="carousel-btn next" id="carouselNext">›</button>
@@ -1214,11 +1292,10 @@
             <button class="next-section-btn" data-next="tech-notes">⬇ Next: Tech Notes</button>
         </section>
 
-        <!-- ===== TECHNICAL NOTES (all textbooks restored) ===== -->
+        <!-- ===== TECHNICAL NOTES ===== -->
         <section id="technical-notes">
             <h2 class="section-title">// technical notes</h2>
             <div class="notes-book">
-                <!-- Calculus -->
                 <button class="notes-header" onclick="toggleNotesSection('calc-notes-main')">
                     📘 Stewart Calculus: Early Transcendentals <span id="calc-notes-main-symbol">+</span>
                 </button>
@@ -1249,9 +1326,8 @@
                     <div id="calc-chap-7" class="chapter-content" style="display:none;"></div>
                 </div>
 
-                <!-- Engineering Economics -->
                 <button class="notes-header" onclick="toggleNotesSection('econ-notes-main')">
-                    📘 Engineering Economics: Financial Decision Making <span id="econ-notes-main-symbol">+</span>
+                    📘 Engineering Economics <span id="econ-notes-main-symbol">+</span>
                 </button>
                 <div id="econ-notes-main" class="notes-content" style="display:none;">
                     <button class="chapter-header" onclick="toggleChapter('econ-chap-1')">
@@ -1272,7 +1348,6 @@
                     <div id="econ-chap-4" class="chapter-content" style="display:none;"></div>
                 </div>
 
-                <!-- Circuit Analysis -->
                 <button class="notes-header" onclick="toggleNotesSection('circuits-notes-main')">
                     📘 Electric Circuit Analysis <span id="circuits-notes-main-symbol">+</span>
                 </button>
@@ -1295,7 +1370,6 @@
                     <div id="circuits-chap-4" class="chapter-content" style="display:none;"></div>
                 </div>
 
-                <!-- Signals and Systems -->
                 <button class="notes-header" onclick="toggleNotesSection('signals-notes-main')">
                     📘 Signals and Systems <span id="signals-notes-main-symbol">+</span>
                 </button>
@@ -1314,7 +1388,6 @@
                     <div id="signals-chap-3" class="chapter-content" style="display:none;"></div>
                 </div>
 
-                <!-- Electromagnetics -->
                 <button class="notes-header" onclick="toggleNotesSection('em-notes-main')">
                     📘 Engineering Electromagnetics <span id="em-notes-main-symbol">+</span>
                 </button>
@@ -1403,7 +1476,57 @@
             desc: "Designed and developed an electromechanical piano-playing robot using a DC motor and two solenoids. Programmed embedded firmware in C++ on an ESP32 using the Arduino IDE and implemented a PID controller for precise linear positioning with a timing belt system and AS5600 magnetic encoder.",
             link: "#",
             img: "robomaestro.jpg",
-            blog: true // indicates this project has a detailed blog/modal content
+            blog: true,
+            blogContent: `
+                <h3>Motivation & System Overview</h3>
+                <p>The reason behind this project was to learn about system modelling and real-life applications of a discrete PID controller on an ESP32 microcontroller. Building a piano-playing robot combines mechanical actuation, real-time control, and embedded systems — making it an ideal challenge for an electrical engineering student.</p>
+
+                <h3>Mechanical Design: Rotary-to-Linear Motion</h3>
+                <p>In order to drive the motor, we needed some sort of rotational-to-linear mechanism. For this project we decided to go with a timing belt and pulley system. This converts the rotation of the DC motor into precise linear motion, allowing the solenoid carriage to position itself accurately over each piano key.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">⚙️</span>
+                    <div>Timing Belt & Pulley Assembly</div>
+                    <span class="caption">[Insert photo of the timing belt mechanism]</span>
+                </div>
+
+                <h3>Motor Driver: Discrete H-Bridge</h3>
+                <p>To drive the motor forward and backward, we need a motor driver. Since this is a brushed DC motor, a very common motor driver topology is the H-bridge — made of 2 P-channel and 2 N-channel MOSFETs. The classic configuration is shown below.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">🔌</span>
+                    <div>Classic H-Bridge Configuration</div>
+                    <span class="caption">[Insert schematic of the H-bridge]</span>
+                </div>
+
+                <p>However, the MOSFETs we selected were not able to be driven with a 3.3V gate voltage directly from the ESP32. Their threshold voltage required a higher gate drive. So we implemented a BJT inverter gate driver stage to boost the signal.</p>
+
+                <p>Due to the relatively low current consumption of the DC motor, this type of gate driver was sufficient. It is important to mention that for a more demanding type of motor — such as a brushless DC motor (BLDC) — another type of gate driver with faster switching and higher current capability would be needed.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">📊</span>
+                    <div>LTspice Simulation: BJT Gate Driver</div>
+                    <span class="caption">[Insert LTspice simulation screenshot]</span>
+                </div>
+
+                <div class="note-box">
+                    <p><span class="highlight">⚠️ Note:</span> Be careful of LTspice simulations! Sometimes they can work perfectly in simulation but <span class="highlight">fail in real life</span>. Parasitic capacitances, PCB trace inductance, and component tolerances can cause unexpected behaviour. Always prototype before ordering a PCB — this is a tip that will save you money!</p>
+                </div>
+
+                <h3>Control Algorithm: Discrete PID</h3>
+                <p>The ESP32 runs a discrete-time PID controller at 1 kHz. The position feedback comes from an AS5600 magnetic encoder mounted on the motor shaft. The PID outputs a PWM duty cycle that drives the motor to the desired position with minimal overshoot.</p>
+
+                <p>Tuning the PID gains was done empirically — first setting Kp, then Ki, and finally Kd to dampen oscillations. The final controller achieved positioning accuracy within ±0.5 mm, which is sufficient for striking the piano keys reliably.</p>
+
+                <h3>Results & Lessons Learned</h3>
+                <p>The Robo-Maestro successfully plays simple melodies by actuating solenoids that strike the piano keys. The system responds to MIDI commands sent over UART, making it expandable for more complex compositions.</p>
+
+                <p>Key takeaways from this project:</p>
+                <p>• Real-time control requires careful attention to timing — interrupt service routines must be kept short.<br>
+                • Always verify the gate drive voltage for MOSFETs — a 3.3V logic level is not always sufficient.<br>
+                • System modelling (even a simple first-order model) helps a lot when tuning PID gains.<br>
+                • Test your motor driver with a dummy load before connecting the actual motor!</p>
+            `
         }, {
             title: "2-Bit ALU",
             meta: "Personal Project | 2026",
@@ -1497,10 +1620,8 @@
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
-                const placeholderSrc = getPlaceholderSVG(p.title);
 
                 let buttonRow = `<a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>`;
-                // Add Learn More if blog property exists
                 if (p.blog) {
                     buttonRow += `<button class="learn-more-btn" data-index="${idx}">📖 Learn More</button>`;
                 }
@@ -1520,7 +1641,6 @@
                 `;
                 track.appendChild(item);
 
-                // dots
                 const dot = document.createElement('div');
                 dot.className = 'dot';
                 dot.dataset.index = idx;
@@ -1528,7 +1648,6 @@
                 dotsContainer.appendChild(dot);
             });
 
-            // Attach click events to Learn More buttons
             document.querySelectorAll('.learn-more-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1575,7 +1694,7 @@
         nextBtn.addEventListener('click', nextSlide);
 
         // ================================================================
-        // MODAL LOGIC (in-page)
+        // MODAL LOGIC
         // ================================================================
         const modalOverlay = document.getElementById('projectModal');
         const modalBody = document.getElementById('modalBody');
@@ -1588,17 +1707,18 @@
             const tagsHtml = project.tags.map(t => `<span>${t}</span>`).join('');
             const imageHtml = `<img src="${project.img}" alt="${project.title}" class="modal-image" onerror="this.style.display='none'">`;
 
+            let blogHtml = '';
+            if (project.blog && project.blogContent) {
+                blogHtml = `<div class="blog-section">${project.blogContent}</div>`;
+            }
+
             modalBody.innerHTML = `
                 ${imageHtml}
                 <div class="modal-title">${project.title}</div>
                 <div class="modal-meta">${project.meta}</div>
                 <div class="modal-tags">${tagsHtml}</div>
-                <div class="modal-desc">${project.desc}</div>
+                ${blogHtml}
                 ${project.link ? `<a href="${project.link}" target="_blank" class="modal-link">⚙ View Project →</a>` : ''}
-                <p style="margin-top:20px; color:#6a9ecf; font-size:0.85rem; border-top:1px solid rgba(0,200,255,0.1); padding-top:20px;">
-                    📖 This is the detailed blog / documentation section for ${project.title}. 
-                    You can write a full case study, share schematics, code snippets, or any additional insights here.
-                </p>
             `;
 
             modalOverlay.classList.add('open');
@@ -1615,7 +1735,6 @@
             if (e.target === this) closeModal();
         });
 
-        // Close on Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
                 closeModal();
@@ -1641,14 +1760,12 @@
             const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
             window.scrollTo({ top, behavior: 'smooth' });
 
-            // update tree nodes
             document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('active'));
             document.querySelectorAll('.tree-node').forEach(n => {
                 if (n.dataset.target === targetId) n.classList.add('active');
             });
         }
 
-        // Tree node clicks
         document.querySelectorAll('.tree-node').forEach(node => {
             node.addEventListener('click', function() {
                 const target = this.dataset.target;
@@ -1656,13 +1773,11 @@
             });
         });
 
-        // "Explore Projects" button
         document.getElementById('exploreBtn').addEventListener('click', function(e) {
             e.preventDefault();
             navigateToSection('projects');
         });
 
-        // "Next Section" buttons
         document.querySelectorAll('.next-section-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const target = this.dataset.next;
@@ -1789,14 +1904,8 @@
             typeNameChar();
         }
 
-        // ================================================================
-        // IMAGE PLACEHOLDER
-        // ================================================================
         document.getElementById('profileImage').src = "profile.jpg";
 
-        // ================================================================
-        // START
-        // ================================================================
         window.onload = function() {
             typeIntroSequence();
         };
