@@ -415,7 +415,7 @@
         }
 
         /* ============================================================
-           PROJECTS – IMMERSIVE CAROUSEL (Image Dominant, No Crop)
+           PROJECTS – CLEAN CARD LAYOUT (Image top, text bottom)
            ============================================================ */
         #projects {
             padding: 40px 5% 60px;
@@ -450,127 +450,125 @@
             padding: 0 10px;
         }
 
-        /* --- Carousel Item: Image as main, no crop --- */
+        /* --- Clean card: image top, text bottom, no overlap --- */
         .carousel-item {
             flex: 0 0 calc(33.333% - 16px);
             min-width: 240px;
-            position: relative;
-            height: 520px; /* taller to show images larger */
+            background: rgba(8, 14, 20, 0.9);
+            backdrop-filter: blur(8px);
             border-radius: 28px;
             border: 1px solid rgba(0, 180, 250, 0.25);
             box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s;
-            background: #0a1018;
+            display: flex;
+            flex-direction: column;
+            height: 480px;
         }
 
         .carousel-item:hover {
-            transform: translateY(-6px) scale(1.01);
+            transform: translateY(-6px);
             border-color: rgba(0, 210, 255, 0.6);
             box-shadow: 0 25px 50px -12px rgba(0, 150, 255, 0.3);
         }
 
-        /* Full-bleed background image – now using contain to avoid cropping */
-        .carousel-item .project-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;   /* <-- no crop, shows full image */
-            object-position: center;
-            z-index: 1;
-            background: #0a1018;   /* fill gaps */
-        }
-
-        /* Dark gradient overlay – softer to keep image visible */
-        .carousel-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.2) 70%, rgba(5, 5, 5, 0.0) 100%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* Text content - positioned at the bottom */
-        .carousel-item .card-content {
+        /* Image container – fixed height, image fills it */
+        .carousel-item .img-wrapper {
+            height: 200px;
+            flex-shrink: 0;
+            background: #0a1018;
             position: relative;
-            z-index: 3;
-            margin-top: auto;
-            padding: 20px 25px 25px;
+            overflow: hidden;
+        }
+
+        .carousel-item .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;   /* cover to fill the area nicely, but no text overlap */
+            object-position: center;
+            display: block;
+        }
+
+        /* Text content – separate, with its own background */
+        .carousel-item .card-content {
+            padding: 18px 22px 22px;
             display: flex;
             flex-direction: column;
+            flex: 1;
+            background: rgba(8, 14, 20, 0.95);
             gap: 4px;
-            color: #fff;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+            color: #eef5ff;
         }
 
         .carousel-item .project-title-sm {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 2px;
             color: #ffffff;
+            margin-bottom: 2px;
         }
 
         .carousel-item .project-meta-sm {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #8bb9fe;
             border-left: 2px solid #0ff;
             padding-left: 10px;
-            margin-bottom: 4px;
-            opacity: 0.9;
+            margin-bottom: 6px;
         }
 
         .carousel-item .project-tags-sm {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .carousel-item .project-tags-sm span {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            padding: 2px 12px;
+            font-size: 0.55rem;
+            background: rgba(0, 200, 255, 0.1);
+            padding: 2px 10px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 200, 255, 0.3);
+            border: 1px solid rgba(0, 200, 255, 0.25);
             color: #b3e4ff;
         }
 
         .carousel-item .project-desc-sm {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             line-height: 1.5;
-            color: rgba(255, 255, 255, 0.85);
+            color: #cdd9ff;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 4.5em; /* show about 3 lines */
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-height: 3em;
+        }
+
+        .carousel-item .project-desc-sm::-webkit-scrollbar {
+            width: 3px;
+        }
+        .carousel-item .project-desc-sm::-webkit-scrollbar-thumb {
+            background: #2a6f8f;
+            border-radius: 10px;
         }
 
         .carousel-item .project-link-sm {
-            margin-top: 10px;
+            margin-top: 12px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: #fff;
-            background: rgba(0, 200, 255, 0.15);
-            border: 1px solid rgba(0, 200, 255, 0.5);
+            font-size: 0.65rem;
+            color: #b6e6ff;
+            border: 1px solid #2f8fbf;
             padding: 4px 16px;
             border-radius: 40px;
             display: inline-block;
             text-decoration: none;
             transition: 0.2s;
             width: fit-content;
-            backdrop-filter: blur(4px);
+            align-self: flex-start;
         }
 
         .carousel-item .project-link-sm:hover {
@@ -846,15 +844,15 @@
             }
             .carousel-item {
                 flex: 0 0 calc(100% - 20px);
-                height: 400px;
+                height: 420px;
+            }
+            .carousel-item .img-wrapper {
+                height: 160px;
             }
             .carousel-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 1.5rem;
-            }
-            .carousel-item .project-title-sm {
-                font-size: 1.3rem;
             }
         }
 
@@ -880,16 +878,19 @@
                 padding: 10px 30px 20px;
             }
             .carousel-item {
-                height: 360px;
+                height: 380px;
+            }
+            .carousel-item .img-wrapper {
+                height: 140px;
             }
             .carousel-item .card-content {
-                padding: 16px 18px 20px;
+                padding: 14px 16px 18px;
             }
             .carousel-item .project-title-sm {
                 font-size: 1.1rem;
             }
             .carousel-item .project-desc-sm {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
             }
             .carousel-btn {
                 width: 34px;
@@ -978,7 +979,7 @@
             <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
         </section>
 
-        <!-- ===== PROJECTS (IMMERSIVE CAROUSEL – full images, no crop) ===== -->
+        <!-- ===== PROJECTS (CLEAN CARD LAYOUT) ===== -->
         <section id="projects">
             <h2 class="section-title">// technical infrastructure</h2>
 
@@ -1243,7 +1244,9 @@
                 item.className = 'carousel-item';
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
                 item.innerHTML = `
-                    <img src="${p.img}" alt="${p.title}" class="project-img" onerror="this.style.display='none'">
+                    <div class="img-wrapper">
+                        <img src="${p.img}" alt="${p.title}" class="project-img" onerror="this.style.display='none'">
+                    </div>
                     <div class="card-content">
                         <div class="project-title-sm">${p.title}</div>
                         <div class="project-meta-sm">${p.meta}</div>
