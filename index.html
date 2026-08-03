@@ -743,7 +743,6 @@
             transform: rotate(90deg);
         }
 
-        /* ---- Modal blog content styles ---- */
         .modal-content .modal-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -864,6 +863,50 @@
         .modal-content .blog-section .note-box .highlight {
             color: #ffaa44;
             font-weight: 600;
+        }
+
+        /* ---- Code snippet styling ---- */
+        .modal-content .blog-section .code-block {
+            background: #0a0f1a;
+            border: 1px solid rgba(0, 200, 255, 0.15);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 16px 0 20px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #d4e4ff;
+        }
+
+        .modal-content .blog-section .code-block code {
+            font-family: 'JetBrains Mono', monospace;
+            display: block;
+            white-space: pre;
+        }
+
+        /* simple syntax highlighting via spans (applied in JS) */
+        .modal-content .blog-section .code-block .kw {
+            color: #ff79c6;
+        }
+        .modal-content .blog-section .code-block .type {
+            color: #8be9fd;
+        }
+        .modal-content .blog-section .code-block .func {
+            color: #50fa7b;
+        }
+        .modal-content .blog-section .code-block .comment {
+            color: #6272a4;
+            font-style: italic;
+        }
+        .modal-content .blog-section .code-block .num {
+            color: #bd93f9;
+        }
+        .modal-content .blog-section .code-block .str {
+            color: #f1fa8c;
+        }
+        .modal-content .blog-section .code-block .var {
+            color: #f8f8f2;
         }
 
         .modal-content .modal-link {
@@ -1156,6 +1199,10 @@
             }
             .modal-content .blog-section h3 {
                 font-size: 1.1rem;
+            }
+            .modal-content .blog-section .code-block {
+                font-size: 0.7rem;
+                padding: 12px 14px;
             }
         }
 
@@ -1513,8 +1560,29 @@
                     <p><span class="highlight">⚠️ Note:</span> Be careful of LTspice simulations! Sometimes they can work perfectly in simulation but <span class="highlight">fail in real life</span>. Parasitic capacitances, PCB trace inductance, and component tolerances can cause unexpected behaviour. Always prototype before ordering a PCB — this is a tip that will save you money!</p>
                 </div>
 
-                <h3>Control Algorithm: Discrete PID</h3>
-                <p>The ESP32 runs a discrete-time PID controller at 1 kHz. The position feedback comes from an AS5600 magnetic encoder mounted on the motor shaft. The PID outputs a PWM duty cycle that drives the motor to the desired position with minimal overshoot.</p>
+                <h3>Firmware: Discrete PID Controller in C++</h3>
+                <p>Here's a simplified version of the discrete PID controller running on the ESP32 with a 1 kHz sampling rate:</p>
+
+                <div class="code-block"><code><span class="comment">// Discrete PID Controller for ESP32</span>
+                <span class="comment">// Sampling time: 1 ms</span>
+                <span class="kw">float</span> <span class="func">pid_update</span>(<span class="kw">float</span> setpoint, <span class="kw">float</span> measurement, <span class="kw">float</span> dt) {
+                    <span class="kw">static</span> <span class="kw">float</span> integral = <span class="num">0.0</span>;
+                    <span class="kw">static</span> <span class="kw">float</span> prev_error = <span class="num">0.0</span>;
+                    
+                    <span class="kw">float</span> error = setpoint - measurement;
+                    integral += error * dt;
+                    <span class="kw">float</span> derivative = (error - prev_error) / dt;
+                    
+                    <span class="kw">float</span> output = Kp * error + Ki * integral + Kd * derivative;
+                    
+                    prev_error = error;
+                    <span class="kw">return</span> output;
+                }</code></pre>
+
+                <p>The PID gains <span class="var">Kp</span>, <span class="var">Ki</span>, and <span class="var">Kd</span> are defined as global constants and tuned empirically. The controller runs in a timer interrupt to ensure consistent timing.</p>
+
+                <h3>Control Algorithm: Tuning & Performance</h3>
+                <p>The ESP32 runs the PID loop at 1 kHz. Position feedback comes from an AS5600 magnetic encoder mounted on the motor shaft. The PID outputs a PWM duty cycle that drives the motor to the desired position with minimal overshoot.</p>
 
                 <p>Tuning the PID gains was done empirically — first setting Kp, then Ki, and finally Kd to dampen oscillations. The final controller achieved positioning accuracy within ±0.5 mm, which is sufficient for striking the piano keys reliably.</p>
 
