@@ -415,7 +415,7 @@
         }
 
         /* ============================================================
-           PROJECTS – SLIDING CAROUSEL (shows 3 at a time)
+           PROJECTS – IMMERSIVE CAROUSEL (Image Dominant, No Crop)
            ============================================================ */
         #projects {
             padding: 40px 5% 60px;
@@ -440,126 +440,147 @@
             position: relative;
             width: 100%;
             overflow: hidden;
-            padding: 10px 50px 20px; /* space for arrows */
+            padding: 10px 50px 20px;
         }
 
         .carousel-track {
             display: flex;
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            gap: 20px;
+            gap: 24px;
             padding: 0 10px;
         }
 
+        /* --- Carousel Item: Image as main, no crop --- */
         .carousel-item {
-            flex: 0 0 calc(33.333% - 14px);
-            min-width: 220px;
-            background: rgba(8, 14, 20, 0.85);
-            backdrop-filter: blur(8px);
-            border-radius: 24px;
+            flex: 0 0 calc(33.333% - 16px);
+            min-width: 240px;
+            position: relative;
+            height: 520px; /* taller to show images larger */
+            border-radius: 28px;
             border: 1px solid rgba(0, 180, 250, 0.25);
-            padding: 20px 22px;
             box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s;
-            height: 420px;
-            overflow-y: auto;
-        }
-
-        .carousel-item::-webkit-scrollbar {
-            width: 4px;
-        }
-        .carousel-item::-webkit-scrollbar-thumb {
-            background: #2a6f8f;
-            border-radius: 10px;
+            background: #0a1018;
         }
 
         .carousel-item:hover {
-            transform: translateY(-6px);
+            transform: translateY(-6px) scale(1.01);
             border-color: rgba(0, 210, 255, 0.6);
-            box-shadow: 0 25px 40px -12px rgba(0, 150, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 150, 255, 0.3);
         }
 
+        /* Full-bleed background image – now using contain to avoid cropping */
         .carousel-item .project-img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0, 200, 255, 0.2);
+            height: 100%;
+            object-fit: contain;   /* <-- no crop, shows full image */
+            object-position: center;
+            z-index: 1;
+            background: #0a1018;   /* fill gaps */
+        }
+
+        /* Dark gradient overlay – softer to keep image visible */
+        .carousel-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.85) 0%, rgba(5, 5, 5, 0.2) 70%, rgba(5, 5, 5, 0.0) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Text content - positioned at the bottom */
+        .carousel-item .card-content {
+            position: relative;
+            z-index: 3;
+            margin-top: auto;
+            padding: 20px 25px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
         }
 
         .carousel-item .project-title-sm {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.2;
             margin-bottom: 2px;
-            color: #fff;
+            color: #ffffff;
         }
 
         .carousel-item .project-meta-sm {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             color: #8bb9fe;
-            margin-bottom: 8px;
             border-left: 2px solid #0ff;
-            padding-left: 8px;
+            padding-left: 10px;
+            margin-bottom: 4px;
+            opacity: 0.9;
         }
 
         .carousel-item .project-tags-sm {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 10px;
+            gap: 6px;
+            margin-bottom: 8px;
         }
 
         .carousel-item .project-tags-sm span {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.5rem;
-            background: #0a1018;
-            padding: 2px 8px;
+            font-size: 0.6rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            padding: 2px 12px;
             border-radius: 20px;
-            border: 1px solid #2c5a7a;
+            border: 1px solid rgba(0, 200, 255, 0.3);
             color: #b3e4ff;
         }
 
         .carousel-item .project-desc-sm {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             line-height: 1.5;
-            color: #d3e5fc;
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .carousel-item .project-desc-sm::-webkit-scrollbar {
-            width: 3px;
-        }
-        .carousel-item .project-desc-sm::-webkit-scrollbar-thumb {
-            background: #2a6f8f;
-            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.85);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 3em;
         }
 
         .carousel-item .project-link-sm {
-            margin-top: 12px;
+            margin-top: 10px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            color: #b6e6ff;
-            border: 1px solid #2f8fbf;
-            padding: 4px 14px;
+            font-size: 0.7rem;
+            color: #fff;
+            background: rgba(0, 200, 255, 0.15);
+            border: 1px solid rgba(0, 200, 255, 0.5);
+            padding: 4px 16px;
             border-radius: 40px;
             display: inline-block;
             text-decoration: none;
             transition: 0.2s;
             width: fit-content;
+            backdrop-filter: blur(4px);
         }
 
         .carousel-item .project-link-sm:hover {
-            background: #0ff22d1;
+            background: #0ff;
             color: #000;
             border-color: #0ff;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
         }
 
-        /* carousel controls – positioned outside the track area */
+        /* --- Carousel Controls --- */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -567,23 +588,24 @@
             background: rgba(0, 20, 30, 0.8);
             border: 1px solid rgba(0, 200, 255, 0.4);
             color: #c4edff;
-            font-size: 2rem;
-            width: 44px;
-            height: 44px;
+            font-size: 2.2rem;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             cursor: pointer;
-            z-index: 10;
+            z-index: 20;
             transition: all 0.25s;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
         }
 
         .carousel-btn:hover {
             background: rgba(0, 200, 255, 0.25);
             border-color: #0ff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.05);
         }
 
         .carousel-btn.prev {
@@ -593,7 +615,7 @@
             right: 6px;
         }
 
-        /* circular dots (wheel indicator) */
+        /* --- Dots --- */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -615,7 +637,7 @@
         .carousel-dots .dot.active {
             background: #0ff;
             border-color: #0ff;
-            box-shadow: 0 0 16px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 16px rgba(0, 255, 255, 0.5);
             transform: scale(1.2);
         }
 
@@ -623,7 +645,7 @@
             background: rgba(0, 255, 255, 0.4);
         }
 
-        /* ===== TECHNICAL NOTES ===== */
+        /* ===== TECHNICAL NOTES (all textbooks restored) ===== */
         #technical-notes {
             padding: 30px 7% 70px;
             max-width: 1400px;
@@ -784,7 +806,8 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .carousel-item {
-                flex: 0 0 calc(50% - 10px);
+                flex: 0 0 calc(50% - 12px);
+                height: 440px;
             }
         }
 
@@ -823,12 +846,15 @@
             }
             .carousel-item {
                 flex: 0 0 calc(100% - 20px);
-                height: 380px;
+                height: 400px;
             }
             .carousel-btn {
-                width: 36px;
-                height: 36px;
+                width: 40px;
+                height: 40px;
                 font-size: 1.5rem;
+            }
+            .carousel-item .project-title-sm {
+                font-size: 1.3rem;
             }
         }
 
@@ -854,18 +880,20 @@
                 padding: 10px 30px 20px;
             }
             .carousel-item {
-                height: 320px;
-                padding: 16px;
+                height: 360px;
+            }
+            .carousel-item .card-content {
+                padding: 16px 18px 20px;
             }
             .carousel-item .project-title-sm {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .carousel-item .project-desc-sm {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
             .carousel-btn {
-                width: 30px;
-                height: 30px;
+                width: 34px;
+                height: 34px;
                 font-size: 1.2rem;
             }
         }
@@ -950,7 +978,7 @@
             <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
         </section>
 
-        <!-- ===== PROJECTS (SLIDING CAROUSEL) ===== -->
+        <!-- ===== PROJECTS (IMMERSIVE CAROUSEL – full images, no crop) ===== -->
         <section id="projects">
             <h2 class="section-title">// technical infrastructure</h2>
 
@@ -966,31 +994,123 @@
             <button class="next-section-btn" data-next="tech-notes">⬇ Next: Tech Notes</button>
         </section>
 
-        <!-- ===== TECHNICAL NOTES ===== -->
+        <!-- ===== TECHNICAL NOTES (all textbooks restored) ===== -->
         <section id="technical-notes">
             <h2 class="section-title">// technical notes</h2>
             <div class="notes-book">
+                <!-- Calculus -->
                 <button class="notes-header" onclick="toggleNotesSection('calc-notes-main')">
-                    📘 Stewart Calculus <span id="calc-notes-main-symbol">+</span>
+                    📘 Stewart Calculus: Early Transcendentals <span id="calc-notes-main-symbol">+</span>
                 </button>
                 <div id="calc-notes-main" class="notes-content" style="display:none;">
                     <button class="chapter-header" onclick="toggleChapter('calc-chap-2')">
-                        Chapter 2: Limits <span id="calc-chap-2-symbol">+</span>
+                        Chapter 2: Limits and Derivatives <span id="calc-chap-2-symbol">+</span>
                     </button>
                     <div id="calc-chap-2" class="chapter-content" style="display:none;"></div>
                     <button class="chapter-header" onclick="toggleChapter('calc-chap-3')">
-                        Chapter 3: Differentiation <span id="calc-chap-3-symbol">+</span>
+                        Chapter 3: Differentiation Rules <span id="calc-chap-3-symbol">+</span>
                     </button>
                     <div id="calc-chap-3" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-4')">
+                        Chapter 4: Applications of Differentiation <span id="calc-chap-4-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-4" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-5')">
+                        Chapter 5: Integrals <span id="calc-chap-5-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-5" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-6')">
+                        Chapter 6: Applications of Integration <span id="calc-chap-6-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-6" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-7')">
+                        Chapter 7: Techniques of Integration <span id="calc-chap-7-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-7" class="chapter-content" style="display:none;"></div>
                 </div>
+
+                <!-- Engineering Economics -->
                 <button class="notes-header" onclick="toggleNotesSection('econ-notes-main')">
-                    📘 Engineering Economics <span id="econ-notes-main-symbol">+</span>
+                    📘 Engineering Economics: Financial Decision Making <span id="econ-notes-main-symbol">+</span>
                 </button>
                 <div id="econ-notes-main" class="notes-content" style="display:none;">
                     <button class="chapter-header" onclick="toggleChapter('econ-chap-1')">
                         Chapter 1: Introduction <span id="econ-chap-1-symbol">+</span>
                     </button>
                     <div id="econ-chap-1" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('econ-chap-2')">
+                        Chapter 2: Interest and Equivalence <span id="econ-chap-2-symbol">+</span>
+                    </button>
+                    <div id="econ-chap-2" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('econ-chap-3')">
+                        Chapter 3: Present Worth Analysis <span id="econ-chap-3-symbol">+</span>
+                    </button>
+                    <div id="econ-chap-3" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('econ-chap-4')">
+                        Chapter 4: Annual Worth Analysis <span id="econ-chap-4-symbol">+</span>
+                    </button>
+                    <div id="econ-chap-4" class="chapter-content" style="display:none;"></div>
+                </div>
+
+                <!-- Circuit Analysis -->
+                <button class="notes-header" onclick="toggleNotesSection('circuits-notes-main')">
+                    📘 Electric Circuit Analysis <span id="circuits-notes-main-symbol">+</span>
+                </button>
+                <div id="circuits-notes-main" class="notes-content" style="display:none;">
+                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-1')">
+                        Chapter 1: Basic Electrical Quantities <span id="circuits-chap-1-symbol">+</span>
+                    </button>
+                    <div id="circuits-chap-1" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-2')">
+                        Chapter 2: Ohm's Law and Kirchhoff's Laws <span id="circuits-chap-2-symbol">+</span>
+                    </button>
+                    <div id="circuits-chap-2" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-3')">
+                        Chapter 3: Nodal and Mesh Analysis <span id="circuits-chap-3-symbol">+</span>
+                    </button>
+                    <div id="circuits-chap-3" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-4')">
+                        Chapter 4: Operational Amplifiers <span id="circuits-chap-4-symbol">+</span>
+                    </button>
+                    <div id="circuits-chap-4" class="chapter-content" style="display:none;"></div>
+                </div>
+
+                <!-- Signals and Systems -->
+                <button class="notes-header" onclick="toggleNotesSection('signals-notes-main')">
+                    📘 Signals and Systems <span id="signals-notes-main-symbol">+</span>
+                </button>
+                <div id="signals-notes-main" class="notes-content" style="display:none;">
+                    <button class="chapter-header" onclick="toggleChapter('signals-chap-1')">
+                        Chapter 1: Continuous-Time Signals <span id="signals-chap-1-symbol">+</span>
+                    </button>
+                    <div id="signals-chap-1" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('signals-chap-2')">
+                        Chapter 2: Fourier Series <span id="signals-chap-2-symbol">+</span>
+                    </button>
+                    <div id="signals-chap-2" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('signals-chap-3')">
+                        Chapter 3: Laplace Transform <span id="signals-chap-3-symbol">+</span>
+                    </button>
+                    <div id="signals-chap-3" class="chapter-content" style="display:none;"></div>
+                </div>
+
+                <!-- Electromagnetics -->
+                <button class="notes-header" onclick="toggleNotesSection('em-notes-main')">
+                    📘 Engineering Electromagnetics <span id="em-notes-main-symbol">+</span>
+                </button>
+                <div id="em-notes-main" class="notes-content" style="display:none;">
+                    <button class="chapter-header" onclick="toggleChapter('em-chap-1')">
+                        Chapter 1: Vector Analysis <span id="em-chap-1-symbol">+</span>
+                    </button>
+                    <div id="em-chap-1" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('em-chap-2')">
+                        Chapter 2: Electrostatics <span id="em-chap-2-symbol">+</span>
+                    </button>
+                    <div id="em-chap-2" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('em-chap-3')">
+                        Chapter 3: Magnetostatics <span id="em-chap-3-symbol">+</span>
+                    </button>
+                    <div id="em-chap-3" class="chapter-content" style="display:none;"></div>
                 </div>
             </div>
             <button class="next-section-btn" data-next="contact">⬇ Next: Contact</button>
@@ -1124,11 +1244,13 @@
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
                 item.innerHTML = `
                     <img src="${p.img}" alt="${p.title}" class="project-img" onerror="this.style.display='none'">
-                    <div class="project-title-sm">${p.title}</div>
-                    <div class="project-meta-sm">${p.meta}</div>
-                    <div class="project-tags-sm">${tagsHtml}</div>
-                    <div class="project-desc-sm">${p.desc}</div>
-                    <a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>
+                    <div class="card-content">
+                        <div class="project-title-sm">${p.title}</div>
+                        <div class="project-meta-sm">${p.meta}</div>
+                        <div class="project-tags-sm">${tagsHtml}</div>
+                        <div class="project-desc-sm">${p.desc}</div>
+                        <a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>
+                    </div>
                 `;
                 track.appendChild(item);
 
@@ -1145,7 +1267,7 @@
 
         function updateCarousel() {
             const itemWidth = track.querySelector('.carousel-item')?.offsetWidth || 0;
-            const gap = 20;
+            const gap = 24;
             const offset = currentIndex * (itemWidth + gap);
             track.style.transform = `translateX(-${offset}px)`;
 
