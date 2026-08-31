@@ -1429,9 +1429,7 @@
                 <p>To drive the motor forward and backward, we need a motor driver. Since this is a brushed DC motor, a very common motor driver topology is the H-bridge — made of 2 P-channel and 2 N-channel MOSFETs. The classic configuration is shown below.</p>
 
                 <div class="blog-image-placeholder">
-                    <span class="icon">🔌</span>
-                    <div>Classic H-Bridge Configuration</div>
-                    <span class="caption">[Insert schematic of the H-bridge]</span>
+                <img src="hbridge_schematic.jpg" alt="Classic H-Bridge Configuration" style="width:100%; border-radius:12px;">
                 </div>
 
                 <p>However, the MOSFETs we selected were not able to be driven with a 3.3V gate voltage directly from the ESP32. Their threshold voltage required a higher gate drive. So we implemented a BJT inverter gate driver stage to boost the signal.</p>
