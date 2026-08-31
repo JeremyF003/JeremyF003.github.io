@@ -463,6 +463,33 @@
             box-shadow: 0 25px 50px -12px rgba(0, 150, 255, 0.3);
         }
 
+        /* Idea cards: dashed border and opacity */
+        .project-card.idea {
+            border: 2px dashed rgba(0, 200, 255, 0.3);
+            opacity: 0.8;
+        }
+
+        .project-card.idea:hover {
+            border-color: rgba(0, 200, 255, 0.6);
+            opacity: 1;
+        }
+
+        .project-card .idea-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 200, 255, 0.15);
+            border: 1px solid rgba(0, 200, 255, 0.4);
+            border-radius: 40px;
+            padding: 2px 12px;
+            font-size: 0.6rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #8ab8e0;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            backdrop-filter: blur(4px);
+        }
+
         .project-card .img-wrapper {
             height: 200px;
             flex-shrink: 0;
@@ -1221,7 +1248,7 @@
             <button class="next-section-btn" id="nextFromProjects" data-next="tech-notes">⬇ Next: Tech Notes</button>
         </section>
 
-        <!-- ===== TECHNICAL NOTES (controlled by code variable) ===== -->
+        <!-- ===== TECHNICAL NOTES ===== -->
         <section id="technical-notes">
             <h2 class="section-title">// technical notes</h2>
             <div class="notes-book">
@@ -1375,7 +1402,7 @@
         // CONFIG: Show or hide Technical Notes section
         // Set to true to show, false to hide
         // ================================================================
-        const SHOW_TECH_NOTES = false;   // <-- Change this to false to hide Technical Notes
+        const SHOW_TECH_NOTES = true;   // <-- Change this to false to hide Technical Notes
 
         // ================================================================
         // HELPER: Generate a placeholder image as data URI
@@ -1402,7 +1429,7 @@
         }
 
         // ================================================================
-        // PROJECT DATA
+        // PROJECT DATA – Updated
         // ================================================================
         const projectData = [{
             title: "Robo-Maestro",
@@ -1428,8 +1455,11 @@
                 <h3>Motor Driver: Discrete H-Bridge</h3>
                 <p>To drive the motor forward and backward, we need a motor driver. Since this is a brushed DC motor, a very common motor driver topology is the H-bridge — made of 2 P-channel and 2 N-channel MOSFETs. The classic configuration is shown below.</p>
 
+                <!-- Replace this placeholder with your image -->
                 <div class="blog-image-placeholder">
-                <img src="hbridge_schematic.jpg" alt="Classic H-Bridge Configuration" style="width:100%; border-radius:12px;">
+                    <span class="icon">🔌</span>
+                    <div>Classic H-Bridge Configuration</div>
+                    <span class="caption">[Insert schematic of the H-bridge]</span>
                 </div>
 
                 <p>However, the MOSFETs we selected were not able to be driven with a 3.3V gate voltage directly from the ESP32. Their threshold voltage required a higher gate drive. So we implemented a BJT inverter gate driver stage to boost the signal.</p>
@@ -1496,17 +1526,19 @@
             link: "#",
             img: "boost_converter.jpg"
         }, {
-            title: "Colpitts Oscillator",
+            // Replaced Colpitts Oscillator with Voltage-Controlled Oscillator (VCO)
+            title: "Voltage-Controlled Oscillator (VCO)",
             meta: "Personal Project | 2026",
-            tags: ["Analog Electronics", "BJT", "Oscillator", "LTspice", "Oscilloscope"],
-            desc: "Designed and constructed a BJT-based Colpitts oscillator using an LC resonant tank. Simulated in LTspice and validated startup behavior and output waveform using an oscilloscope.",
+            tags: ["RF", "Varactor", "Oscillator", "PLL", "Analog Design"],
+            desc: "Designed a VCO using a Colpitts topology with a varactor diode for frequency tuning. Includes a buffer stage and low-noise bias network. Simulated in LTspice and validated on a breadboard with a spectrum analyzer.",
             link: "#",
-            img: "colpitts.jpg"
+            img: "vco.jpg"   // you can rename this to your actual image filename
         }, {
-            title: "Common-Emitter BJT Amp",
+            // Renamed from Common-Emitter BJT Amp
+            title: "Two-Stage Common Emitter Amplifier (BJT)",
             meta: "Personal Project | 2026",
             tags: ["Analog Electronics", "BJT", "Signal Amplification", "LTspice"],
-            desc: "Designed and analyzed a single-stage common-emitter amplifier. Calculated DC operating point, established proper biasing, and optimized component values for desired voltage gain.",
+            desc: "Designed and analyzed a two-stage common-emitter amplifier with inter-stage coupling. Calculated DC biasing, gain, bandwidth, and stability. Verified performance with simulation and breadboard testing.",
             link: "#",
             img: "common_emitter.jpg"
         }, {
@@ -1551,7 +1583,108 @@
             desc: "Designed a functional automotive-style differential assembly in SOLIDWORKS, modeling gears, shafts, bearings, and housing. Verified kinematic motion for torque distribution.",
             link: "#",
             img: "differential.jpg"
-        }];
+        },
+
+        // ========== MAJOR PROJECTS TO COMPLETE (ideas) ==========
+        // These appear with a dashed border and "🚧 Idea" badge
+        {
+            title: "Sensorless BLDC Motor Driver",
+            meta: "Future Project | Idea",
+            tags: ["BLDC", "Sensorless", "Back-EMF", "Motor Control"],
+            desc: "Design a sensorless BLDC motor driver using back-EMF zero-crossing detection. Will include a three-phase inverter, gate drivers, and an MCU with FOC (Field Oriented Control).",
+            link: "#",
+            img: "",   // placeholder
+            idea: true
+        }, {
+            title: "FPGA Mario Game",
+            meta: "Future Project | Idea",
+            tags: ["FPGA", "Verilog", "VGA", "Game Design"],
+            desc: "Implement a simple Mario-style platformer on an FPGA using Verilog. Will include VGA output, sprite rendering, and input handling for a retro gaming experience.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "AM Receiver",
+            meta: "Future Project | Idea",
+            tags: ["RF", "AM", "Demodulation", "Analog"],
+            desc: "Build a superheterodyne AM receiver covering the broadcast band. Will include RF amplifier, mixer, IF filter, and demodulator stages.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "Inverted Pendulum",
+            meta: "Future Project | Idea",
+            tags: ["Control Systems", "PID", "State-Space", "Mechatronics"],
+            desc: "Build a classic inverted pendulum on a cart. Will use an encoder for angle feedback and a DC motor for actuation, implementing a state-space controller.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "DIY Wind Tunnel (Reynolds Number Calc)",
+            meta: "Future Project | Idea",
+            tags: ["Fluid Dynamics", "Reynolds", "Sensors", "Data Acquisition"],
+            desc: "Construct a small wind tunnel with a fan and a test section. Measure airspeed and calculate Reynolds number for various test objects.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "Flight Computer",
+            meta: "Future Project | Idea",
+            tags: ["Avionics", "GPS", "IMU", "Data Logging"],
+            desc: "Develop a flight computer for model rockets using GPS, barometer, IMU, and SD card logging. Will include a Kalman filter for altitude estimation.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "Michelson Interferometer",
+            meta: "Future Project | Idea",
+            tags: ["Optics", "Interferometry", "Precision Measurement"],
+            desc: "Build a Michelson interferometer using a laser, beam splitter, and mirrors. Measure the wavelength of light and explore fringe patterns.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "Tesla Coil",
+            meta: "Future Project | Idea",
+            tags: ["HV", "Resonance", "Wireless Power"],
+            desc: "Design and build a Tesla coil (SGTC or DRSSTC) for high-voltage demonstrations. Will include resonant LC tuning and spark gap control.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "Coil Gun",
+            meta: "Future Project | Idea",
+            tags: ["Electromagnetics", "High Voltage", "Pulse Power"],
+            desc: "Build a multi-stage coil gun using a capacitor bank, thyristors, and IR sensors for projectile detection. Optimize for projectile velocity.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "Full-Wave Bridge Rectifier",
+            meta: "Future Project | Idea",
+            tags: ["Power Electronics", "Diodes", "Capacitor Filter"],
+            desc: "Design and test a full-wave bridge rectifier with an LC filter. Analyze ripple voltage and efficiency for different loads.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "Self-Balancing Table",
+            meta: "Future Project | Idea",
+            tags: ["Mechatronics", "IMU", "Actuators", "Control"],
+            desc: "Build a table that self-levels using an IMU and two or more servo/linear actuators. Implement a PID control loop for disturbance rejection.",
+            link: "#",
+            img: "",
+            idea: true
+        }, {
+            title: "3 DOF Robotic Arm",
+            meta: "Future Project | Idea",
+            tags: ["Robotics", "Inverse Kinematics", "Servos", "Microcontroller"],
+            desc: "Design a 3-DOF robotic arm with stepper/servo motors. Implement inverse kinematics for end-effector positioning and write a simple GUI for control.",
+            link: "#",
+            img: "",
+            idea: true
+        }
+        ];
 
         // ================================================================
         // RENDER PROJECTS GRID
@@ -1563,6 +1696,8 @@
             projectData.forEach((p, idx) => {
                 const card = document.createElement('div');
                 card.className = 'project-card';
+                if (p.idea) card.classList.add('idea');
+
                 const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
 
                 let buttonRow = `<a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>`;
@@ -1570,10 +1705,19 @@
                     buttonRow += `<button class="learn-more-btn" data-index="${idx}">📖 Learn More</button>`;
                 }
 
+                // For idea projects, show "Coming soon" instead of View button
+                if (p.idea) {
+                    buttonRow = `<span style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#4a7a9a;">🚧 Coming soon</span>`;
+                }
+
+                // Show badge
+                const badgeHtml = p.idea ? `<div class="idea-badge">🚧 Idea</div>` : '';
+
                 card.innerHTML = `
                     <div class="img-wrapper">
-                        <img src="${p.img}" alt="${p.title}" class="project-img" 
-                             onerror="this.style.display='none'; this.parentElement.innerHTML = '<div class=\\'placeholder-img\\'><span class=\\'gear-icon\\'>⚙</span><span class=\\'label-text\\'>${p.title}</span></div>';">
+                        ${badgeHtml}
+                        ${p.img ? `<img src="${p.img}" alt="${p.title}" class="project-img" onerror="this.style.display='none'; this.parentElement.innerHTML += '<div class=\\'placeholder-img\\'><span class=\\'gear-icon\\'>⚙</span><span class=\\'label-text\\'>${p.title}</span></div>';">` 
+                        : `<div class="placeholder-img"><span class="gear-icon">⚙</span><span class="label-text">${p.title}</span></div>`}
                     </div>
                     <div class="card-content">
                         <div class="project-title-sm">${p.title}</div>
@@ -1586,7 +1730,7 @@
                 gridContainer.appendChild(card);
             });
 
-            // Attach modal events
+            // Attach modal events for non-idea projects
             document.querySelectorAll('.learn-more-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1605,10 +1749,10 @@
 
         function openModal(index) {
             const project = projectData[index];
-            if (!project) return;
+            if (!project || project.idea) return; // no modal for ideas
 
             const tagsHtml = project.tags.map(t => `<span>${t}</span>`).join('');
-            const imageHtml = `<img src="${project.img}" alt="${project.title}" class="modal-image" onerror="this.style.display='none'">`;
+            const imageHtml = project.img ? `<img src="${project.img}" alt="${project.title}" class="modal-image" onerror="this.style.display='none'">` : '';
 
             let blogHtml = '';
             if (project.blog && project.blogContent) {
@@ -1652,11 +1796,8 @@
         const nextFromProjectsBtn = document.getElementById('nextFromProjects');
 
         if (!SHOW_TECH_NOTES) {
-            // Hide the section
             techNotesSection.classList.add('hidden');
-            // Hide the tree node for Tech Notes
             techNotesTreeNode.style.display = 'none';
-            // Change the "Next" button after projects to point directly to contact
             nextFromProjectsBtn.dataset.next = 'contact';
             nextFromProjectsBtn.textContent = '⬇ Next: Contact';
         } else {
@@ -1678,7 +1819,6 @@
             };
             const el = document.getElementById(sectionMap[targetId]);
             if (!el) return;
-            // If the target is tech-notes and it's hidden, skip to contact
             if (targetId === 'tech-notes' && !SHOW_TECH_NOTES) {
                 navigateToSection('contact');
                 return;
@@ -1749,7 +1889,7 @@
         };
 
         // ================================================================
-        // SCROLL SPY (skip tech notes if hidden)
+        // SCROLL SPY
         // ================================================================
         const sectionIds = ['hero', 'projects', 'technical-notes', 'contact'];
         const targetMap = { 'hero': 'hero', 'projects': 'projects', 'technical-notes': 'tech-notes', 'contact': 'contact' };
@@ -1758,7 +1898,6 @@
             const scrollY = window.pageYOffset + 120;
             let currentId = 'hero';
             for (const id of sectionIds) {
-                // If tech notes are hidden, skip it in scroll detection
                 if (id === 'technical-notes' && !SHOW_TECH_NOTES) continue;
                 const el = document.getElementById(id);
                 if (el) {
@@ -1771,7 +1910,6 @@
                 }
             }
             let target = targetMap[currentId] || 'hero';
-            // If target is tech-notes but hidden, map to contact
             if (target === 'tech-notes' && !SHOW_TECH_NOTES) target = 'contact';
             document.querySelectorAll('.tree-node').forEach(n => n.classList.remove('active'));
             document.querySelectorAll('.tree-node').forEach(n => {
