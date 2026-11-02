@@ -1087,4 +1087,836 @@
                 font-size: 1.1rem;
             }
             .modal-content .blog-section .code-block {
-                font-size: 0
+                font-size: 0.7rem;
+                padding: 12px 14px;
+            }
+        }
+
+        .section-highlight {
+            animation: glowPulse 0.8s ease 2;
+        }
+
+        @keyframes glowPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+            }
+            40% {
+                box-shadow: 0 0 40px 10px rgba(0, 255, 255, 0.15);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+            }
+        }
+
+        /* ===== PLACEHOLDER IMAGE FALLBACK ===== */
+        .placeholder-img {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a1628, #1a2a4a);
+            color: #0ff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .placeholder-img .gear-icon {
+            font-size: 4rem;
+            opacity: 0.6;
+        }
+
+        .placeholder-img .label-text {
+            font-size: 0.75rem;
+            color: #6a9ecf;
+            opacity: 0.7;
+            letter-spacing: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== INTRO ===== -->
+    <div id="intro">
+        <div class="intro-container">
+            <h1 id="intro-text"></h1>
+            <div class="glow-dot"></div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div id="main-content" style="display: none;">
+
+        <!-- ===== STICKY TREE NAV ===== -->
+        <nav id="tree-nav">
+            <div class="tree-container">
+                <div class="tree-node root-node active" data-target="hero">
+                    <span class="node-icon">⏣</span>
+                    <span class="node-label">Home</span>
+                </div>
+                <div class="tree-node has-children" data-target="projects">
+                    <span class="node-icon">⚙</span>
+                    <span class="node-label">Projects</span>
+                </div>
+                <div class="tree-node" data-target="tech-notes" id="treeNodeTechNotes">
+                    <span class="node-icon">📘</span>
+                    <span class="node-label">Tech Notes</span>
+                </div>
+                <div class="tree-node" data-target="contact">
+                    <span class="node-icon">✉</span>
+                    <span class="node-label">Contact</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ===== HERO ===== -->
+        <section class="hero" id="hero">
+            <div class="hero-center">
+                <div class="hero-left">
+                    <img src="profile.jpg" alt="Jeremy Fernandez" class="profile-pic" id="profileImage" loading="lazy" decoding="async" />
+                </div>
+                <div class="hero-right">
+                    <h1 id="typing-name"></h1>
+                    <div class="badge-row">
+                        <span class="eng-badge">⚡ Embedded Systems</span>
+                        <span class="eng-badge">🔧 Control Theory</span>
+                        <span class="eng-badge">📡 IoT & RF</span>
+                        <span class="eng-badge">💡 FPGA / uC</span>
+                    </div>
+                    <p class="about">
+                        I am a third-year Electrical Engineering student at the University of British Columbia (UBC) with a deep passion for circuits, mathematics, physics, and control systems.
+                        My expertise spans low-level firmware, motor control, and sensor integration. I bridge theoretical rigor with hands-on prototyping — from BLDC drivers to precision temperature controllers.
+                        Actively seeking research and industry roles to drive next-generation embedded solutions.
+                    </p>
+                    <a class="scroll-down" id="exploreBtn">
+                        <div class="arrow"></div>
+                        <span> EXPLORE PROJECTS</span>
+                    </a>
+                </div>
+            </div>
+            <button class="next-section-btn" data-next="projects">⬇ Next: Projects</button>
+        </section>
+
+        <!-- ===== PROJECTS – GRID ===== -->
+        <section id="projects">
+            <h2 class="section-title">// technical infrastructure</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- injected by JS -->
+            </div>
+            <button class="next-section-btn" id="nextFromProjects" data-next="tech-notes">⬇ Next: Tech Notes</button>
+        </section>
+
+        <!-- ===== TECHNICAL NOTES (hidden by default — see SHOW_TECH_NOTES) ===== -->
+        <section id="technical-notes">
+            <h2 class="section-title">// technical notes</h2>
+            <div class="notes-book">
+                <button class="notes-header" onclick="toggleNotesSection('calc-notes-main')">
+                    📘 Stewart Calculus: Early Transcendentals <span id="calc-notes-main-symbol">+</span>
+                </button>
+                <div id="calc-notes-main" class="notes-content" style="display:none;">
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-2')">
+                        Chapter 2: Limits and Derivatives <span id="calc-chap-2-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-2" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-3')">
+                        Chapter 3: Differentiation Rules <span id="calc-chap-3-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-3" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-4')">
+                        Chapter 4: Applications of Differentiation <span id="calc-chap-4-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-4" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('calc-chap-5')">
+                        Chapter 5: Integrals <span id="calc-chap-5-symbol">+</span>
+                    </button>
+                    <div id="calc-chap-5" class="chapter-content" style="display:none;"></div>
+                </div>
+
+                <button class="notes-header" onclick="toggleNotesSection('circuits-notes-main')">
+                    📘 Electric Circuit Analysis <span id="circuits-notes-main-symbol">+</span>
+                </button>
+                <div id="circuits-notes-main" class="notes-content" style="display:none;">
+                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-1')">
+                        Chapter 1: Basic Electrical Quantities <span id="circuits-chap-1-symbol">+</span>
+                    </button>
+                    <div id="circuits-chap-1" class="chapter-content" style="display:none;"></div>
+                    <button class="chapter-header" onclick="toggleChapter('circuits-chap-2')">
+                        Chapter 2: Ohm's Law and Kirchhoff's Laws <span id="circuits-chap-2-symbol">+</span>
+                    </button>
+                    <div id="circuits-chap-2" class="chapter-content" style="display:none;"></div>
+                </div>
+            </div>
+            <button class="next-section-btn" data-next="contact">⬇ Next: Contact</button>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact">
+            <div class="contact-card">
+                <h2>⟨ connect ⟩</h2>
+                <p class="contact-text">
+                    Let's collaborate on embedded systems, control research, or hardware acceleration.
+                    Reach out for engineering challenges.
+                </p>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/jeremy-fernandez-264432248" target="_blank">🔗 LinkedIn</a>
+                    <a href="https://github.com/JeremyF003" target="_blank">🐙 GitHub</a>
+                    <a href="mailto:jeremyfa2013@gmail.com">✉️ jeremyfa2013@gmail.com</a>
+                </div>
+            </div>
+            <button class="next-section-btn" data-next="hero">⬆ Back to Home</button>
+        </section>
+
+        <!-- ===== PROJECT DETAIL MODAL ===== -->
+        <div class="modal-overlay" id="projectModal">
+            <div class="modal-content" id="modalContent">
+                <button class="modal-close" id="modalClose">✕</button>
+                <div id="modalBody">
+                    <!-- filled by JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            ⚡ Electrical Engineering · UBC | Firmware · Control · PCB
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        // CONFIG: Show or hide Technical Notes section
+        // ================================================================
+        const SHOW_TECH_NOTES = false;   // set to true to show Tech Notes
+
+        // ================================================================
+        // PROJECT DATA – reordered
+        // ================================================================
+        const projectData = [
+        {
+            title: "Robo-Maestro",
+            meta: "UBC | Jan 2026 – Apr 2026 | PID Controller",
+            tags: ["ESP32", "C++", "Arduino IDE", "PID Control", "H-Bridge", "AS5600 Encoder"],
+            desc: "Designed and developed an electromechanical piano-playing robot using a DC motor and two solenoids. Programmed embedded firmware in C++ on an ESP32 using the Arduino IDE and implemented a PID controller for precise linear positioning with a timing belt system and AS5600 magnetic encoder.",
+            link: "#",
+            img: "robomaestro.jpg",
+            blog: true,
+            blogContent: `
+                <h3>Motivation & System Overview</h3>
+                <p>The reason behind this project was to learn about system modelling and real-life applications of a discrete PID controller on an ESP32 microcontroller. Building a piano-playing robot combines mechanical actuation, real-time control, and embedded systems — making it an ideal challenge for an electrical engineering student.</p>
+
+                <h3>Mechanical Design: Rotary-to-Linear Motion</h3>
+                <p>In order to drive the motor, we needed some sort of rotational-to-linear mechanism. For this project we decided to go with a timing belt and pulley system. This converts the rotation of the DC motor into precise linear motion, allowing the solenoid carriage to position itself accurately over each piano key.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">⚙️</span>
+                    <div>Timing Belt & Pulley Assembly</div>
+                    <span class="caption">[Insert photo of the timing belt mechanism]</span>
+                </div>
+
+                <h3>Motor Driver: Discrete H-Bridge</h3>
+                <p>To drive the motor forward and backward, we need a motor driver. Since this is a brushed DC motor, a very common motor driver topology is the H-bridge — made of 2 P-channel and 2 N-channel MOSFETs. The classic configuration is shown below.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">🔌</span>
+                    <div>Classic H-Bridge Configuration</div>
+                    <span class="caption">[Insert schematic of the H-bridge]</span>
+                </div>
+
+                <p>However, the MOSFETs we selected were not able to be driven with a 3.3V gate voltage directly from the ESP32. Their threshold voltage required a higher gate drive. So we implemented a BJT inverter gate driver stage to boost the signal.</p>
+
+                <p>Due to the relatively low current consumption of the DC motor, this type of gate driver was sufficient. It is important to mention that for a more demanding type of motor — such as a brushless DC motor (BLDC) — another type of gate driver with faster switching and higher current capability would be needed.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">📊</span>
+                    <div>LTspice Simulation: BJT Gate Driver</div>
+                    <span class="caption">[Insert LTspice simulation screenshot]</span>
+                </div>
+
+                <div class="note-box">
+                    <p><span class="highlight">⚠️ Note:</span> Be careful of LTspice simulations! Sometimes they can work perfectly in simulation but <span class="highlight">fail in real life</span>. Parasitic capacitances, PCB trace inductance, and component tolerances can cause unexpected behaviour. Always prototype before ordering a PCB — this is a tip that will save you money!</p>
+                </div>
+
+                <h3>Firmware: Discrete PID Controller in C++</h3>
+                <p>Here's a simplified version of the discrete PID controller running on the ESP32 with a 1 kHz sampling rate:</p>
+
+                <div class="code-block"><code><span class="comment">// Discrete PID Controller for ESP32</span>
+<span class="comment">// Sampling time: 1 ms</span>
+<span class="kw">float</span> <span class="func">pid_update</span>(<span class="kw">float</span> setpoint, <span class="kw">float</span> measurement, <span class="kw">float</span> dt) {
+    <span class="kw">static</span> <span class="kw">float</span> integral = <span class="num">0.0</span>;
+    <span class="kw">static</span> <span class="kw">float</span> prev_error = <span class="num">0.0</span>;
+    <span class="kw">float</span> error = setpoint - measurement;
+    integral += error * dt;
+    <span class="kw">float</span> derivative = (error - prev_error) / dt;
+    <span class="kw">float</span> output = Kp * error + Ki * integral + Kd * derivative;
+    prev_error = error;
+    <span class="kw">return</span> output;
+}</code></div>
+
+                <p>The PID gains <span class="var">Kp</span>, <span class="var">Ki</span>, and <span class="var">Kd</span> are defined as global constants and tuned empirically. The controller runs in a timer interrupt to ensure consistent timing.</p>
+
+                <h3>Control Algorithm: Tuning & Performance</h3>
+                <p>The ESP32 runs the PID loop at 1 kHz. Position feedback comes from an AS5600 magnetic encoder mounted on the motor shaft. The PID outputs a PWM duty cycle that drives the motor to the desired position with minimal overshoot.</p>
+
+                <p>Tuning the PID gains was done empirically — first setting Kp, then Ki, and finally Kd to dampen oscillations. The final controller achieved positioning accuracy within ±0.5 mm, which is sufficient for striking the piano keys reliably.</p>
+
+                <h3>Results & Lessons Learned</h3>
+                <p>The Robo-Maestro successfully plays simple melodies by actuating solenoids that strike the piano keys. The system responds to MIDI commands sent over UART, making it expandable for more complex compositions.</p>
+
+                <p>Key takeaways from this project:</p>
+                <p>• Real-time control requires careful attention to timing — interrupt service routines must be kept short.<br>
+                • Always verify the gate drive voltage for MOSFETs — a 3.3V logic level is not always sufficient.<br>
+                • System modelling (even a simple first-order model) helps a lot when tuning PID gains.<br>
+                • Test your motor driver with a dummy load before connecting the actual motor!</p>
+            `
+        },
+        {
+            title: "Reflow Oven Controller",
+            meta: "UBC | Mar 2025 – May 2025 | Industrial Control",
+            tags: ["A51 Assembly", "N76E003", "Thermocouple", "PID", "Zero-Cross"],
+            desc: "Developed a reflow soldering oven controller with real-time temperature profiling, programmed entirely in A51 assembly. Implemented PI control with triac switching.",
+            link: "https://github.com/JeremyF003/Reflow-oven",
+            img: "reflow.jpg"
+        },
+        {
+            title: "Coin Picking Robot",
+            meta: "UBC | Apr 2025 – May 2025 | Embedded Collaboration",
+            tags: ["C", "PIC18", "EFM8", "RF Modules", "H-Bridge", "Metal Detection"],
+            desc: "Architected a remote-controlled robot that autonomously picks Canadian coins using inductive sensing. Wrote low-level C for PIC18 and EFM8, designed custom H-bridge, and 433MHz RF.",
+            link: "https://github.com/JeremyF003/Picking-coin-robot",
+            img: "coin.jpg"
+        },
+        {
+            title: "Line Following Robot",
+            meta: "KPU | Apr 2024 – May 2024 | Optical Sensing",
+            tags: ["C", "PIC18F46K42", "Phototransistors", "PID Line", "MPLAB"],
+            desc: "Programmed an autonomous line-following robot using PID-based steering correction. Implemented sensor fusion from 5-channel IR array with efficient C interrupt routines.",
+            link: "https://github.com/JeremyF003/WheelsonRobot",
+            img: "line.jpg"
+        },
+        {
+            title: "Discrete H-Bridge Driver",
+            meta: "Personal Project | Jan 2026",
+            tags: ["Power Electronics", "ESP32", "C++", "MOSFETs", "BJT Driver", "PWM"],
+            desc: "Designed a discrete MOSFET H-bridge for bidirectional DC motor control using IRF3205 and IRF9540N with 2N2222 gate drivers. Implemented PWM-based speed control and optimized gate-drive.",
+            link: "#",
+            img: "hbridge.jpg",
+            blog: true,
+            blogContent: `
+                <h3>Motivation & System Overview</h3>
+                <p>The goal of this project was to build a bidirectional motor driver from scratch rather than relying on an off-the-shelf module. A discrete H-bridge is a great exercise in power electronics — it forces you to think about gate drive, shoot-through protection, dead time, and thermal design, all of which are abstracted away when you buy a ready-made driver board.</p>
+
+                <h3>Topology: Four MOSFETs, Two High-Side, Two Low-Side</h3>
+                <p>The bridge uses two IRF3205 N-channel MOSFETs on the low side and two IRF9540N P-channel MOSFETs on the high side. By turning on diagonally opposite pairs (Q1+Q4 or Q2+Q3), the motor sees either +V or −V across its terminals, giving full bidirectional control from a single supply rail.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">🔌</span>
+                    <div>Discrete H-Bridge Schematic</div>
+                    <span class="caption">[Insert your schematic here]</span>
+                </div>
+
+                <h3>Gate Drive: Why the ESP32 Alone Isn't Enough</h3>
+                <p>The IRF3205 has a gate threshold voltage around 2–4 V, but to fully enhance it and get a low R<sub>DS(on)</sub>, you need closer to 10 V at the gate. Driving it directly from a 3.3 V ESP32 GPIO leaves the FET in the linear region, where it dissipates huge amounts of power and can overheat quickly. The IRF9540N P-channel high-side FETs have the same problem in reverse: their gates need to be pulled well below the source rail to turn on.</p>
+
+                <p>To solve this, I added a 2N2222 BJT inverter stage on each gate. The ESP32 drives the BJT base through a current-limiting resistor; when the BJT saturates, it pulls the MOSFET gate to the appropriate rail, providing the full voltage swing the FET needs. A 10 kΩ pull-up (or pull-down) resistor holds the gate in its default state when the BJT is off, preventing floating gates and accidental turn-on during MCU reset.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">📊</span>
+                    <div>BJT Gate Driver Stage</div>
+                    <span class="caption">[Insert gate driver schematic or scope capture]</span>
+                </div>
+
+                <div class="note-box">
+                    <p><span class="highlight">⚠️ Dead Time:</span> Never turn on both FETs on the same leg at the same time. Even a few microseconds of overlap creates a direct short from V+ to ground — "shoot-through" — which will destroy the FETs almost instantly. I enforce dead time in firmware between every direction change.</p>
+                </div>
+
+                <h3>Firmware: PWM Speed Control on the ESP32</h3>
+                <p>Speed is controlled with the ESP32's LEDC peripheral, which gives hardware-timed PWM without CPU intervention. Direction is set by which diagonal pair is active; the duty cycle then scales the average voltage seen by the motor. Here's the core of the control logic:</p>
+
+                <div class="code-block"><code><span class="comment">// Bidirectional motor control on ESP32</span>
+<span class="kw">#define</span> IN1 <span class="num">18</span>
+<span class="kw">#define</span> IN2 <span class="num">19</span>
+<span class="kw">#define</span> PWM_FREQ <span class="num">20000</span>   <span class="comment">// 20 kHz, above audible range</span>
+<span class="kw">#define</span> PWM_RES  <span class="num">8</span>
+
+<span class="kw">void</span> <span class="func">setMotor</span>(<span class="kw">int</span> speed) {
+    <span class="kw">if</span> (speed &gt;= <span class="num">0</span>) {
+        <span class="func">ledcWrite</span>(<span class="num">0</span>, <span class="num">0</span>);
+        <span class="func">ledcWrite</span>(<span class="num">1</span>, speed);
+    } <span class="kw">else</span> {
+        <span class="func">ledcWrite</span>(<span class="num">1</span>, <span class="num">0</span>);
+        <span class="func">ledcWrite</span>(<span class="num">0</span>, -speed);
+    }
+}</code></div>
+
+                <p>Running the PWM at 20 kHz puts the switching frequency above the audible range, which eliminates the high-pitched whine you get from lower-frequency PWM. It also reduces current ripple in the motor windings, at the cost of slightly higher switching losses in the FETs.</p>
+
+                <h3>Testing & Results</h3>
+                <p>I tested the bridge with a small brushed DC motor and a bench supply current-limited to 2 A. The FETs stayed cool to the touch at moderate duty cycles, and the motor ran smoothly in both directions with no audible PWM tone. A quick scope capture of the gate waveform confirmed clean, fast edges with no significant ringing — the BJT driver was doing its job.</p>
+
+                <h3>Lessons Learned</h3>
+                <p>• Always check the gate threshold and R<sub>DS(on)</sub> at your actual drive voltage — the datasheet "on" numbers assume 10 V gate drive.<br>
+                • Pull-up/pull-down resistors on the gates are non-negotiable; a floating gate during boot can smoke a FET.<br>
+                • Dead time in firmware is cheap insurance against shoot-through.<br>
+                • Freewheeling diodes (or the FETs' body diodes) matter — inductive kickback from the motor has to go somewhere.</p>
+            `
+        },
+        {
+            title: "Differential Gear Assembly",
+            meta: "Personal Project | 2026",
+            tags: ["SOLIDWORKS", "Mechanical Design", "CAD", "Gear Design"],
+            desc: "Designed a functional automotive-style differential assembly in SOLIDWORKS, modeling gears, shafts, bearings, and housing. Verified kinematic motion for torque distribution.",
+            link: "#",
+            img: "differential.jpg",
+            blog: true,
+            blogContent: `
+                <h3>Motivation</h3>
+                <p>Automotive differentials are a beautiful piece of mechanical engineering: they let the two driven wheels of a car rotate at different speeds while still receiving torque from a single input shaft. This is essential in a turn, where the outside wheel travels a longer arc than the inside wheel. I wanted to model one from scratch in SOLIDWORKS to understand the gear geometry, the housing, and the kinematics that make it work.</p>
+
+                <h3>How a Differential Works</h3>
+                <p>The core idea is the bevel-gear arrangement. The input drives a ring gear on the differential carrier. Inside the carrier, two "side gears" (one per output shaft) mesh with two "pinion gears" that are free to spin on a cross-pin. When both wheels turn at the same speed, the pinion gears don't rotate on their pin — they just carry the carrier around with them, so both side gears turn at carrier speed. When one wheel slows (e.g. the inside wheel in a turn), the pinion gears start spinning on their own axis, subtracting speed from one side and adding it to the other. The average of the two wheel speeds always equals the carrier speed.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">⚙️</span>
+                    <div>Exploded View of the Differential</div>
+                    <span class="caption">[Insert your SOLIDWORKS exploded view]</span>
+                </div>
+
+                <h3>Modeling in SOLIDWORKS</h3>
+                <p>The assembly has five main components:</p>
+                <p>• <strong>Ring gear</strong> — driven by the input pinion, bolted to the carrier.<br>
+                • <strong>Carrier</strong> — houses the cross-pin and the internal bevel gears.<br>
+                • <strong>Side gears</strong> (×2) — splined to the two output shafts.<br>
+                • <strong>Pinion gears</strong> (×2) — ride on the cross-pin inside the carrier.<br>
+                • <strong>Housing</strong> — holds the carrier bearings and the input pinion bearings.</p>
+
+                <p>For the gears I used the SOLIDWORKS Toolbox bevel-gear generator to get proper involute tooth profiles, then mated them with the correct gear ratios. The cross-pin, side gears, and pinion gears were modeled as separate parts and mated in an assembly so the whole mechanism could be driven kinematically.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">🔧</span>
+                    <div>Carrier & Bevel Gear Detail</div>
+                    <span class="caption">[Insert close-up of the bevel gear mesh]</span>
+                </div>
+
+                <h3>Kinematic Verification</h3>
+                <p>In a SOLIDWORKS Motion study, I drove the input shaft at a constant angular velocity and applied different resistive torques to the two output shafts to simulate a turn. The results matched the textbook relation:</p>
+
+                <p style="text-align:center; font-family:'JetBrains Mono', monospace; color:#0ff; font-size:1.1rem;">ω<sub>left</sub> + ω<sub>right</sub> = 2 · ω<sub>carrier</sub></p>
+
+                <p>When one output was held still, the other spun at exactly twice the carrier speed — confirming the classic differential behavior. No interference was detected between the pinion gears and the side gears through a full revolution.</p>
+
+                <div class="note-box">
+                    <p><span class="highlight">💡 Design note:</span> Bevel gear tooth counts must be chosen carefully. If the side gear and pinion gear tooth counts aren't equal, the differential won't behave symmetrically — the two outputs will have different torque splits. For a true 50/50 differential, both side gears and both pinion gears should have equal tooth counts.</p>
+                </div>
+
+                <h3>What I Learned</h3>
+                <p>• Bevel gear geometry is far more sensitive to mate errors than spur gears — small axis misalignments cause visible interference in the motion study.<br>
+                • The carrier is the hardest part to design, because it has to hold the cross-pin rigidly while letting the pinion gears spin freely.<br>
+                • Getting the housing tolerances right in CAD is a good reminder of why real differentials need shims and bearing preload.<br>
+                • A differential is a wonderful teaching tool — it shows up everywhere from cars to LEGO sets.</p>
+            `
+        },
+        {
+            title: "2-Bit ALU",
+            meta: "Personal Project | 2026",
+            tags: ["Digital Logic", "Breadboard", "Logic Gates", "Combinational Logic"],
+            desc: "Designed and constructed a 2-bit Arithmetic Logic Unit (ALU) on a breadboard using discrete AND, OR, and NOT logic gates. Derived and minimized Boolean expressions to implement arithmetic and logical operations.",
+            link: "#",
+            img: "alu.jpg"
+        },
+        {
+            title: "Closed-Loop Boost Converter",
+            meta: "Personal Project | Jan 2026",
+            tags: ["Power Electronics", "Arduino", "C++", "PWM", "Feedback Control"],
+            desc: "Designed and built a closed-loop DC-DC boost converter using an Arduino to regulate output voltage through PWM duty-cycle control. Implemented voltage feedback and optimized the feedback loop for stable output regulation.",
+            link: "#",
+            img: "boost_converter.jpg"
+        },
+        {
+            title: "E-Ball Model",
+            meta: "UBC | Dec 2025 – Jan 2026 | Robotics & BLDC",
+            tags: ["ESP32", "C++", "BLDC", "PWM", "Bluetooth (DS4)", "ESC"],
+            desc: "Engineered a high-torque Bluetooth-controlled robotic vehicle driven by three-phase sensorless BLDC motors. Wrote custom C++ firmware with smooth speed regulation via 50kHz PWM.",
+            link: "#",
+            img: "eball.jpg"
+        },
+
+        // ========== FUTURE PROJECT IDEAS ==========
+        {
+            title: "Sensorless BLDC Motor Driver",
+            meta: "Future Project | Idea",
+            tags: ["BLDC", "Sensorless", "Back-EMF", "Motor Control"],
+            desc: "Design a sensorless BLDC motor driver using back-EMF zero-crossing detection. Will include a three-phase inverter, gate drivers, and an MCU with FOC (Field Oriented Control).",
+            link: "#",
+            img: "",
+            idea: true
+        },
+        {
+            title: "FPGA Mario Game",
+            meta: "Future Project | Idea",
+            tags: ["FPGA", "Verilog", "VGA", "Game Design"],
+            desc: "Implement a simple Mario-style platformer on an FPGA using Verilog. Will include VGA output, sprite rendering, and input handling for a retro gaming experience.",
+            link: "#",
+            img: "",
+            idea: true
+        },
+        {
+            title: "AM Receiver",
+            meta: "Future Project | Idea",
+            tags: ["RF", "AM", "Demodulation", "Analog"],
+            desc: "Build a superheterodyne AM receiver covering the broadcast band. Will include RF amplifier, mixer, IF filter, and demodulator stages.",
+            link: "#",
+            img: "",
+            idea: true
+        },
+        {
+            title: "Inverted Pendulum",
+            meta: "Future Project | Idea",
+            tags: ["Control Systems", "PID", "State-Space", "Mechatronics"],
+            desc: "Build a classic inverted pendulum on a cart. Will use an encoder for angle feedback and a DC motor for actuation, implementing a state-space controller.",
+            link: "#",
+            img: "",
+            idea: true
+        },
+        {
+            title: "Flight Computer",
+            meta: "Future Project | Idea",
+            tags: ["Avionics", "GPS", "IMU", "Data Logging"],
+            desc: "Develop a flight computer for model rockets using GPS, barometer, IMU, and SD card logging. Will include a Kalman filter for altitude estimation.",
+            link: "#",
+            img: "",
+            idea: true
+        },
+        {
+            title: "Tesla Coil",
+            meta: "Future Project | Idea",
+            tags: ["HV", "Resonance", "Wireless Power"],
+            desc: "Design and build a Tesla coil (SGTC or DRSSTC) for high-voltage demonstrations. Will include resonant LC tuning and spark gap control.",
+            link: "#",
+            img: "",
+            idea: true
+        },
+        {
+            title: "3 DOF Robotic Arm",
+            meta: "Future Project | Idea",
+            tags: ["Robotics", "Inverse Kinematics", "Servos", "Microcontroller"],
+            desc: "Design a 3-DOF robotic arm with stepper/servo motors. Implement inverse kinematics for end-effector positioning and write a simple GUI for control.",
+            link: "#",
+            img: "",
+            idea: true
+        }
+        ];
+
+        // ================================================================
+        // RENDER PROJECTS GRID
+        // ================================================================
+        const gridContainer = document.getElementById('projectsGrid');
+
+        function renderProjects() {
+            const frag = document.createDocumentFragment();
+
+            projectData.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = 'project-card' + (p.idea ? ' idea' : '');
+
+                const tagsHtml = p.tags.map(t => `<span>${t}</span>`).join('');
+
+                let buttonRow = `<a href="${p.link}" target="_blank" class="project-link-sm">⚙ View →</a>`;
+                if (p.blog) {
+                    buttonRow += `<button class="learn-more-btn" data-index="${idx}">📖 Learn More</button>`;
+                }
+                if (p.idea) {
+                    buttonRow = `<span style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:#4a7a9a;">🚧 Coming soon</span>`;
+                }
+
+                const badgeHtml = p.idea ? `<div class="idea-badge">🚧 Idea</div>` : '';
+
+                // Image with clean placeholder swap on error (no nested quote escapes)
+                const fallbackInner = `<span class="gear-icon">⚙</span><span class="label-text">${p.title}</span>`;
+                const imgHtml = p.img
+                    ? `<img src="${p.img}" alt="${p.title}" class="project-img" loading="lazy" decoding="async"
+                         onerror="this.onerror=null; var d=document.createElement('div'); d.className='placeholder-img'; d.innerHTML=${JSON.stringify(fallbackInner)}; this.replaceWith(d);">`
+                    : `<div class="placeholder-img">${fallbackInner}</div>`;
+
+                card.innerHTML = `
+                    <div class="img-wrapper">
+                        ${badgeHtml}
+                        ${imgHtml}
+                    </div>
+                    <div class="card-content">
+                        <div class="project-title-sm">${p.title}</div>
+                        <div class="project-meta-sm">${p.meta}</div>
+                        <div class="project-tags-sm">${tagsHtml}</div>
+                        <div class="project-desc-sm">${p.desc}</div>
+                        <div class="button-row">${buttonRow}</div>
+                    </div>
+                `;
+                frag.appendChild(card);
+            });
+
+            gridContainer.innerHTML = '';
+            gridContainer.appendChild(frag);
+
+            // Single delegated click listener
+            gridContainer.addEventListener('click', function(e) {
+                const btn = e.target.closest('.learn-more-btn');
+                if (btn) {
+                    e.stopPropagation();
+                    openModal(parseInt(btn.dataset.index));
+                }
+            });
+        }
+
+        // ================================================================
+        // MODAL
+        // ================================================================
+        const modalOverlay = document.getElementById('projectModal');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+
+        function openModal(index) {
+            const project = projectData[index];
+            if (!project || project.idea) return;
+
+            const tagsHtml = project.tags.map(t => `<span>${t}</span>`).join('');
+            const imageHtml = project.img
+                ? `<img src="${project.img}" alt="${project.title}" class="modal-image" loading="lazy" decoding="async" onerror="this.style.display='none'">`
+                : '';
+
+            let blogHtml = '';
+            if (project.blog && project.blogContent) {
+                blogHtml = `<div class="blog-section">${project.blogContent}</div>`;
+            }
+
+            modalBody.innerHTML = `
+                ${imageHtml}
+                <div class="modal-title">${project.title}</div>
+                <div class="modal-meta">${project.meta}</div>
+                <div class="modal-tags">${tagsHtml}</div>
+                ${blogHtml}
+                ${project.link && project.link !== '#' ? `<a href="${project.link}" target="_blank" class="modal-link">⚙ View Project →</a>` : ''}
+            `;
+
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+            modalBody.innerHTML = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+        });
+
+        // ================================================================
+        // TECH NOTES VISIBILITY
+        // ================================================================
+        const techNotesSection = document.getElementById('technical-notes');
+        const techNotesTreeNode = document.getElementById('treeNodeTechNotes');
+        const nextFromProjectsBtn = document.getElementById('nextFromProjects');
+
+        if (!SHOW_TECH_NOTES) {
+            techNotesSection.classList.add('hidden');
+            techNotesTreeNode.style.display = 'none';
+            nextFromProjectsBtn.dataset.next = 'contact';
+            nextFromProjectsBtn.textContent = '⬇ Next: Contact';
+        } else {
+            techNotesSection.classList.remove('hidden');
+            techNotesTreeNode.style.display = '';
+            nextFromProjectsBtn.dataset.next = 'tech-notes';
+            nextFromProjectsBtn.textContent = '⬇ Next: Tech Notes';
+        }
+
+        // ================================================================
+        // NAVIGATION
+        // ================================================================
+        function navigateToSection(targetId) {
+            if (targetId === 'tech-notes' && !SHOW_TECH_NOTES) {
+                navigateToSection('contact');
+                return;
+            }
+            const sectionMap = {
+                'hero': 'hero',
+                'projects': 'projects',
+                'tech-notes': 'technical-notes',
+                'contact': 'contact'
+            };
+            const el = document.getElementById(sectionMap[targetId]);
+            if (!el) return;
+
+            el.classList.remove('section-highlight');
+            void el.offsetWidth;
+            el.classList.add('section-highlight');
+
+            const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top, behavior: 'smooth' });
+
+            document.querySelectorAll('.tree-node').forEach(n => {
+                n.classList.toggle('active', n.dataset.target === targetId);
+            });
+        }
+
+        document.querySelectorAll('.tree-node').forEach(node => {
+            node.addEventListener('click', function() {
+                const target = this.dataset.target;
+                if (target) navigateToSection(target);
+            });
+        });
+
+        document.getElementById('exploreBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateToSection('projects');
+        });
+
+        document.querySelectorAll('.next-section-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const target = this.dataset.next;
+                if (target) navigateToSection(target);
+            });
+        });
+
+        // ================================================================
+        // TECH NOTES TOGGLES
+        // ================================================================
+        window.toggleNotesSection = function(sectionId) {
+            const content = document.getElementById(sectionId);
+            const symbol = document.getElementById(sectionId + "-symbol");
+            if (!content) return;
+            const open = content.style.display === "none" || content.style.display === "";
+            content.style.display = open ? "block" : "none";
+            if (symbol) symbol.innerHTML = open ? "−" : "+";
+            if (open && window.MathJax) MathJax.typesetPromise();
+        };
+
+        window.toggleChapter = function(chapterId) {
+            const div = document.getElementById(chapterId);
+            const sym = document.getElementById(chapterId + "-symbol");
+            if (!div) return;
+            const open = div.style.display === "none" || div.style.display === "";
+            div.style.display = open ? "block" : "none";
+            if (sym) sym.innerHTML = open ? "−" : "+";
+            if (open && window.MathJax) MathJax.typesetPromise();
+        };
+
+        // ================================================================
+        // SCROLL SPY – cached offsets, rAF-throttled
+        // ================================================================
+        const sectionIds = ['hero', 'projects', 'technical-notes', 'contact'];
+        const targetMap = { 'hero': 'hero', 'projects': 'projects', 'technical-notes': 'tech-notes', 'contact': 'contact' };
+
+        let sectionOffsets = [];
+        let scrollSpyScheduled = false;
+
+        function cacheSectionOffsets() {
+            sectionOffsets = sectionIds
+                .filter(id => !(id === 'technical-notes' && !SHOW_TECH_NOTES))
+                .map(id => {
+                    const el = document.getElementById(id);
+                    return el ? { id, top: el.offsetTop, bottom: el.offsetTop + el.offsetHeight } : null;
+                })
+                .filter(Boolean);
+        }
+
+        function updateActiveOnScroll() {
+            scrollSpyScheduled = false;
+            const scrollY = window.pageYOffset + 120;
+            let currentId = 'hero';
+            for (const s of sectionOffsets) {
+                if (scrollY >= s.top && scrollY < s.bottom) {
+                    currentId = s.id;
+                    break;
+                }
+            }
+            let target = targetMap[currentId] || 'hero';
+            if (target === 'tech-notes' && !SHOW_TECH_NOTES) target = 'contact';
+
+            const active = document.querySelector('.tree-node.active');
+            if (active && active.dataset.target === target) return;
+
+            document.querySelectorAll('.tree-node').forEach(n => {
+                n.classList.toggle('active', n.dataset.target === target);
+            });
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!scrollSpyScheduled) {
+                scrollSpyScheduled = true;
+                requestAnimationFrame(updateActiveOnScroll);
+            }
+        }, { passive: true });
+
+        window.addEventListener('resize', cacheSectionOffsets);
+
+        // ================================================================
+        // INTRO
+        // ================================================================
+        const introMsg = ">_ SYSTEM BOOT: JEREMY FERNANDEZ";
+        let introIdx = 0;
+        const introElem = document.getElementById("intro-text");
+        const mainDiv = document.getElementById("main-content");
+        const introContainer = document.getElementById("intro");
+
+        function typeIntroSequence() {
+            if (introIdx < introMsg.length) {
+                introElem.textContent = introMsg.substring(0, introIdx + 1);
+                introIdx++;
+                setTimeout(typeIntroSequence, 55);
+            } else {
+                setTimeout(() => {
+                    introContainer.classList.add("fade-out");
+                    setTimeout(() => {
+                        introContainer.style.display = "none";
+                        introContainer.remove();
+                        mainDiv.style.display = "block";
+                        requestAnimationFrame(() => { mainDiv.style.opacity = "1"; });
+                        startNameTyping();
+                        renderProjects();
+                        cacheSectionOffsets();
+                        updateActiveOnScroll();
+                    }, 1000);
+                }, 800);
+            }
+        }
+
+        // ================================================================
+        // NAME TYPING
+        // ================================================================
+        const nameTarget = "Jeremy Fernandez";
+        let nameIdx = 0;
+        const typingSpan = document.getElementById("typing-name");
+
+        function startNameTyping() {
+            typingSpan.textContent = "";
+            (function typeNameChar() {
+                if (nameIdx < nameTarget.length) {
+                    typingSpan.textContent = nameTarget.substring(0, nameIdx + 1);
+                    nameIdx++;
+                    setTimeout(typeNameChar, 70);
+                } else {
+                    typingSpan.style.borderRight = "2px solid #0ff";
+                    typingSpan.style.animation = "blinkCarets 0.8s infinite";
+                }
+            })();
+        }
+
+        window.addEventListener('load', typeIntroSequence);
+    </script>
+
+</body>
+</html>
