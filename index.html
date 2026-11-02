@@ -1429,7 +1429,7 @@
         }
 
         // ================================================================
-        // PROJECT DATA – Updated
+        // PROJECT DATA – Reordered
         // ================================================================
         const projectData = [{
             title: "Robo-Maestro",
@@ -1512,6 +1512,41 @@
                 • Test your motor driver with a dummy load before connecting the actual motor!</p>
             `
         }, {
+            title: "Reflow Oven Controller",
+            meta: "UBC | Mar 2025 – May 2025 | Industrial Control",
+            tags: ["A51 Assembly", "N76E003", "Thermocouple", "PID", "Zero-Cross"],
+            desc: "Developed a reflow soldering oven controller with real-time temperature profiling, programmed entirely in A51 assembly. Implemented PI control with triac switching.",
+            link: "https://github.com/JeremyF003/Reflow-oven",
+            img: "reflow.jpg"
+        }, {
+            title: "Coin Picking Robot",
+            meta: "UBC | Apr 2025 – May 2025 | Embedded Collaboration",
+            tags: ["C", "PIC18", "EFM8", "RF Modules", "H-Bridge", "Metal Detection"],
+            desc: "Architected a remote-controlled robot that autonomously picks Canadian coins using inductive sensing. Wrote low-level C for PIC18 and EFM8, designed custom H-bridge, and 433MHz RF.",
+            link: "https://github.com/JeremyF003/Picking-coin-robot",
+            img: "coin.jpg"
+        }, {
+            title: "Line Following Robot",
+            meta: "KPU | Apr 2024 – May 2024 | Optical Sensing",
+            tags: ["C", "PIC18F46K42", "Phototransistors", "PID Line", "MPLAB"],
+            desc: "Programmed an autonomous line-following robot using PID-based steering correction. Implemented sensor fusion from 5-channel IR array with efficient C interrupt routines.",
+            link: "https://github.com/JeremyF003/WheelsonRobot",
+            img: "line.jpg"
+        }, {
+            title: "Discrete H-Bridge Driver",
+            meta: "Personal Project | Jan 2026",
+            tags: ["Power Electronics", "ESP32", "C++", "MOSFETs", "BJT Driver", "PWM"],
+            desc: "Designed a discrete MOSFET H-bridge for bidirectional DC motor control using IRF3205 and IRF9540N with 2N2222 gate drivers. Implemented PWM-based speed control and optimized gate-drive.",
+            link: "#",
+            img: "hbridge.jpg"
+        }, {
+            title: "Differential Gear Assembly",
+            meta: "Personal Project | 2026",
+            tags: ["SOLIDWORKS", "Mechanical Design", "CAD", "Gear Design"],
+            desc: "Designed a functional automotive-style differential assembly in SOLIDWORKS, modeling gears, shafts, bearings, and housing. Verified kinematic motion for torque distribution.",
+            link: "#",
+            img: "differential.jpg"
+        }, {
             title: "2-Bit ALU",
             meta: "Personal Project | 2026",
             tags: ["Digital Logic", "Breadboard", "Logic Gates", "Combinational Logic"],
@@ -1526,15 +1561,15 @@
             link: "#",
             img: "boost_converter.jpg"
         }, {
-            // Replaced Colpitts Oscillator with Voltage-Controlled Oscillator (VCO)
+            // Voltage-Controlled Oscillator (VCO)
             title: "Voltage-Controlled Oscillator (VCO)",
             meta: "Personal Project | 2026",
             tags: ["RF", "Varactor", "Oscillator", "PLL", "Analog Design"],
             desc: "Designed a VCO using a Colpitts topology with a varactor diode for frequency tuning. Includes a buffer stage and low-noise bias network. Simulated in LTspice and validated on a breadboard with a spectrum analyzer.",
             link: "#",
-            img: "vco.jpg"   // you can rename this to your actual image filename
+            img: "vco.jpg"
         }, {
-            // Renamed from Common-Emitter BJT Amp
+            // Two-Stage Common Emitter Amplifier
             title: "Two-Stage Common Emitter Amplifier (BJT)",
             meta: "Personal Project | 2026",
             tags: ["Analog Electronics", "BJT", "Signal Amplification", "LTspice"],
@@ -1542,47 +1577,12 @@
             link: "#",
             img: "common_emitter.jpg"
         }, {
-            title: "Discrete H-Bridge Driver",
-            meta: "Personal Project | Jan 2026",
-            tags: ["Power Electronics", "ESP32", "C++", "MOSFETs", "BJT Driver", "PWM"],
-            desc: "Designed a discrete MOSFET H-bridge for bidirectional DC motor control using IRF3205 and IRF9540N with 2N2222 gate drivers. Implemented PWM-based speed control and optimized gate-drive.",
-            link: "#",
-            img: "hbridge.jpg"
-        }, {
             title: "E-Ball Model",
             meta: "UBC | Dec 2025 – Jan 2026 | Robotics & BLDC",
             tags: ["ESP32", "C++", "BLDC", "PWM", "Bluetooth (DS4)", "ESC"],
             desc: "Engineered a high-torque Bluetooth-controlled robotic vehicle driven by three-phase sensorless BLDC motors. Wrote custom C++ firmware with smooth speed regulation via 50kHz PWM.",
             link: "#",
             img: "eball.jpg"
-        }, {
-            title: "Coin Picking Robot",
-            meta: "UBC | Apr 2025 – May 2025 | Embedded Collaboration",
-            tags: ["C", "PIC18", "EFM8", "RF Modules", "H-Bridge", "Metal Detection"],
-            desc: "Architected a remote-controlled robot that autonomously picks Canadian coins using inductive sensing. Wrote low-level C for PIC18 and EFM8, designed custom H-bridge, and 433MHz RF.",
-            link: "https://github.com/JeremyF003/Picking-coin-robot",
-            img: "coin.jpg"
-        }, {
-            title: "Reflow Oven Controller",
-            meta: "UBC | Mar 2025 – May 2025 | Industrial Control",
-            tags: ["A51 Assembly", "N76E003", "Thermocouple", "PID", "Zero-Cross"],
-            desc: "Developed a reflow soldering oven controller with real-time temperature profiling, programmed entirely in A51 assembly. Implemented PI control with triac switching.",
-            link: "https://github.com/JeremyF003/Reflow-oven",
-            img: "reflow.jpg"
-        }, {
-            title: "Line Following Robot",
-            meta: "KPU | Apr 2024 – May 2024 | Optical Sensing",
-            tags: ["C", "PIC18F46K42", "Phototransistors", "PID Line", "MPLAB"],
-            desc: "Programmed an autonomous line-following robot using PID-based steering correction. Implemented sensor fusion from 5-channel IR array with efficient C interrupt routines.",
-            link: "https://github.com/JeremyF003/WheelsonRobot",
-            img: "line.jpg"
-        }, {
-            title: "Differential Gear Assembly",
-            meta: "Personal Project | 2026",
-            tags: ["SOLIDWORKS", "Mechanical Design", "CAD", "Gear Design"],
-            desc: "Designed a functional automotive-style differential assembly in SOLIDWORKS, modeling gears, shafts, bearings, and housing. Verified kinematic motion for torque distribution.",
-            link: "#",
-            img: "differential.jpg"
         },
 
         // ========== MAJOR PROJECTS TO COMPLETE (ideas) ==========
@@ -1593,7 +1593,7 @@
             tags: ["BLDC", "Sensorless", "Back-EMF", "Motor Control"],
             desc: "Design a sensorless BLDC motor driver using back-EMF zero-crossing detection. Will include a three-phase inverter, gate drivers, and an MCU with FOC (Field Oriented Control).",
             link: "#",
-            img: "",   // placeholder
+            img: "",
             idea: true
         }, {
             title: "FPGA Mario Game",
