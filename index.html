@@ -522,15 +522,16 @@
         }
 
         .project-card .project-desc-sm {
-            font-size: 0.8rem;
-            line-height: 1.5;
+            font-size: 0.85rem;       /* increased from 0.8rem */
+            line-height: 1.6;
             color: #cdd9ff;
             flex: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            /* remove line clamping – show full description */
+            display: block;
+            overflow: visible;
+            -webkit-line-clamp: unset;
+            -webkit-box-orient: unset;
+            text-overflow: clip;
         }
 
         .project-card .button-row {
@@ -1221,7 +1222,7 @@
         const SHOW_TECH_NOTES = false;
 
         // ================================================================
-        // PROJECT DATA
+        // PROJECT DATA – now includes TRIUMF PCB and LabVIEW projects
         // ================================================================
         const projectData = [
         {
@@ -1470,6 +1471,118 @@
             desc: "Engineered a high-torque Bluetooth-controlled robotic vehicle driven by three-phase sensorless BLDC motors. Wrote custom C++ firmware with smooth speed regulation via 50kHz PWM.",
             link: "#",
             img: "eball.jpg"
+        },
+
+        // ========== NEW PROJECT: TRIUMF PCB ==========
+        {
+            title: "TRIUMF BJT Impedance Tester PCB",
+            meta: "TRIUMF | Under Dr. Leonid Kurchaninov | 2024–2025",
+            tags: ["PCB Design", "Impedance Measurement", "SMD BJT", "Analog Front-End", "KiCad"],
+            desc: "Designed and tested a custom PCB at TRIUMF under Dr. Leonid Kurchaninov to measure the impedance of an SMD bipolar junction transistor at a designated operating point. The board incorporates a precision AC excitation source, a transimpedance amplifier, and a phase-sensitive detector to extract the complex impedance of the device under test.",
+            link: "#",
+            img: "triumf_impedance_pcb.jpg",   // placeholder – replace with actual image
+            blog: true,
+            blogContent: `
+                <h3>Motivation & Context</h3>
+                <p>While working at TRIUMF (Canada's particle accelerator centre) under the supervision of Dr. Leonid Kurchaninov, I was tasked with building a dedicated impedance tester for surface-mount bipolar junction transistors (BJTs). The goal was to characterise the small-signal impedance of an SMD BJT at a specific DC bias point — a measurement that is critical for understanding device behaviour in low-noise analogue circuits.</p>
+
+                <h3>System Architecture</h3>
+                <p>The tester is built around a precision AC excitation source that injects a small sinusoidal current into the base or collector of the BJT. The resulting voltage across the device is measured with a high-impedance buffer, while the current is sensed through a transimpedance amplifier (TIA). A phase-sensitive detector (PSD) then extracts the in-phase and quadrature components, allowing the complex impedance (R + jX) to be computed at the chosen frequency.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">🔬</span>
+                    <div>Block Diagram of the Impedance Tester</div>
+                    <span class="caption">[Insert block diagram or schematic]</span>
+                </div>
+
+                <h3>PCB Design & Layout</h3>
+                <p>The board was designed in KiCad with careful attention to grounding and shielding. Key considerations included:</p>
+                <p>• <strong>Star grounding</strong> to minimise circulating currents between the analogue and digital sections.<br>
+                • <strong>Guard traces</strong> around the high-impedance input nodes to reduce leakage.<br>
+                • <strong>Short, direct traces</strong> for the AC excitation path to avoid parasitic inductance.<br>
+                • <strong>SMD test socket</strong> for quick insertion of the BJT under test.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">📐</span>
+                    <div>PCB Layout (KiCad)</div>
+                    <span class="caption">[Insert PCB layout screenshot]</span>
+                </div>
+
+                <h3>Measurement Principle</h3>
+                <p>The impedance is calculated from the ratio of the measured voltage and current phasors. At a designated bias point (set by a precision current source), the AC signal is swept across a range of frequencies, and the magnitude and phase of the impedance are recorded. The final result is a Nyquist or Bode plot that reveals the parasitic capacitances and resistances of the BJT.</p>
+
+                <div class="note-box">
+                    <p><span class="highlight">⚠️ Key challenge:</span> The impedance of a small SMD BJT at high frequencies is very sensitive to PCB parasitics. Even a few nanohenries of trace inductance can skew the measurement above 10 MHz. We addressed this by keeping the measurement loop as tight as possible and calibrating out the fixture parasitics with a known reference resistor.</p>
+                </div>
+
+                <h3>Results & Applications</h3>
+                <p>The board successfully measured the impedance of several SMD BJTs (e.g. MMBT3904) at bias currents from 10 µA to 1 mA. The measured values matched the manufacturer's SPICE models within a few percent, validating the design. This tool is now used at TRIUMF for quick characterisation of transistors before they are soldered into sensitive detector electronics.</p>
+
+                <h3>What I Learned</h3>
+                <p>• High-frequency PCB layout is all about minimising loop inductance — every millimetre of trace matters.<br>
+                • Calibration is essential: always de-embed the test fixture before trusting the data.<br>
+                • Working with Dr. Kurchaninov taught me the importance of rigorous error analysis and repeatable measurement techniques.</p>
+            `
+        },
+
+        // ========== NEW PROJECT: LABVIEW OSCILLOSCOPE DATA LOGGER ==========
+        {
+            title: "LabVIEW Oscilloscope Data Logger",
+            meta: "Personal / Lab Automation | 2025",
+            tags: ["LabVIEW", "Instrument Control", "Data Acquisition", "CSV Export", "Automation"],
+            desc: "Developed a LabVIEW application that automates the acquisition of waveform data from a digital oscilloscope, processes the measurements, and exports the results to both individual .csv files and a consolidated final output .csv file for streamlined analysis.",
+            link: "#",
+            img: "labview_scope_logger.jpg",   // placeholder – replace with actual image
+            blog: true,
+            blogContent: `
+                <h3>Motivation & Overview</h3>
+                <p>In many electronics labs, capturing data from an oscilloscope is a repetitive, error-prone manual process. I built a LabVIEW virtual instrument (VI) that automates the entire workflow: it connects to a digital oscilloscope over USB/GPIB, triggers a measurement, reads the waveform, and saves the data to a structured CSV file. A final summary CSV aggregates key metrics (e.g., peak-to-peak voltage, rise time, frequency) from each acquisition, making it easy to post-process large batches of measurements.</p>
+
+                <h3>System Architecture</h3>
+                <p>The application is composed of three main layers:</p>
+                <p>• <strong>Instrument communication:</strong> Uses VISA (Virtual Instrument Software Architecture) to send SCPI commands to the oscilloscope and read back binary waveform data.<br>
+                • <strong>Data processing:</strong> Extracts time and voltage arrays, computes basic statistics (min, max, mean, RMS), and packages them into a cluster.<br>
+                • <strong>File I/O:</strong> Writes each waveform to a separate .csv file and appends the summary metrics to a master .csv file.</p>
+
+                <div class="blog-image-placeholder">
+                    <span class="icon">📊</span>
+                    <div>LabVIEW Front Panel</div>
+                    <span class="caption">[Insert screenshot of the LabVIEW front panel]</span>
+                </div>
+
+                <h3>Key Features & Workflow</h3>
+                <p>• <strong>User-friendly front panel:</strong> Users can set the oscilloscope channel, timebase, voltage range, and number of acquisitions before starting a run.<br>
+                • <strong>Automated triggering:</strong> The VI waits for the scope to trigger, then reads the waveform — no manual button presses required.<br>
+                • <strong>Batch mode:</strong> Specify N acquisitions and the VI will automatically repeat the measurement, saving each trace to its own file.<br>
+                • <strong>Final summary file:</strong> After all acquisitions, the VI generates a master .csv containing the filename, timestamp, and computed metrics for each trace.</p>
+
+                <div class="code-block"><code><span class="comment">// Simplified block diagram logic (pseudo-code representation)</span>
+<span class="comment">// 1. Configure scope</span>
+<span class="func">VISA Write</span>(":TIMEBASE:SCALE 1e-3")
+<span class="func">VISA Write</span>(":CHANNEL1:RANGE 5")
+<span class="comment">// 2. Loop for N acquisitions</span>
+<span class="kw">For</span> i = 1 <span class="kw">to</span> N:
+    <span class="func">VISA Write</span>(":SINGLE")     <span class="comment">// arm trigger</span>
+    <span class="func">Wait for trigger</span>()
+    waveform = <span class="func">VISA Read</span>(":WAVEFORM:DATA?")
+    <span class="func">Write CSV</span>("trace_" + i + ".csv", waveform)
+    metrics = <span class="func">ComputeMetrics</span>(waveform)
+    <span class="func">Append to Summary</span>(metrics)
+<span class="comment">// 3. Write final summary CSV</span>
+<span class="func">Write CSV</span>("summary.csv", allMetrics)</code></div>
+
+                <h3>Results & Impact</h3>
+                <p>The tool reduced a 30-minute manual data-collection task to under a minute. It has been used in my coursework and personal projects to characterise filters, measure transient responses, and log long-term signal behaviour. The consolidated CSV output made it trivial to import the data into Python or Excel for further analysis and plotting.</p>
+
+                <div class="note-box">
+                    <p><span class="highlight">💡 Tip:</span> When working with binary waveform data over VISA, always check the byte order and data width. A mismatch here will produce garbage waveforms that are very confusing to debug!</p>
+                </div>
+
+                <h3>Future Improvements</h3>
+                <p>• Add support for multiple channels (simultaneous acquisition).<br>
+                • Integrate a simple Python script node to perform advanced post-processing (FFT, filtering).<br>
+                • Add a real-time plot on the front panel to visualise the waveform as it is captured.</p>
+            `
         },
 
         // ========== FUTURE PROJECT IDEAS ==========
